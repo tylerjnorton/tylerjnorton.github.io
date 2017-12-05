@@ -237,17 +237,20 @@ div.bl-panel-items > div > div {
 
 .bl-content > ul li {
 	margin: 10px 0;
+	font-size: 1.2em;
 }
 
 .bl-content > ul li a {
-	display: block;
+	display: inline;
 	padding: 0;
 	border: 8px solid rgba(0,0,0,0.1);
 }
 
-.bl-content > ul li a img {
-	display: block;
+.bl-content > ul li img {
+	display: inline-block;
 	max-width: 100%;
+	height: .75em;
+	padding-right: 2px;
 }
 
 /* Panel Items */
