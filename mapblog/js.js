@@ -91,7 +91,8 @@ window.onscroll = function() {
     }
 };
 
-var activeChapterName = Object.keys(chapters)[0];
+
+var activeChapterName = null;
 function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
 
@@ -101,7 +102,10 @@ function setActiveChapter(chapterName) {
     document.getElementById(activeChapterName).setAttribute('class', '');
 
     activeChapterName = chapterName;
+        
 }
+
+setActiveChapter(Object.keys(chapters[0]));
 
 function isElementOnScreen(id) {
     var element = document.getElementById(id);

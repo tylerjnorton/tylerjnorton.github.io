@@ -37,6 +37,11 @@ section {
     transition: opacity .3s ease-in-out;
     font-size: 13px;
 }
+figcaption{
+    text-align: center;
+    font-style: italic;
+    padding-bottom: 10px;
+}
 figure {
     display: block;
     margin-block-start: 0;
