@@ -12,6 +12,13 @@ var map = new mapboxgl.Map({
 });
 
 var chapters = {
+    'home': {
+        duration: 10000,
+        center: [-71.155,42.692],
+        zoom: 8.5,
+        bearing: 0,
+        pitch: 25,
+    },
     'Vegas Visit #1': {
         duration: 10000,
         center: [4.899,52.370],
@@ -142,8 +149,6 @@ $(function() {
             newSection.find('hr').remove();
   
           });
-          // mark first item active
-          $features.children()[0].classList.add('active');
       }
     });
   });

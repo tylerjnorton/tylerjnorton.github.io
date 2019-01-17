@@ -8,17 +8,13 @@ body {
     position: fixed;
     width:50%;
 }
-#cover {
-    width: 50%;
-    margin-left: 50%;
-    height: 51vh;
-    padding-top: 49vh;
+#home {
+    height: 100vh;
     text-align: justify;
     font-family: sans-serif;
-    overflow-y: scroll;
     background-color: #f59bb9;
 }
-#cover p {
+#home p {
     text-align: center;
 }
 #features {
@@ -26,7 +22,6 @@ body {
     margin-left: 50%;
     text-align: justify;
     font-family: sans-serif;
-    overflow-y: scroll;
     background-color: #fafafa;
 }
 section {
