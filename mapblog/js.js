@@ -92,7 +92,7 @@ window.onscroll = function() {
 };
 
 
-var activeChapterName = null;
+var activeChapterName = Object.keys(chapters)[0];
 function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
 
@@ -102,10 +102,7 @@ function setActiveChapter(chapterName) {
     document.getElementById(activeChapterName).setAttribute('class', '');
 
     activeChapterName = chapterName;
-        
 }
-
-setActiveChapter(Object.keys(chapters[0]));
 
 function isElementOnScreen(id) {
     var element = document.getElementById(id);
@@ -145,6 +142,8 @@ $(function() {
             newSection.find('hr').remove();
   
           });
+          // mark first item active
+          $features.children()[0].classList.add('active');
       }
     });
   });
