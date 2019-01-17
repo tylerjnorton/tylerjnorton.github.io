@@ -27,10 +27,59 @@ h4{
 a{
     color:black;
 }
+#menu{
+    background-color: #f59bb9;
+    width: 4vw;
+    height: 4vw;
+    position: fixed;
+    top: 0px;
+    opacity: .5;
+    transition: opacity .3s ease-in-out;
+    z-index: 3;
+    right: 0px;
+}
+#menu:hover{
+    opacity: 1;
+    transition: opacity .3s ease-in-out;
+}
+#menu img {
+    padding: 1vw;
+    height: 2vw;
+    width: 2vw;
+}
+#citylist{
+    top:0;
+    bottom:0;
+    padding: 50px 0 0 50px;
+    right:0;
+    background-color: rgb(152, 255, 255);
+    position: fixed;
+    width:50%;
+    transition: all .3s ease-in-out;
+    opacity: 0;
+    z-index: 1;
+}
+#citylist ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#citylist ul li{
+    font-size: 2em;
+    color: #fff;
+    transition: color .3s ease-in-out;
+    margin: 5px 0;
+}
+#citylist ul li:hover{
+    transition: color .3s ease-in-out;
+    cursor: pointer;
+    color: #8d0505;
+}
 #features {
     width: 50%;
     margin-left: 50%;
     text-align: justify;
+    z-index: 2;
     font-family: sans-serif;
     background-color: #fafafa;
 }
