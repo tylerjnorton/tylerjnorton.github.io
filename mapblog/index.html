@@ -89,7 +89,9 @@ var map = new mapboxgl.Map({
     center: [-71.155,42.692],
     zoom: 8.5,
     bearing: 0,
-    pitch: 25
+    pitch: 25,
+    // .dragging.disable() and other handler .disable() funtions in Leaflet.
+    interactive: false
 });
 
 var chapters = {
