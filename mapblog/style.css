@@ -14,8 +14,18 @@ body {
     font-family: sans-serif;
     background-color: #f59bb9;
 }
+
 #home p {
     text-align: center;
+}
+h3{
+    font-size: 2.5em;
+}
+h4{
+    font-size: 1.5em;
+}
+a{
+    color:black;
 }
 #features {
     width: 50%;
