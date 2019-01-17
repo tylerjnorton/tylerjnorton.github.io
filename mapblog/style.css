@@ -8,6 +8,19 @@ body {
     position: fixed;
     width:50%;
 }
+#cover {
+    width: 50%;
+    margin-left: 50%;
+    height: 51vh;
+    padding-top: 49vh;
+    text-align: justify;
+    font-family: sans-serif;
+    overflow-y: scroll;
+    background-color: #f59bb9;
+}
+#cover p {
+    text-align: center;
+}
 #features {
     width: 50%;
     margin-left: 50%;
@@ -20,7 +33,7 @@ section {
     padding:  2vw 4vw;
     line-height: 25px;
     border-bottom: 1px solid #ddd;
-    opacity: 0.75;
+    opacity: 0.25;
     transition: opacity .3s ease-in-out;
     font-size: 13px;
 }
