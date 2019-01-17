@@ -1,0 +1,44 @@
+body {
+    margin:0;
+    padding:0;
+}
+#map {
+    top:0;
+    bottom:0;
+    position: fixed;
+    width:50%;
+}
+#features {
+    width: 50%;
+    margin-left: 50%;
+    text-align: justify;
+    font-family: sans-serif;
+    overflow-y: scroll;
+    background-color: #fafafa;
+}
+section {
+    padding:  2vw 4vw;
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.75;
+    transition: opacity .3s ease-in-out;
+    font-size: 13px;
+}
+figure {
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+img{
+    width: 42vw;
+}
+section.active {
+    opacity: 1;
+    transition: opacity .3s ease-in-out;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 200px;
+}
