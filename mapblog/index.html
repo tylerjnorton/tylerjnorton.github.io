@@ -37,6 +37,16 @@ section {
     opacity: 0.25;
     font-size: 13px;
 }
+figure {
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+img{
+    width: 40vw;
+}
 section.active {
     opacity: 1;
 }
@@ -165,7 +175,9 @@ $(function() {
     var $features = $("#features");
 
     var data = {
-      rss_url: "https://medium.com/feed/lets-move-mountains/"
+      rss_url: "https://medium.com/feed/lets-move-mountains/",
+      api_key: "2usdfjjeu0g7hlmoucajuxwfvnaaqidn9yi3a6oz",
+      count: 50
     };
     $.get("https://api.rss2json.com/v1/api.json", data, function(response) {
       if (response.status == "ok") {
@@ -183,12 +195,6 @@ $(function() {
                 "</h3><p class='content' />" + item.content + "</section>"
             );
             $features.append(newSection);
-  
-            // Remove the tracking images
-            newSection.find('img').remove();
-  
-            // Remove the hero images
-            newSection.find('figure').remove();
   
             // Remove Mediums stupid bullshit
             newSection.find("p:contains('where people are continuing the conversation by highlighting and responding to this story')").remove();
