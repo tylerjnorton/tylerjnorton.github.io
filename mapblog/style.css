@@ -2,21 +2,43 @@ body {
     margin:0;
     padding:0;
 }
+
+/* 
+
+Colors
+
+maroon - #6a1b37
+red - #ff4c61
+yellow - #fef8c1
+teal - #07cfcf
+
+*/
+
+
 #map {
     top:0;
     bottom:0;
     position: fixed;
     width:50%;
 }
+
 #home {
-    height: 100vh;
+    height: 60vh;
+    padding: 20vh 0;
     text-align: justify;
     font-family: sans-serif;
-    background-color: #f59bb9;
+    background-image: url('images/bg.jpg');
+    background-position-x: center;
+    background-size: cover;
 }
 
 #home p {
     text-align: center;
+    color: #fff;
+    font-size: 4em;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
 }
 h3{
     font-size: 2.5em;
@@ -25,10 +47,11 @@ h4{
     font-size: 1.5em;
 }
 a{
-    color:black;
+    color:#ff4c61;
+    text-decoration: none;
 }
 #menu{
-    background-color: #f59bb9;
+    background-color: #6a1b37;
     width: 4vw;
     height: 4vw;
     position: fixed;
@@ -46,6 +69,7 @@ a{
     padding: 1vw;
     height: 2vw;
     width: 2vw;
+    cursor: auto;
 }
 #citylist{
     top:0;
@@ -57,6 +81,7 @@ a{
     width:50%;
     transition: all .3s ease-in-out;
     opacity: 0;
+    display: none;
     z-index: 1;
 }
 #citylist ul{
@@ -86,6 +111,7 @@ a{
 section {
     padding:  2vw 4vw;
     line-height: 25px;
+    color: #6a1b37;
     border-bottom: 1px solid #ddd;
     opacity: 0.25;
     transition: opacity .3s ease-in-out;
