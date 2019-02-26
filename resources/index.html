@@ -5,12 +5,12 @@
 <input type="text" id="search" onkeyup="myFunction()" placeholder="Search">
 
 <ul id="myUL">
-    <li class="titlename">Boy Names</li>
-    <li><a href="#">Billy</a></li>
-    <li><a href="#">Bob</a></li>
-    <li class="titlename">Girl Names</li>
-    <li><a href="#">Christina</a></li>
-    <li><a href="#">Cindy</a></li>
+    <li class="titlename" data-search="boy names">Boys Names</li>
+    <li data-search="boy names, Billy" >Billy</li>
+    <li data-search="boy names, Bob">Bob<li>
+    <li class="titlename" data-search="girl names">Girls Names</li>
+    <li data-search="girls names, Cindy" >Cindy</li>
+    <li data-search="girls names, Christina">Christina<li>
 </ul>
 <script>
 function myFunction() {
@@ -24,8 +24,8 @@ function myFunction() {
     // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
     a = li[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    txtValue=li[i].getAttribute('data-search')
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
         li[i].style.display = "";
     } else {
         li[i].style.display = "none";
