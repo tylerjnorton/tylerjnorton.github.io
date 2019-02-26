@@ -1,36 +1,78 @@
 <head>
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<input type="text" id="search" onkeyup="myFunction()" placeholder="Search">
+  <input type="text" id="search" onkeyup="myFunction()" placeholder="Search" />
 
-<ul id="myUL">
-    <li class="titlename" data-search="boy names">Boys Names</li>
-    <li data-search="boy names, Billy" >Billy</li>
-    <li data-search="boy names, Bob">Bob<li>
-    <li class="titlename" data-search="girl names">Girls Names</li>
-    <li data-search="girls names, Cindy" >Cindy</li>
-    <li data-search="girls names, Christina">Christina<li>
-</ul>
-<script>
-function myFunction() {
-    // Declare variables
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById('search');
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName('li');
+  <ul id="myUL">
+    <li>
+      <h4 class="titlename">Boys Names</h4>
+      <ul>
+        <li>Billy</li>
+        <li>Bob</li>
+      </ul>
+    </li>
+    <li>
+      <h4 class="titlename">Girls Names</h4>
+      <ul>
+        <li>Cindy</li>
+        <li>Christina</li>
+      </ul>
+    </li>
+  </ul>
 
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    txtValue=li[i].getAttribute('data-search')
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        li[i].style.display = "";
-    } else {
-        li[i].style.display = "none";
+  <script>
+    var input = document.getElementById("search");
+    var myUL = document.getElementById("myUL");
+
+    var categories = myUL.children;
+
+    function myFunction() {
+      // get filter text
+      const filter = input.value.toUpperCase();
+
+      //loop through the categories
+      for (let i = 0; i < categories.length; i++) {
+        // get the titlename element from this category li
+        const title = categories[i].querySelector(".titlename");
+        const titleText = (title && title.innerHTML) || "";
+
+        // get the children items
+        const items = categories[i].querySelectorAll("li");
+
+        if (titleText.toUpperCase().indexOf(filter) > -1) {
+          categories[i].style.display = "";
+
+          // since we matched the category title, show all items
+          for (let j = 0; j < items.length; j++) {
+            items[j].style.display = "";
+          }
+        } else {
+          // start with no match found
+          let foundMatch = false;
+
+          // loop through all children
+          for (let j = 0; j < items.length; j++) {
+            const item = items[j];
+            const itemText = (item && item.innerHTML) || "";
+
+            // if a child matches then we found at least one match
+            if (itemText.toUpperCase().indexOf(filter) > -1) {
+              foundMatch = true;
+              item.style.display = "";
+            } else {
+              item.style.display = "none";
+            }
+          }
+
+          // If one of the children matched then we should show this category title
+          if (foundMatch) {
+            categories[i].style.display = "";
+          } else {
+            categories[i].style.display = "none";
+          }
+        }
+      }
     }
-    }
-}
-</script>
+  </script>
 </body>
