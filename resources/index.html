@@ -3,7 +3,7 @@
   <base target="_new">
 </head>
 <body>
-  <input type="text" id="search" onkeyup="myFunction()" placeholder="Search" />
+  <input type="text" id="search" autocomplete="off" onkeyup="myFunction()" placeholder="Search" />
 <div>
   <ul id="myUL">
     <li>
@@ -34,15 +34,6 @@
           <li><a href="https://dribbble.com/">Dribbble</a></li>
       </ul>
   </li>
-  <li>
-      <h4 class="titlename">Themes</h4>
-      <ul>
-          <li><a href="https://themeforest.net/">ThemeForest</a></li>
-          <li><a href="https://themeforest.net/">ThemeForest</a></li>
-          <li><a href="https://themeforest.net/">ThemeForest</a></li>
-          <li><a href="https://themeforest.net/">ThemeForest</a></li>
-      </ul>
-  </li>
     <li>
       <h4 class="titlename">Page Backgrounds</h4>
       <ul>
@@ -55,58 +46,58 @@
     </li>
   </ul>
 </div>
-  <script>
-    var input = document.getElementById("search");
-    var myUL = document.getElementById("myUL");
+<script>
+  var input = document.getElementById("search");
+  var myUL = document.getElementById("myUL");
 
-    var categories = myUL.children;
+  var categories = myUL.children;
 
-    function myFunction() {
-      // get filter text
-      const filter = input.value.toUpperCase();
+  function myFunction() {
+    // get filter text
+    const filter = input.value.toUpperCase();
 
-      //loop through the categories
-      for (let i = 0; i < categories.length; i++) {
-        // get the titlename element from this category li
-        const title = categories[i].querySelector(".titlename");
-        const titleText = (title && title.innerHTML) || "";
+    //loop through the categories
+    for (let i = 0; i < categories.length; i++) {
+      // get the titlename element from this category li
+      const title = categories[i].querySelector(".titlename");
+      const titleText = (title && title.innerHTML) || "";
 
-        // get the children items
-        const items = categories[i].querySelectorAll("li");
+      // get the children items
+      const items = categories[i].querySelectorAll("li");
 
-        if (titleText.toUpperCase().indexOf(filter) > -1) {
-          categories[i].style.display = "";
+      if (titleText.toUpperCase().indexOf(filter) > -1) {
+        categories[i].style.display = "";
 
-          // since we matched the category title, show all items
-          for (let j = 0; j < items.length; j++) {
-            items[j].style.display = "";
-          }
-        } else {
-          // start with no match found
-          let foundMatch = false;
+        // since we matched the category title, show all items
+        for (let j = 0; j < items.length; j++) {
+          items[j].style.display = "";
+        }
+      } else {
+        // start with no match found
+        let foundMatch = false;
 
-          // loop through all children
-          for (let j = 0; j < items.length; j++) {
-            const item = items[j];
-            const itemText = (item && item.innerHTML) || "";
+        // loop through all children
+        for (let j = 0; j < items.length; j++) {
+          const item = items[j];
+          const itemText = (item && item.innerHTML) || "";
 
-            // if a child matches then we found at least one match
-            if (itemText.toUpperCase().indexOf(filter) > -1) {
-              foundMatch = true;
-              item.style.display = "";
-            } else {
-              item.style.display = "none";
-            }
-          }
-
-          // If one of the children matched then we should show this category title
-          if (foundMatch) {
-            categories[i].style.display = "";
+          // if a child matches then we found at least one match
+          if (itemText.toUpperCase().indexOf(filter) > -1) {
+            foundMatch = true;
+            item.style.display = "";
           } else {
-            categories[i].style.display = "none";
+            item.style.display = "none";
           }
+        }
+
+        // If one of the children matched then we should show this category title
+        if (foundMatch) {
+          categories[i].style.display = "";
+        } else {
+          categories[i].style.display = "none";
         }
       }
     }
-  </script>
+  }
+</script>
 </body>
