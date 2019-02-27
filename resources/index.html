@@ -60,7 +60,7 @@
     for (let i = 0; i < categories.length; i++) {
       // get the titlename element from this category li
       const title = categories[i].querySelector(".titlename");
-      const titleText = (title && title.innerHTML) || "";
+      const titleText = (title && title.textContent) || "";
 
       // get the children items
       const items = categories[i].querySelectorAll("li");
@@ -79,7 +79,7 @@
         // loop through all children
         for (let j = 0; j < items.length; j++) {
           const item = items[j];
-          const itemText = (item && item.innerHTML) || "";
+          const itemText = (item && item.textContent) || "";
 
           // if a child matches then we found at least one match
           if (itemText.toUpperCase().indexOf(filter) > -1) {
