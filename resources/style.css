@@ -1,6 +1,7 @@
 
 body{
     background-color: #ffffff;
+    font-family: 'Libre Baskerville', serif;
 }
 a{
     text-decoration: none;
@@ -10,21 +11,26 @@ div{
     width: 1000px;
 }
 a:hover{
-    color:rgb(148, 51, 148);
+    color:rgb(255, 255, 255);
 }
 ul{
     margin:10px;
     width: 1440px;
     padding:0px;
 }
+li.big{
+    height: 320px;
+}
 ul li{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border-radius: 5px;
-    background-color: #b8defa;
+    background-color: #77c4fa;
     float: left;
     border: rgba(0,0,0,0) solid 10px;
     padding: 20px;
+    font-size:14px;
     margin: 10px;
+    min-height: 120px;
     width: 400px;
     list-style: none;
     -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
@@ -43,12 +49,16 @@ ul li ul li{
     padding: 0px;
     margin: 0px;
     border: none;
+    min-height: 0px;
     margin-bottom: 0px;
     margin-top: 0px;
 }
 h4{
-    font-size: 42px;
+    font-size: 32px;
     margin:0px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+
 }
 
 #search{
