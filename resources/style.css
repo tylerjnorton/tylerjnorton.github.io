@@ -2,13 +2,11 @@
 body{
     background-color: #ffffff;
     font-family: 'Libre Baskerville', serif;
+    width: 1440px;
 }
 a{
     text-decoration: none;
     color:black;
-}
-div{
-    width: 1000px;
 }
 a:hover{
     color:rgba(0, 0, 0, 0.5);
@@ -54,35 +52,45 @@ h4{
     font-weight: 400;
 
 }
-div{
+.left{
     border:none;
     font-size: 48px;
     color:black;
     padding: 10px 0;
-    width: 460px;
+    width: 940px;
     font-family: inherit;
     float: left;
     margin: 10px 0px 10px 20px;
     background: none;
     border-bottom: black 2px solid;
 }
-.middle{
-    text-align: center;
-}
 .right{
+    float: left;
+    position: relative;
+    font-size: 16px;
+    height: 80px;
+    margin: 10px 0px 10px 20px;
+    width:420px;
+    padding: 0 20px;
+    border-bottom: black 2px solid;
+   
+}
+span#madeby{
+    right:0;
     text-align: right;
+    position: absolute;
+    bottom:10px;
 }
 #search{
     border:none;
+    left:0;
+    position: absolute;
+    bottom:0;  
     font-size: 48px;
     color:black;
-    float: left;
-    padding: 10px 0;
-    width: 460px;
+    width: 330px;
     font-family: inherit;
-    margin: 10px 0px 10px 20px;
     background: none;
-    border-bottom: black 2px solid;
 }
 ::placeholder{
     color: rgba(0, 0, 0, 0.25);
