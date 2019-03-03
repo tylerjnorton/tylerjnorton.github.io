@@ -1,33 +1,33 @@
 
 body{
-    background-color: #ffffff;
+    background-image: linear-gradient(to right bottom, #ff92fb, #b6b3ff, #4cccff, #00dcff, #12e4eb);
     font-family: 'Libre Baskerville', serif;
     width: 1440px;
+    color: rgb(255, 255, 255);
 }
 a{
     text-decoration: none;
-    color:black;
+    color:#4B4737;;
 }
 a:hover{
-    color:rgba(0, 0, 0, 0.5);
+    color:#FF3EA1;
 }
 ul{
     margin:10px;
     width: 1440px;
     padding:0px;
 }
-li.big{
-    height: 300px;
-}
 ul li{
-    box-shadow: 0 0px 0px 0 rgba(0,0,0,1), 0 -2px 0px 0 rgba(0,0,0,1) ;
+    color: #4B4737;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
     float: left;
-    border: rgba(0,0,0,0) solid 20px outset;
-    padding: 20px 0;
+    background-color: rgb(227, 253, 255);
+    padding: 25px;
     font-size:14px;
     margin: 10px;
-    min-height: 120px;
-    width: 460px;
+    height: 300px;
+    position: relative;
+    width: 410px;
     list-style: none;
 }
 ul li ul{
@@ -42,11 +42,35 @@ ul li ul li{
     padding: 0px;
     margin: 0px;
     border: none;
-    min-height: 0px;
+    height: auto;
     margin-bottom: 0px;
     margin-top: 0px;
 }
 h4{
+    position: absolute;
+    bottom: -13px;
+    background:rgb(188, 239, 255);
+    left: 0px;
+    padding: 10px 20px 10px 20px;
+    width: 420px;
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    height: 35px;
+    color: rgba(0, 0, 0, 0.25);
+}
+/* h4:after{
+    content: " ";
+    background-image: url('tag.svg');
+    background-size: cover;
+    position: relative;
+    display: inline-block;
+    top: -5px;
+    left: -75px;
+    width: 15px;
+    height: 15px;
+} */
+h3{
     font-size: 24px;
     margin:0px;
     font-weight: 400;
@@ -55,11 +79,12 @@ h4{
 .left{
     border:none;
     font-size: 48px;
-    color:black;
+    color:#4B4737;
     padding: 10px 0;
     width: 940px;
     font-family: inherit;
     float: left;
+    
     margin: 10px 0px 10px 20px;
     background: none;
     border-bottom: black 2px solid;
@@ -87,13 +112,13 @@ span#madeby{
     position: absolute;
     bottom:0;  
     font-size: 48px;
-    color:black;
+    color:#4B4737;
     width: 330px;
     font-family: inherit;
     background: none;
 }
 ::placeholder{
-    color: rgba(0, 0, 0, 0.25);
+    color: rgba(255, 255, 255, .5);
 }
 
 input:focus, textarea:focus {
