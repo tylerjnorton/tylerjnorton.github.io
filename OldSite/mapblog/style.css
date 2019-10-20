@@ -1,0 +1,142 @@
+body {
+    margin:0;
+    padding:0;
+}
+
+/* 
+
+Colors
+
+maroon - #6a1b37
+red - #ff4c61
+yellow - #fef8c1
+teal - #07cfcf
+
+*/
+
+
+#map {
+    top:0;
+    bottom:0;
+    position: fixed;
+    width:50%;
+}
+
+#home {
+    height: 60vh;
+    padding: 20vh 0;
+    text-align: justify;
+    font-family: sans-serif;
+    background-image: url('images/bg.jpg');
+    background-position-x: center;
+    background-size: cover;
+}
+
+#home p {
+    text-align: center;
+    color: #fff;
+    font-size: 4em;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+h3{
+    font-size: 2.5em;
+}
+h4{
+    font-size: 1.5em;
+}
+a{
+    color:#ff4c61;
+    text-decoration: none;
+}
+#menu{
+    background-color: #6a1b37;
+    width: 4vw;
+    height: 4vw;
+    position: fixed;
+    top: 0px;
+    opacity: .5;
+    transition: opacity .3s ease-in-out;
+    z-index: 3;
+    right: 0px;
+}
+#menu:hover{
+    opacity: 1;
+    transition: opacity .3s ease-in-out;
+}
+#menu img {
+    padding: 1vw;
+    height: 2vw;
+    width: 2vw;
+    cursor: auto;
+}
+#citylist{
+    top:0;
+    bottom:0;
+    padding: 50px 0 0 50px;
+    right:0;
+    background-color: rgb(152, 255, 255);
+    position: fixed;
+    width:50%;
+    transition: all .3s ease-in-out;
+    opacity: 0;
+    display: none;
+    z-index: 1;
+}
+#citylist ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#citylist ul li{
+    font-size: 2em;
+    color: #fff;
+    transition: color .3s ease-in-out;
+    margin: 5px 0;
+}
+#citylist ul li:hover{
+    transition: color .3s ease-in-out;
+    cursor: pointer;
+    color: #8d0505;
+}
+#features {
+    width: 50%;
+    margin-left: 50%;
+    text-align: justify;
+    z-index: 2;
+    font-family: sans-serif;
+    background-color: #fafafa;
+}
+section {
+    padding:  2vw 4vw;
+    line-height: 25px;
+    color: #6a1b37;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.25;
+    transition: opacity .3s ease-in-out;
+    font-size: 13px;
+}
+figcaption{
+    text-align: center;
+    font-style: italic;
+    padding-bottom: 10px;
+}
+figure {
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+img{
+    width: 42vw;
+}
+section.active {
+    opacity: 1;
+    transition: opacity .3s ease-in-out;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 200px;
+}
