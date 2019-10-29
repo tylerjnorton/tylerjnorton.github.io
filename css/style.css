@@ -1698,7 +1698,7 @@ ul.social-network li {
     -webkit-transition: all .2s ease-out;
     -o-transition: all .2s ease-out;
     transition: all .2s ease-out;
-    top: -2px;
+    top: -3px;
 }
 
 .addo-nav-toggle i::before,
@@ -1739,14 +1739,6 @@ ul.social-network li {
     bottom: -7px;
 }
 
-.addo-nav-toggle:hover i::before {
-    top: -10px;
-}
-
-.addo-nav-toggle:hover i::after {
-    bottom: -10px;
-}
-
 .addo-nav-toggle.active i {
     background: transparent;
 }
@@ -1778,12 +1770,9 @@ ul.social-network li {
     opacity: 1;
     visibility: hidden;
     padding: 12px 15px;
-    -webkit-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
     background: #101010;
-    margin: 15px 30px;
-    border-radius: 50%;
+    margin: 7px 7px;
+    border-radius: 5%;
 }
 
 @media screen and (max-width: 1000px) {
