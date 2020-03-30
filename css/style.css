@@ -20,7 +20,7 @@
 
 /*** 01. Google Fonts ***/
 
-@import url('https://fonts.googleapis.com/css?family=Oswald:400,500|Rambla:400,700');
+@import url('https://fonts.googleapis.com/css?family=Oswald:400,500|Roboto:400,700');
 
 /*** 02. Default styles ***/
 
@@ -33,8 +33,8 @@ body {
 }
 
 body {
-    font-family: 'Rambla', sans-serif;
-    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
     line-height: 1.75em;
     font-weight: 400;
     color: #888;
@@ -63,8 +63,8 @@ h6 {
 /* paragraph */
 
 p {
-    font-family: 'Rambla', sans-serif;
-    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
     line-height: 1.75em;
     font-weight: 400;
     color: #888;
@@ -135,7 +135,7 @@ input,
 optgroup,
 select,
 textarea {
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 input[type="password"]:focus,
@@ -667,7 +667,7 @@ input[type="checkbox"] {
     font-size: 27px;
     line-height: 1.75em;
     color: #fff;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     margin: 0;
     letter-spacing: -1px;
@@ -751,7 +751,7 @@ body.offcanvas .addo-nav-toggle {
 
 .addo-about-heading {
     color: #101010;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 24px;
 }
@@ -807,7 +807,7 @@ body.offcanvas .addo-nav-toggle {
 
 .addo-post-heading {
     color: #101010;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin-bottom: 30px;
     font-weight: 700;
     font-size: 24px;
@@ -910,7 +910,7 @@ body.offcanvas .addo-nav-toggle {
 .blog-entry .desc h3 a {
     color: #101010;
     text-decoration: none;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 18px;
 }
@@ -930,7 +930,7 @@ body.offcanvas .addo-nav-toggle {
     font-size: 12px;
     color: #101010;
     font-weight: 400;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .blog-entry .desc .lead:hover {
@@ -954,7 +954,7 @@ body.offcanvas .addo-nav-toggle {
 .addo-sidebar-block .addo-sidebar-block-title {
     color: #101010;
     text-decoration: none;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 24px;
     margin-bottom: 10px;
@@ -1139,7 +1139,7 @@ body.offcanvas .addo-nav-toggle {
 
 .comments-area .comments-title {
     font-size: 24px;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.75em;
     font-weight: 700;
 }
@@ -1183,7 +1183,7 @@ ol.comment-list li.comment .comment-author .avatar {
 ol.comment-list li.comment .comment-author .name {
     display: inline-block;
     color: #101010;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 18px;
     line-height: 1.75em;
     font-weight: 700;
@@ -1215,7 +1215,7 @@ ol.comment-list li.comment .reply a:before {
 }
 
 ol.comment-list li.comment p {
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     line-height: 1.75em;
     margin: 0 0 20px;
@@ -1386,7 +1386,7 @@ ol.comment-list li .children li {
 
 .project-desc h2 {
     color: #101010;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 24px;
 }
@@ -1564,7 +1564,7 @@ ul.social-network li {
     -ms-border-radius: 0;
     border-radius: 0;
     padding: 0;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     line-height: 1.75em;
     font-weight: 400;
@@ -1584,7 +1584,7 @@ ul.social-network li {
 }
 
 .btn {
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.75;
     font-weight: 400;
@@ -1640,7 +1640,7 @@ ul.social-network li {
     margin-bottom: 10px;
     color: #101010;
     font-size: 18px;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .addo-feature.addo-feature-sm .addo-text {
@@ -1854,7 +1854,7 @@ ul.social-network li {
 .team .desc h3 {
     font-size: 18px;
     color: #fff;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
     -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
@@ -2068,7 +2068,7 @@ hr {
 .cd-headline {
     font-size: 20px;
     font-weight: 700;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .cd-words-wrapper {
@@ -2081,6 +2081,8 @@ hr {
     display: inline-block;
     position: absolute;
     white-space: nowrap;
+    font-weight: 500;
+    color: #ffffff;
     left: 0;
     top: 0;
 }
@@ -2123,7 +2125,7 @@ hr {
 
 .cd-headline.clip b {
     opacity: 0;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .cd-headline b.is-visible {
@@ -2147,7 +2149,7 @@ hr {
 
 .bar-title {
     position: relative;
-    font-family: 'Rambla', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     text-align: left;
     margin: 0 0 5px 0;
