@@ -2072,23 +2072,27 @@ hr {
     margin-left:2%;
 }
 .rightpic{
-    height:630px;
+    max-height:630px;
+    height:45vw;
     width: auto;
     transform: translate(5vw, 0px);
 }
 .rightpic2{
-    height:730px;
+    height:45vw;
+    max-height: 730px;
     width: auto;
     transform: translate(5vw, 0px);
 }
 .leftpic{
-    height:450px;
+    max-height:450px;
+    height:35vw;
     width: auto;
     text-align: left;
     transform: translate(-7vw, 0px);
 }
 .leftpic2{
-    height:730px;
+    height:45vw;
+    max-height: 730px;
     width: auto;
     transform: translate(-8vw, 0px);
 }
