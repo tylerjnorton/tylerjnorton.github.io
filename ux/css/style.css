@@ -38,7 +38,8 @@ body {
     font-size: 14px;
     line-height: 1.75em;
     font-weight: 400;
-    color: #888;
+    background-color: #FFFAFA;
+    color:#171416;
 }
 
 
@@ -53,7 +54,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: rgb(70, 70, 70);
+    color: #171416;
     font-family: 'Cabin', sans-serif;
     font-weight: 500;
     line-height: 1.75em;
@@ -77,12 +78,23 @@ h2{
 
 
 @media screen and (max-width: 767px) {
-
+    h1 {
+        font-size: 2.5rem;
+        line-height: 3rem;
+    }
+    h2{
+    font-size: 2rem;
+    line-height: 2.5rem;
+    }
+    p{
+        font-size: 1.2em !important;
+        line-height: 1.4em !important;
+    }
     .hidden-sm-down{
         display: none;
     }
     .linkspace{
-        padding-bottom: 80px;
+        padding-bottom: 50px;
     }
     .project .container-fluid{
         margin: 10%;
@@ -90,6 +102,9 @@ h2{
     .project .row{
         max-width:100%;
         margin-bottom: 0px !important;
+    }
+    #about .row{
+        margin-bottom: 50px !important;
     }
     .project .offset-0, .project .offset-md-0{
         margin-left:0%;
@@ -136,7 +151,7 @@ p {
     font-size: 1.4em;
     line-height: 1.5em;
     font-weight: 400;
-    color: rgb(24, 24, 24);
+    color:#171416;
     margin: 0 0 8px;
 }
 
@@ -151,15 +166,15 @@ ul {
 /* links */
 
 a {
-    color:rgb(24, 55, 155);
+    color:#820333;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
 }
-
 a:hover,
 a:active,
 a:focus {
+    color: #F0433A;
     outline: none;
     text-decoration: none !important;
 }
