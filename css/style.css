@@ -20,7 +20,7 @@
 
 /*** 01. Google Fonts ***/
 
-@import url('https://fonts.googleapis.com/css?family=Oswald:400,500|Roboto:400,700');
+@import url('https://fonts.googleapis.com/css?family=Oswald:400,500|Roboto:400,700|Cabin:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /*** 02. Default styles ***/
 
@@ -30,14 +30,16 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
     font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Cabin', sans-serif;
     font-size: 14px;
     line-height: 1.75em;
     font-weight: 400;
-    color: #888;
+    background-color: #FFFAFA;
+    color:#171416;
 }
 
 
@@ -52,23 +54,132 @@ h3,
 h4,
 h5,
 h6 {
-    color: #101010;
-    font-family: 'Oswald', sans-serif;
+    color: #171416;
+    font-family: 'Cabin', sans-serif;
     font-weight: 500;
     line-height: 1.75em;
     margin: 0 0 10px 0;
 }
 
 
+h1{
+    font-size: 3.5rem;
+    line-height: 4rem;
+}
+
+h2{
+    font-size: 2.5rem;
+    line-height: 3rem;
+}
+
+.row{
+    margin-bottom: 160px;
+}
+
+
+@media screen and (max-width: 767px) {
+    h1 {
+        font-size: 2.5rem;
+        line-height: 3rem;
+    }
+    h2{
+    font-size: 2rem;
+    line-height: 2.5rem;
+    }
+    p{
+        font-size: 1.2em !important;
+        line-height: 1.4em !important;
+    }
+    .hidden-sm-down{
+        display: none;
+    }
+    .linkspace{
+        padding-bottom: 50px;
+    }
+    .project .container-fluid{
+        margin: 10%;
+    }
+    .project .row{
+        max-width:100%;
+        margin-bottom: 0px !important;
+    }
+    #about .row{
+        margin-bottom: 50px !important;
+    }
+    .project .offset-0, .project .offset-md-0{
+        margin-left:0%;
+    }
+    .project .col-12{
+        max-width: 87%;
+    }
+    .project .row > div{
+        padding-bottom: 30px;
+    }
+    #about{
+        margin-top: 15%;
+    }
+}
+@media screen and (min-width: 768px) {
+    .container-fluid{
+        padding-top: 180px;
+    }
+    .project .offset-0,{
+        margin-left:0%;
+    }
+    .project .offset-md-0{
+        margin-left:2%;
+    }
+}
+
+
+.rightpic{
+    max-height:630px;
+    height:45vw;
+    width: auto;
+    transform: translate(5vw, 0px);
+}
+.rightpic2{
+    height:45vw;
+    max-height: 730px;
+    width: auto;
+    transform: translate(5vw, 0px);
+}
+.leftpic{
+    max-height:450px;
+    height:35vw;
+    width: auto;
+    text-align: left;
+    transform: translate(-7vw, 0px);
+}
+.leftpic2{
+    height:45vw;
+    max-height: 730px;
+    width: auto;
+    transform: translate(-8vw, 0px);
+}
+
+.project .row {
+    margin-bottom: 80px;
+}
+
+.container-fluid {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1440px;
+    padding-bottom:0;
+    padding-left:0;
+    padding-right:0;
+}
+
 /* paragraph */
 
 p {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    line-height: 1.75em;
+    font-family: 'Cabin', sans-serif;
+    font-size: 1.4em;
+    line-height: 1.5em;
     font-weight: 400;
-    color: #888;
-    margin: 0 0 20px;
+    color:#171416;
+    margin: 0 0 8px;
 }
 
 
@@ -82,16 +193,15 @@ ul {
 /* links */
 
 a {
-    color: #101010;
+    color:#820333;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
 }
-
 a:hover,
 a:active,
 a:focus {
-    color: #101010;
+    color: #F0433A;
     outline: none;
     text-decoration: none !important;
 }
@@ -135,7 +245,7 @@ input,
 optgroup,
 select,
 textarea {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Cabin', sans-serif;
 }
 
 input[type="password"]:focus,
@@ -296,6 +406,7 @@ input[type="checkbox"] {
         width: 30%;
     }
 }
+
 
 @media screen and (max-width: 1000px) {
     #addo-aside {
@@ -486,23 +597,9 @@ input[type="checkbox"] {
 /*** 04. Content styles ***/
 
 #addo-main {
-    width: 77%;
-    float: right;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
-}
-
-@media screen and (max-width: 1200px) {
-    #addo-main {
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    #addo-main {
-        width: 100%;
-    }
 }
 
 .addo-hero {
@@ -736,7 +833,7 @@ body.offcanvas .addo-nav-toggle {
 /*** 06. Heading styles ***/
 
 .addo-heading {
-    color: #101010;
+    color: #333333;
     font-family: 'Oswald', sans-serif;
     margin-bottom: 30px;
     font-weight: 500;
@@ -755,6 +852,7 @@ body.offcanvas .addo-nav-toggle {
     font-weight: 700;
     font-size: 24px;
 }
+
 
 .addo-about-contact-wrap {
     width: 100%;
@@ -1947,11 +2045,6 @@ ul.social-network li {
     }
 }
 
-.container-fluid {
-    padding-right: 30px;
-    padding-left: 30px;
-    max-width: 90%;
-}
 
 .font-35px {
     font-size: 35px;
@@ -1996,14 +2089,14 @@ hr {
 .addo-projects,
 .addo-recent-projects,
 .addo-team,
-.addo-about,
 .addo-services,
 .addo-contact {
-    padding-top: 60px;
-    padding-bottom: 60px;
     clear: both;
     width: 100%;
     display: block;
+}
+.offset-0, .offset-md-0{
+    margin-left:2%;
 }
 
 @media screen and (max-width: 1000px) {
@@ -2014,8 +2107,6 @@ hr {
     .addo-blog,
     .addo-about,
     .addo-contact {
-        padding-top: 90px;
-        padding-bottom: 60px;
     }
     .addo-team {
         padding-top: 0px;

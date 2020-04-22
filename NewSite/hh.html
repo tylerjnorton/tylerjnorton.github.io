@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tyler J Norton - Homegrown Host</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/et-lineicons.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/flexslider.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <div id="addo-page"> <a href="#" class="js-addo-nav-toggle addo-nav-toggle"><i></i></a>
+        <!-- Sidebar Section -->
+        <aside id="addo-aside">
+            <!-- Logo -->
+            <div id="addo-logo"> <a href="index.html">TYLERJNORTON</a> </div>
+            <!-- Menu -->
+            <nav id="addo-main-menu">
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#portfolio">Creative Work</a></li>
+                    <li><a href="index.html#news">My Book</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <!-- Sidebar Footer -->
+            <div class="addo-footer delay-display">
+                <ul>
+                    <li><a href="http://www.https://medium.com/lets-move-mountains"><i
+                        class="ti-write font-14px white-icon"></i></a></li>
+                        <li><a href="http://www.instagram.com/tylerjnorton"><i
+                                class="ti-instagram font-14px white-icon"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/tylerjnorton/"><i
+                                class="ti-linkedin font-14px white-icon"></i></a></li>
+                </ul>
+            </div>
+        </aside>
+        <!-- Main Section -->
+        <div id="addo-main">
+            <div class="addo-projects">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12"> <span class="heading-meta">Portfolio</span>
+                            <h2 class="addo-heading animate-box" data-animate-effect="fadeInLeft">Homegrown Host</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 image-content animate-box fadeInLeft animated"
+                            data-animate-effect="fadeInLeft">
+                            <img class="img-fluid mb-30" src="images/hh/Image1.png" alt="">
+                            <p>Amy at Homegrown Host wanted to rebrand an event planning company targeted at high end
+                                southern events hosted by women. Amy needed something simple, elegant, and hand made.
+                                One of her requirements what that it include a pineapple, the symbol of hospitality in the south. 
+                                During our initial meeting Amy made it clear that she wanted her new identity to have that
+                                personal look and feel while still conveying professionalism and class.</p>
+                            <img class="img-fluid mb-30" src="images/hh/Image3.jpg" alt="">
+                            <p>For her new logo and brand elements, a few different options were presented. Bright colors
+                                and the slightly offset fill ended up being exactly what she was looking for to bring her
+                                new brand exactly where she wanted it. After a few iterations back and forth we landed on what you 
+                                see here as a final decisions. From there I produced a logo, sample website (she was not ready to launch a full one 
+                                yet), and some marketing material like business cards and one sheets that explain her services.
+                            </p>
+                            <img class="img-fluid mb-30" src="images/hh/Image2.png" alt="">
+                            <p> Amy was extremely happy with the way her brand identity turned out. The traditional
+                                southern elegance mixed with the handmade detail oriented event planner made for the
+                                perfect blend for Homegrown Host.</p>
+                            <img class="img-fluid mb-30" src="images/hh/Image.png" alt="">
+
+                        </div>
+                        <div class="col-md-4 sticky-parent animate-box fadeInLeft animated"
+                            data-animate-effect="fadeInLeft">
+                            <div id="sticky_item">
+                                <div class="project-desc">
+                                    <h2>Project Details</h2>
+                                    <b>Client</b>
+                                    <p>Homegrown Host</p>
+                                    <b>Category</b>
+                                    <p>Branding & Identity, Marketing Material</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Js -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.flexslider-min.js"></script>
+    <script src="js/animated.headline.js"></script>
+    <script src="js/sticky-kit.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        $.get(
+            "https://us-central1-last-fm-now-playing.cloudfunctions.net/now_playing?token=tyler"
+        ).then(function (result) {
+            var recent = result.recenttracks.track[0];
+            var artist = recent.artist["#text"];
+            var song = recent.name;
+            $(".nowplaying").text(song + " by " + artist);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.delay-display').delay(2000).fadeIn(500);
+        });</script>
+</body>
+
+</html>
