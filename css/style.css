@@ -96,7 +96,7 @@ h2{
     .linkspace{
         padding-bottom: 50px;
     }
-    .project .container-fluid{
+    .project .container-fluid, .about .container-fluid{
         margin: 10%;
     }
     .project .row{
@@ -104,12 +104,14 @@ h2{
         margin-bottom: 0px !important;
     }
     #about .row{
+        max-width:100%;
         margin-bottom: 50px !important;
     }
-    .project .offset-0, .project .offset-md-0{
+    
+    .project .offset-0, .project .offset-md-0, .about .offset-0, .about .offset-md-0{
         margin-left:0%;
     }
-    .project .col-12{
+    .project .col-12, .about .col-12{
         max-width: 87%;
     }
     .project .row > div{
