@@ -59,7 +59,7 @@
                 }, 100);
             }
         }, {
-            offset: '85%'
+            offset: '100%'
         });
     };
     // Burger Menu 
