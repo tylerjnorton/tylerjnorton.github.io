@@ -153,6 +153,13 @@ h2{
     text-align: left;
     transform: translate(-7vw, 0px);
 }
+.leftpic1{
+    max-height:450px;
+    height:35vw;
+    width: auto;
+    text-align: left;
+    transform: translate(-3vw, 0px);
+}
 .leftpic2{
     height:45vw;
     max-height: 730px;
