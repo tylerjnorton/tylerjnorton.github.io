@@ -38,7 +38,7 @@ body {
     font-size: 14px;
     line-height: 1.75em;
     font-weight: 400;
-    background-color: #FFFAFA;
+    background-color: #ffffff;
     color:#171416;
 }
 
@@ -152,6 +152,13 @@ h2{
     width: auto;
     text-align: left;
     transform: translate(-7vw, 0px);
+}
+.leftpic1{
+    max-height:450px;
+    height:35vw;
+    width: auto;
+    text-align: left;
+    transform: translate(-3vw, 0px);
 }
 .leftpic2{
     height:45vw;
