@@ -1,0 +1,57 @@
+body{
+    margin:0;
+    padding:0;
+}
+.left{
+    background: blue;
+    min-height: 100vh;
+    width: 50%;
+    float:left;
+    margin: 0;
+}
+p{
+    font-size: 50px;
+}
+nav{
+    z-index: 10;
+    opacity: .5;
+    background-color: black;
+    color: blanchedalmond;
+    height: 100vh;
+    position: fixed;
+    overflow: auto;
+    width: 100vw;
+}
+ul{
+    margin-top: 10px;
+    padding: 0;
+    margin-left: calc(38.2% - 200px);
+    list-style-type: none;
+    font-size: 32px;
+    position: relative;
+}
+ul li{
+    font-size: 48px;
+    margin-left: 200px;
+}
+ul li:first-child{
+    position: absolute;
+    margin-left: 50px;
+}
+
+
+
+.right{
+    height:100vh;
+    right:0;
+    top:0;
+    position: fixed;
+    width: 50%;
+}
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right:0;
+    width: 100%;
+}
