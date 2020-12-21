@@ -26,12 +26,15 @@ Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
 
 
 
-
+<div><a href="javascript:void(0)" id="openbtn" onclick="openNav()">open</a></div>
 <div class="right" >
     <div id="map"></div>
-
 </div>
-<nav>
+<nav id="nav">
+    <div id="logo"><img src="images/logo.png" /></div>
+    <div id="hidex"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">close</a>
+    </div>
+    
     <ul>
         <li>2010</li>
         <li>Paris, France</li>
@@ -66,17 +69,7 @@ Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
         <li>Innsbruck, Austria</li>
     </ul>
 </nav>
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoidHlsZXJqbm9ydG9uIiwiYSI6ImNpdmUxYnR6bTAxOGUyb3AzeWI0ZzJ5bHkifQ.SWoo70ZhudEwqzzScdzETA';
-var map = new mapboxgl.Map({
-container: 'map', // container id
-style: 'mapbox://styles/tylerjnorton/ckinzcvmx05bn17jy0bz0jqzk', // style URL
-center: [-74.5, 40], // starting position [lng, lat]
-zoom: 9 // starting zoom
-});
-map.scrollZoom.disable();
-
-</script>
+<script src="js.js"></script>
 </body>
 
 
