@@ -10,13 +10,11 @@ map.scrollZoom.disable();
 /* Open when someone clicks on the span element */
 function openNav() {
     document.getElementById("nav").style.opacity = "1";
-    document.getElementById("nav").style.zIndex = "50";
-    document.getElementById("nav").style.display = "block";
+    document.getElementById('nav').style.pointerEvents = 'all'; // When open, we want the click events
   }
   
   /* Close when someone clicks on the "x" symbol inside the overlay */
   function closeNav() {
     document.getElementById("nav").style.opacity = "0";
-    document.getElementById("nav").style.display = "none";
-    document.getElementById("nav").style.zIndex = "0";
+    document.getElementById('nav').style.pointerEvents = 'none'; // when closed, no more click events
   }

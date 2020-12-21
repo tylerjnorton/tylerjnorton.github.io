@@ -14,9 +14,10 @@ p{
     font-size: 50px;
 }
 #nav{
-    z-index: 0;
+    z-index: 2; /* Just always 2, so its in front of the map */
     opacity: 0;
-    display: none;
+    pointer-events: none; /* none means clicks just go through it */
+    transition: opacity 1s;
     background-color: black;
     color: blanchedalmond;
     height: 100vh;
