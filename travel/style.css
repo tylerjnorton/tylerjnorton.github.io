@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+
 body{
     margin:0;
     padding:0;
@@ -14,45 +16,45 @@ p{
     font-size: 50px;
 }
 #nav{
-    z-index: 2; /* Just always 2, so its in front of the map */
+    z-index: 30; /* Just always 2, so its in front of the map */
     opacity: 0;
     pointer-events: none; /* none means clicks just go through it */
     transition: opacity 1s;
     background-color: black;
-    color: blanchedalmond;
+    color: white;
     height: 100vh;
     position: fixed;
     overflow: auto;
     width: 100vw;
 }
-#logo{
-    position: fixed;
-    top: 0px;
-    left: 20px;
-}
-#logo img{
-    max-height: 200px;
-    max-width: 200px;
-}
-#hidex {
+#hidex{
     position: fixed;
     top: 20px;
     z-index: 51;
     right: 20px;
+}
+#hidex a{
     color: white;
     text-decoration: none;
 }
 #openbtn{
+    color: white;
+    text-decoration: none;
+}
+.opennava{
     position: fixed;
-    z-index: 40;
-    top: 20;
-    color: red;
-    right: 20;
+    z-index: 2;
+    top: 0px;
+    right: 0px;
+    padding: 20px;
+    background: black;
+}
+.list{
+    padding: 50px 0;
 }
 ul{
     margin-top: 10px;
     padding: 0;
-    margin-left: calc(38.2% - 200px);
     list-style-type: none;
     font-size: 32px;
     position: relative;
@@ -60,10 +62,13 @@ ul{
 ul li{
     font-size: 48px;
     margin-left: 200px;
+    font-family: 'Nanum Myeongjo', serif;
+    font-weight: 400;
 }
 ul li:first-child{
     position: absolute;
     margin-left: 50px;
+    font-weight: 800;
 }
 .right{
     height:100vh;
