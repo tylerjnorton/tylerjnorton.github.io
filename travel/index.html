@@ -1,12 +1,23 @@
 <!DOCTYPE HTML>
 <html lang="en">
+<head>
 <title>See The World</title>
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
 <body>
+    <div id="circle"></div> 
+    <div class="border"></div>
+
+    <div class="imageshow1"><img src=images/amsterdam1.jpg /></div>
+    <div class="imageshow2"><img src=images/amsterdam2.jpg /></div>
+    <div class="imageshow3"><img src=images/amsterdam3.jpg /></div>
+    <div id="title">Amsterdam, Netherlands</div>
 <div class="left">
+    <div id="writing">
     <p>The standard Lorem Ipsum passage, used since the 1500s
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
@@ -25,20 +36,25 @@ Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
 "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
 </p>
 </div>
+</div>
 
 
 
 <div class="right" >
-    <a href="javascript:void(0)" id="openbtn" onclick="openNav()"><div class="opennava">Timeline</div></a>
+    <a href="javascript:void(0)" id="openbtn" onclick="openNav()"><div class="opennava"><img src="./images/nav.svg" /></div></a>
     <div id="map"></div>
 </div>
 <nav id="nav">
-    <div id="hidex"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Back</a>
+    <div id="hidex"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close X</a>
     </div>
 <div class="list">
     <ul>
         <li>Year</li>
         <li>Destination</li>
+    </ul>
+    <ul>
+        <li>2005</li>
+        <li>Montreal, QC, Canada</li>
     </ul>
     <ul>
        <li>2010</li>
@@ -57,18 +73,6 @@ Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
         <li>Paris, France</li>
     </ul>
     <ul>
-        <li>2011</li>
-        <li>Boston, United States</li>
-    </ul>
-    <ul>
-        <li>2012</li>
-        <li>Boston, United States</li>
-    </ul>
-    <ul>
-        <li>2013</li>
-        <li>Boston, United States</li>
-    </ul>
-    <ul>
         <li>2014</li>
         <li>Madrid, Spain</li>
         <li>Toledo, Spain</li>
@@ -81,11 +85,12 @@ Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
         <li>Pettigo, Ireland</li>
         <li>Sligo, Ireland</li>
         <li>Donegal, Ireland</li>
+        <li>Niagara Falls, Ontario, Canada</li>
     </ul>
     <ul>
         <li>2016</li>
         <li>Sao Miguel, Azores, Portugal</li>
-        <li>Toronto, Canada</li>
+        <li>Toronto, Ontario, Canada</li>
         <li>Evesham, England</li>
         <li>Liverpool, England</li>
     </ul>
@@ -125,14 +130,14 @@ Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
         <li>Belgrade, Serbia</li>
         <li>Tallinn, Estonia</li>
         <li>Hanburg, Germany</li>
-        <li>Tromsø, Norway</li>
+        <li>Tromso, Norway</li>
         <li>Brussels, Belgium</li>
-        <li>Halifax, Canada</li>
+        <li>Halifax, NS, Canada</li>
     </ul>
 </div>
 </nav>
 <script src="js.js"></script>
+<script src="mouse.js"></script>
 </body>
-
 
 </html>

@@ -1,27 +1,168 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 
 body{
     margin:0;
     padding:0;
+    cursor: none;
+}
+#circle{
+    width: 20px;
+    height: 20px;
+    z-index: 1000;
+    border: 5px solid #E4572E;
+    pointer-events: none;
+    /* background-color: #3c2946; */
+    position: fixed;
+    border-radius:50%;
+}
+.border{
+    height: calc(100vh - 80px);
+    width: calc(100vw - 80px);
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+    border:#002642 solid 40px;
+    z-index: 100;
 }
 .left{
-    background: blue;
+    background: #DCC48E;
     min-height: 100vh;
-    width: 50%;
+    width: 700px;
     float:left;
+    position: relative;
     z-index: 1;
     margin: 0;
 }
+.imageshow1, .imageshow2, .imageshow3{
+    position: fixed;
+    display: flex;
+    height: 350px;
+    width: 350px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: -8px 7px 0px 0px rgba(228,87,46,0.97);
+}
+.imageshow1 img, .imageshow2 img, .imageshow3 img{
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.imageshow1{
+    animation: slow 80s ;
+    animation-iteration-count: 1;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+    margin-left: 1100px;
+    margin-top: 200px;
+    opacity: 0;
+    z-index: 11;
+}
+.imageshow2{
+    animation: slowoppo 80s ;
+    animation-iteration-count: 1;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    margin-left: 800px;
+    margin-top: 300px;
+    opacity: 0;
+    z-index: 10;
+}
+.imageshow3{
+    animation: slow 80s ;
+    animation-iteration-count: 1;
+    animation-delay: 4s;
+    animation-fill-mode: forwards;
+    margin-left: 1000px;
+    margin-top: 700px;
+    opacity: 0;
+    z-index: 9;
+}
+@keyframes move {
+   0% {
+      transform: translate(0, 4vh);
+      opacity: 0;
+    }
+    
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+  }
+  @keyframes slow {
+    0% {
+       transform: translate(0, 4vh);
+       opacity: 0;
+     }
+     2% {
+         transform: translate(0, 0);
+         opacity: 1;
+     }
+     100% {
+         transform: translate(0, -20vh);
+         opacity: 1;
+     }
+   }
+
+  @keyframes slowoppo {
+    0% {
+       transform: translate(0, -24vh);
+       opacity: 0;
+     }
+     2% {
+         transform: translate(0, -20vh);
+         opacity: 1;
+     }
+     100% {
+         transform: translate(0, 0vh);
+         opacity: 1;
+     }
+   }
+.imageshow1 img, .imageshow2 img, .imageshow3 img{
+    max-width: 15vw;
+    border: 1px solid #002642;
+}
 p{
-    font-size: 50px;
+    margin:0;
+}
+#title{
+    animation: move 2s ;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    font-size: 72px;
+    position: absolute;
+    padding-right: 12px;
+    color: #002642;
+    font-style: bold;
+    margin-top: 100px;
+    margin-left: 100px;
+    z-index: 15;
+}
+#writing{
+    animation: move 2s ;
+    animation-iteration-count: 1;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    font-size: 18px;
+    color: #002642;
+    height: 69.5vh;
+    position: absolute;
+    top: 195px;
+    left: 100px;
+    overflow-y: scroll;
+    width: 520px;
 }
 #nav{
     z-index: 30; /* Just always 2, so its in front of the map */
     opacity: 0;
     pointer-events: none; /* none means clicks just go through it */
     transition: opacity 1s;
-    background-color: black;
-    color: white;
+    background-color: #002642;
+    color: #DCC48E;
     height: 100vh;
     position: fixed;
     overflow: auto;
@@ -29,28 +170,42 @@ p{
 }
 #hidex{
     position: fixed;
-    top: 20px;
-    z-index: 51;
-    right: 20px;
+    top: calc(50vh - 10px);
+    color: rgba(228,87,46,0.97);
+    z-index: 101;
+    right: 40px;
 }
 #hidex a{
-    color: white;
+    color: rgba(228,87,46,0.97);
     text-decoration: none;
-}
-#openbtn{
-    color: white;
-    text-decoration: none;
+    cursor: none;
 }
 .opennava{
     position: fixed;
     z-index: 2;
-    top: 0px;
+    top: calc(50vh - 60px);
     right: 0px;
-    padding: 20px;
-    background: black;
+    height: 120px;
+    width: 120px;
+    cursor: none;
+    transform: rotate(0deg);
 }
+.opennava:hover {
+    animation-duration: 3s;
+    animation-name: navcircle;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes navcircle {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+  }
 .list{
-    padding: 50px 0;
+    padding: 50px 50px;
 }
 ul{
     margin-top: 10px;
@@ -64,25 +219,37 @@ ul li{
     margin-left: 200px;
     font-family: 'Nanum Myeongjo', serif;
     font-weight: 400;
+    transition-duration: 0.5s;
 }
 ul li:first-child{
     position: absolute;
     margin-left: 50px;
     font-weight: 800;
 }
+ul li:hover{
+    color:#E4572E;
+}
+ul li:first-child:hover{
+    color: inherit;
+}
+
 .right{
     height:100vh;
     right:0;
     top:0;
     position: fixed;
-    width: 50%;
+    width: calc(100vw - 699px);
     z-index: 1;
-
+    cursor: none;
 }
 #map {
     position: absolute;
     top: 0;
     bottom: 0;
+    cursor: none;
     right:0;
     width: 100%;
+}
+.right #map .mapboxgl-canvas-container.mapboxgl-interactive{
+    cursor: none !important;
 }
