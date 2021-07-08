@@ -9,7 +9,6 @@
 
 -----------------------------------------------------------------------------------*/
 
-
 dl, dt, dd, ol, ul, li {
 	margin: 0;
 	padding: 0;
@@ -3199,8 +3198,10 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 #page-title {
 	position: relative;
-	padding: 50px 0;
-	background-color: #47444a;
+	padding: 100px 0;
+	background-image: url('images/bigbg.png');
+	background-size: cover;
+	background-position: 50% 50%;	
 }
 
 #page-title .container { position: relative; }
@@ -3334,7 +3335,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 /* Page Title - Mini
 -----------------------------------------------------------------*/
 
-#page-title.page-title-mini { padding: 80px 0 60px 0; }
+#page-title.page-title-mini { padding: 220px 0 200px 0; }
 
 #page-title.page-title-mini h1 {
 	font-weight: 600;
