@@ -241,10 +241,10 @@ p{
     content: "";
     display: inline-block;
     position: absolute;
-    width: 115%;
     height: 50px;
     top: 58px;
-    left: -9.5%;
+    left: -20px;
+    right: -20px;
     z-index: -1;
 }
 #title span{
@@ -255,10 +255,10 @@ p{
     content: "";
     display: inline-block;
     position: absolute;
-    width: 105%;
     height: 60px;
     top: 37px;
-    left: -2.5%;
+    right: -20px;
+    left: -20px;
     z-index: -1;
 }
 #writing{
@@ -365,6 +365,17 @@ ul li{
     font-weight: 400;
     transition-duration: 0.5s;
 }
+#botnav a{
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    text-decoration: none;
+    transition-duration: 0.5s;
+    color: #032742;
+}
+#botnav a:hover{
+    color:#E4572E;
+    cursor: none;
+}
 ul li:first-child{
     position: absolute;
     margin-left: 50px;
@@ -372,6 +383,7 @@ ul li:first-child{
 }
 ul li:hover{
     color:#E4572E;
+    cursor: none;
 }
 ul li:first-child:hover{
     color: inherit;
