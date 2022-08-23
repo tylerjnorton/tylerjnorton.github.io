@@ -1,6 +1,6 @@
 const data = {
-  boston: {
-    place: "boston",
+  rotterdam: {
+    place: "rotterdam",
     stuff: {
       title: "Rotterdam, Netherlands",
       year: "2022",
@@ -63,4 +63,4 @@ function template(place) {
 const div = document.querySelector("#rendered-content-area");
 
 // execute the template and set it as the content for the rendered-content-area div
-div.innerHTML = template(data.boston);
+div.innerHTML = template(data.rotterdam);
