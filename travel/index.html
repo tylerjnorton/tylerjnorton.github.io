@@ -19,8 +19,7 @@
 <div class="left">
     <div class="logo"><img src="./images/logo.svg" />
     </div>
-    <div id="year"><span>2013</span></div>
-
+    <div id="year"><span>{{#data}}{{stuff.year}}{{/data}}</span></div>
     <div id="title"><span>Rotterdam, Netherlands</span></div>
     <div id="writing">
     <p>At the end of 2018’s travels, a few English friends and I stayed in Rotterdam for a week’s vacation before I headed back to the states. We stayed at Weena, right next to the train station and really close to everything else the city has to offer.</p>
@@ -134,6 +133,14 @@
 </nav>
 <script src="js.js"></script>
 <script src="mouse.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script>
+  // compile the template
+  var template = Handlebars.compile("Handlebars <b>{{doesWhat}}</b>");
+  // execute the compiled template and print the output to the console
+  console.log(template({ doesWhat: "rocks!" }));
+</script>
+<script type="text/javascript" src="data.json"></script>
 </body>
 
 </html>

@@ -283,7 +283,7 @@ p{
     font-size: 20px;
     position: absolute;
     bottom: 60px;
-    width: 85%;
+    width: 76%;
     padding-right:60px;
 }
 #botnav p{
@@ -292,6 +292,7 @@ p{
 }
 .next{
     float:right;
+    text-align: right;
 }
 .prev{
     float:left;
