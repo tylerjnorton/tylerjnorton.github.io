@@ -5,7 +5,6 @@
     --bg-blend:          difference;
     --blur:              0px;
     --fg-blend:          color;
-    --foreground:        #dcc48e;
     --opacity:           1;
     --spacing:           0px;
 }
@@ -35,15 +34,6 @@ body{
     border:#002642 solid 40px;
     z-index: 100;
 }
-.left{
-    background: #DCC48E;
-    min-height: 100vh;
-    width: 700px;
-    float:left;
-    position: relative;
-    z-index: 1;
-    margin: 0;
-}
 .imageshow1, .imageshow2, .imageshow3, .imageshow4 {
     background-color:    var(--base);
     display:             flex;
@@ -63,7 +53,6 @@ body{
 }
 
 .imageshow1:before, .imageshow2:before, .imageshow3:before, .imageshow4:before {
-    background-color:    var(--foreground);
     bottom:              0;
     content:             '';
     height:              100%;
@@ -77,41 +66,41 @@ body{
   }
 
 .imageshow1{
-    animation: slow 80s ;
+    animation: slow 40s ;
     animation-iteration-count: 1;
-    animation-delay: 2s;
+    animation-delay: 1s;
     animation-fill-mode: forwards;
-    margin-left: 1140px;
+    margin-left: 1240px;
     margin-top: 250px;
     opacity: 0;
     z-index: 11;
 }
 .imageshow2{
-    animation: slowoppo 80s ;
+    animation: slowoppo 40s ;
     animation-iteration-count: 1;
-    animation-delay: 3s;
+    animation-delay: 1.5s;
     animation-fill-mode: forwards;
-    margin-left: 800px;
+    margin-left: 900px;
     margin-top: 140px;
     opacity: 0;
     z-index: 10;
 }
 .imageshow3{
-    animation: slow 80s ;
+    animation: slow 40s ;
     animation-iteration-count: 1;
-    animation-delay: 4s;
+    animation-delay: 2s;
     animation-fill-mode: forwards;
-    margin-left: 700px;
+    margin-left: 800px;
     margin-top: 600px;
     opacity: 0;
     z-index: 9;
 }
 .imageshow4{
-    animation: slowoppo 80s ;
+    animation: slowoppo 40s ;
     animation-iteration-count: 1;
-    animation-delay: 5s;
+    animation-delay: 2.5s;
     animation-fill-mode: forwards;
-    margin-left: 1080px;
+    margin-left: 1180px;
     margin-top: 540px;
     opacity: 0;
     z-index: 9;
@@ -172,35 +161,91 @@ body{
     min-width: 100%;
     display: block;
     min-height: 100%;
+    transition: all 1s;
 }
+.imageshow1:hover img, .imageshow2:hover img, .imageshow3:hover img, .imageshow4:hover img
+{
+    filter:              none;
+    mix-blend-mode:      normal;
+    opacity:             1;
+    transition:          all 1s;
+}  
 p{
     margin:0 0 20px 0;
     line-height: 1.5;
 }
+.left{
+    background: #DCC48E;
+    height: 100vh;
+    width: 600px;
+    padding-left: 100px;
+    float:left;
+    position: relative;
+    z-index: 10;
+    margin: 0;
+}
 .logo{
-    position: absolute;
-    margin-top: 50px;
-    margin-left: 100px;
+    padding-top: 60px;
     z-index: 15;
+    width: 240px;
+    margin-left:-15px;
+    float: left;
 }
 .logo img{
-    min-height: 200px;
-    min-width: 200px;
+    height: 200px;
+    width: 200px;
+    opacity: 0;
+    animation: move 2s 3s ;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 #title{
+    animation: move 2s ;
+    padding-bottom: 16px;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: .5s;
+    opacity: 0;
+    font-style: italic;
+    font-size: 72px;
+    display: block;
+    padding-right: 12px;
+    color: #002642;
+    z-index: 15;
+    overflow-x:visible;
+    white-space: nowrap;
+    margin-left: 2.5%;
+    margin-top: -16px;
+}
+#year{
     animation: move 2s ;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     opacity: 0;
     font-style: italic;
-    font-size: 72px;
-    position: absolute;
+    font-size: 82px;
     display: block;
     padding-right: 12px;
     color: #002642;
-    margin-top: 240px;
-    margin-left: 120px;
     z-index: 15;
+    overflow-x:visible;
+    white-space: nowrap;
+    margin-left: 2.5%;
+    margin-top: 60px;
+}
+#year span{
+    position: relative;
+}
+#year span:before{
+    background-color: rgba(228,87,46,0.97);
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 115%;
+    height: 50px;
+    top: 58px;
+    left: -9.5%;
+    z-index: -1;
 }
 #title span{
     position: relative;
@@ -224,12 +269,32 @@ p{
     opacity: 0;
     font-size: 18px;
     color: #002642;
-    height: 300px;
-    position: absolute;
-    top: 355px;
-    left: 100px;
+    height: 520px;
+    margin-top: 20px;
     overflow-y: scroll;
-    width: 520px;
+    width: 540px;
+}
+#botnav{
+    animation: move 2s ;
+    animation-iteration-count: 1;
+    animation-delay: 1.5s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    font-size: 20px;
+    position: absolute;
+    bottom: 60px;
+    width: 85%;
+    padding-right:60px;
+}
+#botnav p{
+    color: #002642;
+    width: 50%;
+}
+.next{
+    float:right;
+}
+.prev{
+    float:left;
 }
 #nav{
     z-index: 30; /* Just always 2, so its in front of the map */
@@ -288,6 +353,9 @@ ul{
     list-style-type: none;
     font-size: 32px;
     position: relative;
+}
+#ro:hover{
+    color: inherit;
 }
 ul li{
     font-size: 48px;
