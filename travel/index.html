@@ -1,146 +1,132 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-<title>See The World</title>
-<link rel="stylesheet" href="style.css">
-<link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-    <div id="circle"></div> 
+  <head>
+    <title>See The World</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito"
+      rel="stylesheet"
+    />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="circle"></div>
     <div class="border"></div>
-    <div class="imageshow1"><img src=images/rotterdam1.jpg /></div>
-    <div class="imageshow2"><img src=images/rotterdam2.jpg /></div>
-    <div class="imageshow3"><img src=images/rotterdam3.jpg /></div>
-    <div class="imageshow4"><img src=images/rotterdam4.jpg /></div>
-<div class="left">
-    <div class="logo"><img src="./images/logo.svg" />
+
+    <div id="rendered-content-area"></div>
+
+    <div class="right">
+      <a href="javascript:void(0)" id="openbtn" onclick="openNav()"
+        ><div class="opennava"><img src="./images/nav.svg" /></div
+      ></a>
+      <div id="map"></div>
     </div>
-    <div id="year"><span>{{#data}}{{stuff.year}}{{/data}}</span></div>
-    <div id="title"><span>Rotterdam, Netherlands</span></div>
-    <div id="writing">
-    <p>At the end of 2018’s travels, a few English friends and I stayed in Rotterdam for a week’s vacation before I headed back to the states. We stayed at Weena, right next to the train station and really close to everything else the city has to offer.</p>
-    <p>Our first night was a few quiet drinks at Bierlokaal Locus Publicus. It is an awesome little brewhouse with great beers from the area as well as some traditional local snacks to keep you going through the night. Perfect atmosphere inside as well for dimly lit intimate surroundings. Everyone speaks English so well that one of my friends asked “where are you from” expecting a city in England and the response was “from here”.</p>
-    <p>We hit all the normal touristy things and ate at the Markthal downtown, saw the cube homes, and took a trip up the Euromast. All highly recommended but also well covered by other travel publications. I’d rather talk about the all chicken themed place we stopped for dinner and drinks called Scharrels en Schuim. A narrow bar/restaurant with full wall windows, a great menu of both beer and chicken, and an upstairs with live music a few nights a week (usually jazz).</p>
-    <p>It wasn’t all late night eats though, we got up for some waffles (pictured above) from a shockingly good vegan place called Backyard. It was probably the best waffle I’ve ever had, not that I’m an expert. We also took the tram to the other side of the river for a tour of Stadion Feyenoord. Sadly, Dirk Kuyt was not there. Pair that with a few 30 minute train rides for the big days and nights in Amsterdam and you’ve got quite the nice time in the Netherlands.</p>
-</div>
-<div id="botnav">
-    <p class="prev">Year // Destination</p>
-    <p class="next">Year // Destination</p>
-</div>
-</div>
-
-
-
-<div class="right" >
-    <a href="javascript:void(0)" id="openbtn" onclick="openNav()"><div class="opennava"><img src="./images/nav.svg" /></div></a>
-    <div id="map"></div>
-</div>
-<nav id="nav">
-    <div id="hidex"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close X</a>
-    </div>
-<div class="list">
-    <ul>
-        <li>Year</li>
-        <li id="ro">Destination</li>
-    </ul>
-    <ul>
-        <li>2005</li>
-        <li>Montreal, QC, Canada</li>
-    </ul>
-    <ul>
-       <li>2010</li>
-       <li>Evesham, England</li>
-       <li>Dunfanaghy, Ireland</li>
-       <li>Dublin, Ireland</li>
-        <li>Cork, Ireland</li>
-        <li>Amsterdam, Netherlands</li>
-        <li>Rome, Italy</li>
-        <li>Orte, Italiy</li>
-        <li>Florence, Italy</li>
-        <li>Milan, Italy</li>
-        <li>Venice, Italy</li>
-        <li>Burano, Italy</li>
-        <li>Murano, Italy</li>
-        <li>Paris, France</li>
-    </ul>
-    <ul>
-        <li>2014</li>
-        <li>Madrid, Spain</li>
-        <li>Toledo, Spain</li>
-        <li>London, England</li>
-        <li>Evesham, England</li>
-        <li>Liverpool, England</li>
-    </ul>
-    <ul>
-        <li>2015</li>
-        <li>Pettigo, Ireland</li>
-        <li>Sligo, Ireland</li>
-        <li>Donegal, Ireland</li>
-        <li>Niagara Falls, Ontario, Canada</li>
-    </ul>
-    <ul>
-        <li>2016</li>
-        <li>Sao Miguel, Azores, Portugal</li>
-        <li>Toronto, Ontario, Canada</li>
-        <li>Evesham, England</li>
-        <li>Liverpool, England</li>
-    </ul>
-    <ul>
-        <li>2017</li>
-        <li>Evesham, England</li>
-        <li>Liverpool, England</li>
-        <li>Edinburgh, Scotland</li>
-        <li>Lisbon, Portugal</li>
-        <li>Seville, Spain</li>
-    </ul>
-    <ul>
-        <li>2018</li>
-        <li>Lyon, France</li>
-        <li>Chambery, France</li>
-        <li>Monaco</li>
-        <li>Ventimiglia, Italy</li>
-        <li>Paris, France</li>
-        <li>Rotterdam, Netherlands</li>
-        <li>Amsterdam, Netherlands</li>
-    </ul>
-    <ul>
-        <li>2019</li>
-        <li>Evesham, England</li>
-        <li>Munich, Germany</li>
-        <li>Innsbruck, Austria</li>
-        <li>London, England</li>
-        <li>Rome, Italy</li>
-        <li>Florence, Italy</li>
-        <li>Venice, Italy</li>
-        <li>Burano, Italy</li>
-        <li>Vienna, Austria</li>
-        <li>Krakaw, Poland</li>
-        <li>Bar, Montenegro</li>
-        <li>Kotor, Montenegro</li>
-        <li>Lake Skadar, Montenegro</li>
-        <li>Belgrade, Serbia</li>
-        <li>Tallinn, Estonia</li>
-        <li>Hanburg, Germany</li>
-        <li>Tromso, Norway</li>
-        <li>Brussels, Belgium</li>
-        <li>Halifax, NS, Canada</li>
-    </ul>
-</div>
-</nav>
-<script src="js.js"></script>
-<script src="mouse.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-<script>
-  // compile the template
-  var template = Handlebars.compile("Handlebars <b>{{doesWhat}}</b>");
-  // execute the compiled template and print the output to the console
-  console.log(template({ doesWhat: "rocks!" }));
-</script>
-<script type="text/javascript" src="data.json"></script>
-</body>
-
+    <nav id="nav">
+      <div id="hidex">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+          >Close X</a
+        >
+      </div>
+      <div class="list">
+        <ul>
+          <li>Year</li>
+          <li id="ro">Destination</li>
+        </ul>
+        <ul>
+          <li>2005</li>
+          <li>Montreal, QC, Canada</li>
+        </ul>
+        <ul>
+          <li>2010</li>
+          <li>Evesham, England</li>
+          <li>Dunfanaghy, Ireland</li>
+          <li>Dublin, Ireland</li>
+          <li>Cork, Ireland</li>
+          <li>Amsterdam, Netherlands</li>
+          <li>Rome, Italy</li>
+          <li>Orte, Italiy</li>
+          <li>Florence, Italy</li>
+          <li>Milan, Italy</li>
+          <li>Venice, Italy</li>
+          <li>Burano, Italy</li>
+          <li>Murano, Italy</li>
+          <li>Paris, France</li>
+        </ul>
+        <ul>
+          <li>2014</li>
+          <li>Madrid, Spain</li>
+          <li>Toledo, Spain</li>
+          <li>London, England</li>
+          <li>Evesham, England</li>
+          <li>Liverpool, England</li>
+        </ul>
+        <ul>
+          <li>2015</li>
+          <li>Pettigo, Ireland</li>
+          <li>Sligo, Ireland</li>
+          <li>Donegal, Ireland</li>
+          <li>Niagara Falls, Ontario, Canada</li>
+        </ul>
+        <ul>
+          <li>2016</li>
+          <li>Sao Miguel, Azores, Portugal</li>
+          <li>Toronto, Ontario, Canada</li>
+          <li>Evesham, England</li>
+          <li>Liverpool, England</li>
+        </ul>
+        <ul>
+          <li>2017</li>
+          <li>Evesham, England</li>
+          <li>Liverpool, England</li>
+          <li>Edinburgh, Scotland</li>
+          <li>Lisbon, Portugal</li>
+          <li>Seville, Spain</li>
+        </ul>
+        <ul>
+          <li>2018</li>
+          <li>Lyon, France</li>
+          <li>Chambery, France</li>
+          <li>Monaco</li>
+          <li>Ventimiglia, Italy</li>
+          <li>Paris, France</li>
+          <li>Rotterdam, Netherlands</li>
+          <li>Amsterdam, Netherlands</li>
+        </ul>
+        <ul>
+          <li>2019</li>
+          <li>Evesham, England</li>
+          <li>Munich, Germany</li>
+          <li>Innsbruck, Austria</li>
+          <li>London, England</li>
+          <li>Rome, Italy</li>
+          <li>Florence, Italy</li>
+          <li>Venice, Italy</li>
+          <li>Burano, Italy</li>
+          <li>Vienna, Austria</li>
+          <li>Krakaw, Poland</li>
+          <li>Bar, Montenegro</li>
+          <li>Kotor, Montenegro</li>
+          <li>Lake Skadar, Montenegro</li>
+          <li>Belgrade, Serbia</li>
+          <li>Tallinn, Estonia</li>
+          <li>Hanburg, Germany</li>
+          <li>Tromso, Norway</li>
+          <li>Brussels, Belgium</li>
+          <li>Halifax, NS, Canada</li>
+        </ul>
+      </div>
+    </nav>
+    <script src="js.js"></script>
+    <script src="mouse.js"></script>
+    <script type="text/javascript" src="templatey-stuff.js"></script>
+  </body>
 </html>
