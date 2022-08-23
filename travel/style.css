@@ -409,3 +409,12 @@ ul li:first-child:hover{
 .right #map .mapboxgl-canvas-container.mapboxgl-interactive{
     cursor: none !important;
 }
+
+
+#rendered-content-area {
+    transition: opacity 400ms ease-in-out;
+}
+
+#rendered-content-area.fadedOut {
+    opacity: 0;
+}
