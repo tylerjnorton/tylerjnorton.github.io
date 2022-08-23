@@ -1,0 +1,126 @@
+
+body{
+    background-image: linear-gradient(to right bottom, #ff92fb, #b6b3ff, #4cccff, #00dcff, #12e4eb);
+    font-family: 'Libre Baskerville', serif;
+    width: 1440px;
+    color: rgb(255, 255, 255);
+}
+a{
+    text-decoration: none;
+    color:#4B4737;;
+}
+a:hover{
+    color:#FF3EA1;
+}
+ul{
+    margin:10px;
+    width: 1440px;
+    padding:0px;
+}
+ul li{
+    color: #4B4737;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+    float: left;
+    background-color: rgb(227, 253, 255);
+    padding: 25px;
+    font-size:14px;
+    margin: 10px;
+    position: relative;
+    width: 410px;
+    list-style: none;
+}
+ul li ul{
+    margin:0px;
+    height: auto;
+    width: auto;
+    padding:0px;
+}
+ul li ul li{
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    height: auto;
+    margin-bottom: 4px;
+    margin-top: 0px;
+}
+h4{
+    position: absolute;
+    bottom: -13px;
+    background:rgb(188, 239, 255);
+    left: 0px;
+    padding: 10px 20px 10px 20px;
+    width: 420px;
+    display: none;
+    align-items: center;
+    font-size: 10px;
+    height: 35px;
+    color: rgba(0, 0, 0, 0.25);
+}
+/* h4:after{
+    content: " ";
+    background-image: url('tag.svg');
+    background-size: cover;
+    position: relative;
+    display: inline-block;
+    top: -5px;
+    left: -75px;
+    width: 15px;
+    height: 15px;
+} */
+h3{
+    font-size: 24px;
+    margin:0px;
+    padding-bottom: 12px;
+    font-weight: 400;
+
+}
+.left{
+    border:none;
+    font-size: 48px;
+    color:#4B4737;
+    padding: 10px 0;
+    width: 940px;
+    font-family: inherit;
+    float: left;
+    
+    margin: 10px 0px 10px 20px;
+    background: none;
+    border-bottom: black 2px solid;
+}
+.right{
+    float: left;
+    position: relative;
+    font-size: 16px;
+    height: 80px;
+    margin: 10px 0px 10px 20px;
+    width:420px;
+    padding: 0 20px;
+    border-bottom: black 2px solid;
+   
+}
+span#madeby{
+    right:0;
+    text-align: right;
+    position: absolute;
+    bottom:10px;
+}
+#search{
+    border:none;
+    left:0;
+    position: absolute;
+    bottom:0;  
+    font-size: 48px;
+    color:#4B4737;
+    width: 330px;
+    font-family: inherit;
+    background: none;
+}
+::placeholder{
+    color: rgba(255, 255, 255, .5);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+}
