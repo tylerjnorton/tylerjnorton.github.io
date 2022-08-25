@@ -855,6 +855,20 @@ const data = {
     ],
     content:
       "<p>At the end of 2018&rsquo;s travels, a few English friends and I stayed in Rotterdam for a week&rsquo;s vacation before I headed back to the states. We stayed at Weena, right next to the train station and really close to everything else the city has to offer.</p><p>Our first night was a few quiet drinks at Bierlokaal Locus Publicus. It is an awesome little brewhouse with great beers from the area as well as some traditional local snacks to keep you going through the night. Perfect atmosphere inside as well for dimly lit intimate surroundings. Everyone speaks English so well that one of my friends asked &ldquo;where are you from&rdquo; expecting a city in England and the response was &ldquo;from here&rdquo;.</p><p>We hit all the normal touristy things and ate at the Markthal downtown, saw the cube homes, and took a trip up the Euromast. All highly recommended but also well covered by other travel publications. I&rsquo;d rather talk about the all chicken themed place we stopped for dinner and drinks called Scharrels en Schuim. A narrow bar/restaurant with full wall windows, a great menu of both beer and chicken, and an upstairs with live music a few nights a week (usually jazz).</p><p>It wasn&rsquo;t all late night eats though, we got up for some waffles (pictured above) from a shockingly good vegan place called Backyard. It was probably the best waffle I&rsquo;ve ever had, not that I&rsquo;m an expert. We also took the tram to the other side of the river for a tour of Stadion Feyenoord. Sadly, Dirk Kuyt was not there. Pair that with a few 30 minute train rides for the big days and nights in Amsterdam and you&rsquo;ve got quite the nice time in the Netherlands.</p>",
+  },
+  annecy: {
+    title: "Annecy, France",
+    year: "2019",
+    lat: 45.8992,
+    lon: 6.1294,
+    images: [
+      "rotterdam1.jpg",
+      "rotterdam1.jpg",
+      "rotterdam1.jpg",
+      "rotterdam1.jpg",
+    ],
+    content:
+      "<p>At the end of 2018&rsquo;s travels, a few English friends and I stayed in Rotterdam for a week&rsquo;s vacation before I headed back to the states. We stayed at Weena, right next to the train station and really close to everything else the city has to offer.</p><p>Our first night was a few quiet drinks at Bierlokaal Locus Publicus. It is an awesome little brewhouse with great beers from the area as well as some traditional local snacks to keep you going through the night. Perfect atmosphere inside as well for dimly lit intimate surroundings. Everyone speaks English so well that one of my friends asked &ldquo;where are you from&rdquo; expecting a city in England and the response was &ldquo;from here&rdquo;.</p><p>We hit all the normal touristy things and ate at the Markthal downtown, saw the cube homes, and took a trip up the Euromast. All highly recommended but also well covered by other travel publications. I&rsquo;d rather talk about the all chicken themed place we stopped for dinner and drinks called Scharrels en Schuim. A narrow bar/restaurant with full wall windows, a great menu of both beer and chicken, and an upstairs with live music a few nights a week (usually jazz).</p><p>It wasn&rsquo;t all late night eats though, we got up for some waffles (pictured above) from a shockingly good vegan place called Backyard. It was probably the best waffle I&rsquo;ve ever had, not that I&rsquo;m an expert. We also took the tram to the other side of the river for a tour of Stadion Feyenoord. Sadly, Dirk Kuyt was not there. Pair that with a few 30 minute train rides for the big days and nights in Amsterdam and you&rsquo;ve got quite the nice time in the Netherlands.</p>",
   }
 };
 
