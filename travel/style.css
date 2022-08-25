@@ -73,7 +73,6 @@ body{
     margin-left: 1240px;
     margin-top: 250px;
     opacity: 0;
-    z-index: 11;
 }
 .imageshow2{
     animation: slowoppo 40s ;
@@ -83,7 +82,6 @@ body{
     margin-left: 900px;
     margin-top: 140px;
     opacity: 0;
-    z-index: 10;
 }
 .imageshow3{
     animation: slow 40s ;
@@ -93,7 +91,6 @@ body{
     margin-left: 800px;
     margin-top: 600px;
     opacity: 0;
-    z-index: 9;
 }
 .imageshow4{
     animation: slowoppo 40s ;
@@ -103,7 +100,6 @@ body{
     margin-left: 1180px;
     margin-top: 540px;
     opacity: 0;
-    z-index: 9;
 }
 @keyframes fadein {
     0% {
@@ -235,7 +231,7 @@ p{
     display: block;
     padding-right: 12px;
     color: #002642;
-    z-index: 15;
+    z-index: 50;
     overflow-x:visible;
     white-space: nowrap;
     margin-left: 2.5%;
@@ -445,7 +441,7 @@ ul li:first-child:hover{
 }
 
 .fadedOut {
-    animation: fadeout 1s;
+    animation: fadeout .5s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
