@@ -88,7 +88,7 @@ function switchToLocation(key) {
   place = data[key];
 
   // add fade out class
-  div.classList.add("fadedOut");
+  leftDiv.classList.add("fadedOut");
 
   // wait for fade out to finish
   setTimeout(() => {
@@ -98,17 +98,19 @@ function switchToLocation(key) {
     // wait for pan
     setTimeout(() => {
       // render new content
-      div.classList.remove("fadedOut");
+      leftDiv.classList.remove("fadedOut");
       render();
     }, 3000);
   }, 500);
 }
 
+let leftDiv = document.querySelector('.left');
 function render() {
   console.log("Rendering", selected);
 
   // execute the template and set it as the content for the rendered-content-area div
   div.innerHTML = template(place);
+  leftDiv = document.querySelector('.left');
 
   document.querySelectorAll(".pagerButton").forEach((node) => {
     node.addEventListener("click", () => {
