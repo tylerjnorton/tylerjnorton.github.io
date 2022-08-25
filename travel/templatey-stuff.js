@@ -137,19 +137,19 @@ function template(place) {
   const next = data[keys[nextIndex]];
 
   return `
-    <div class="imageshow1"><img src="images/${place.images[0]}" /></div>
-    <div class="imageshow2"><img src="images/${place.images[1]}" /></div>
-    <div class="imageshow3"><img src="images/${place.images[2]}" /></div>
-    <div class="imageshow4"><img src="images/${place.images[3]}" /></div>
     <div class="left">
-        <div class="logo"><img src="./images/logo.svg" /></div>
-        <div id="year"><span>${place.year}</span></div>
-        <div id="title"><span>${place.title}</span></div>
-        <div id="writing">${place.content}</div>
-        <div id="botnav">
-            <p class="prev"><a class="pagerButton" href="#${keys[prevIndex]}">${prev.title} // ${prev.year}</a></p>
-            <p class="next"><a class="pagerButton" href="#${keys[nextIndex]}">${next.title} // ${next.year}</a></p>
-        </div>
+      <div class="imageshow1"><img src="images/${place.images[0]}" /></div>
+      <div class="imageshow2"><img src="images/${place.images[1]}" /></div>
+      <div class="imageshow3"><img src="images/${place.images[2]}" /></div>
+      <div class="imageshow4"><img src="images/${place.images[3]}" /></div>
+      <div class="logo"><img src="./images/logo.svg" /></div>
+      <div id="year"><span>${place.year}</span></div>
+      <div id="title"><span>${place.title}</span></div>
+      <div id="writing">${place.content}</div>
+      <div id="botnav">
+          <p class="prev"><a class="pagerButton" href="#${keys[prevIndex]}">${prev.title} // ${prev.year}</a></p>
+          <p class="next"><a class="pagerButton" href="#${keys[nextIndex]}">${next.title} // ${next.year}</a></p>
+      </div>
     </div>
  `;
 }
