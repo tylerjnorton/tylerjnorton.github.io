@@ -818,7 +818,7 @@ const data = {
     title: "Halifax, NS, Canada",
     year: "2019",
     lat: 44.6476,
-    lon: 63.5728,
+    lon: -63.5728,
     images: [
       "rotterdam1.jpg",
       "rotterdam1.jpg",
