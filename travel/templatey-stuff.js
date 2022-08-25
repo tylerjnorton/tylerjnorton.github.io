@@ -100,7 +100,7 @@ function switchToLocation(key) {
       // render new content
       div.classList.remove("fadedOut");
       render();
-    }, 3000);
+    }, 1500);
   }, 500);
 }
 
