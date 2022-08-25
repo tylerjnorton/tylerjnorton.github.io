@@ -444,7 +444,7 @@ ul li:first-child:hover{
     transition: opacity 400ms ease-in-out;
 }
 
-#rendered-content-area.fadedOut {
+.fadedOut {
     animation: fadeout 1s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
