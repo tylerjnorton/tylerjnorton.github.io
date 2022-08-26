@@ -630,7 +630,7 @@ const data = {
       "london8.jpg",
     ],
     content:
-      "<p>Back to London for a few days with Phil, Hunter, MarcO, and Fraz before getting incredibly ill and having to retreat to Evesham. I remember one fun night at the pub when Phil arrived, but beyond that I was just feeling like death. I know the lads stayed for a bit and had a great time. Short entry, short stay! Oh well.</p>",
+      "<p>Back to London for a few days with Phil, Hunter, MarcO, and Fraz before getting incredibly ill and having to retreat to Evesham. I remember one fun night at the pub when Phil arrived, but beyond that I was just feeling like death. I know the lads stayed for a bit and had a great time. Short entry, short stay! Oh well.</p><p>I found one of the best pieces of art I’ve ever seen there though. We stopped at an art show and had a walk around and this one paining was just incredible. One of my favorites i’ve ever seen. I don’t know what it is about it, but it just spoke to me. The artist is Lucia Hardy and I high recommend following her.</p>",
   },
   rome1: {
     title: "Rome, Italy",
