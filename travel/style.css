@@ -289,12 +289,22 @@ p{
     animation-delay: 2.5s;
     animation-fill-mode: forwards;
     opacity: 0;
-    font-size: 18px;
+    font-size: 20px;
     color: #002642;
     height: 520px;
     margin-top: 20px;
     overflow-y: scroll;
     width: 540px;
+}
+#writing a{
+    color:rgba(228,87,46,0.97);
+    text-decoration: none;
+    cursor: none;
+}
+#writing a:hover{
+    color:#002642;
+    cursor: none;
+    transition-duration: 0.5s;
 }
 #botnav{
     animation: move 1s ;
