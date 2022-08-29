@@ -514,7 +514,7 @@ const data = {
     images: [
       "monaco1.jpg",
       "monaco2.jpg",
-      "monaco3.jpg",
+      "monaco3.JPG",
       "monaco4.jpg",
     ],
     content:
