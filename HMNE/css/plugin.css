@@ -28,7 +28,7 @@
     z-index: 999;
     width: 100%;
     height: 100%;
-    background-color: #3451c6
+    background-color: #3451c6;
 }
 .animsition-loading, .animsition-loading:after {
     width: 32px;
@@ -42,7 +42,7 @@
     z-index: 9999
 }
 .animsition-loading {
-    background-color: transparent;
+    background-color: #3451c6;
     border-top: 5px solid rgba(0,0,0,.2);
     border-right: 5px solid rgba(0,0,0,.2);
     border-bottom: 5px solid rgba(0,0,0,.2);
@@ -4845,7 +4845,7 @@ html.fp-enabled, .fp-enabled body{margin:0;padding:0;overflow:hidden;-webkit-tap
     width: 420px;
     height: 315px;
     padding: 10px;
-    background: #fff;
+    background-color: #3451c6;
     text-align: left;
     margin: 0 auto;
     overflow: auto;
