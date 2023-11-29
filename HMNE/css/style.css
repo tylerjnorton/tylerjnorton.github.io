@@ -172,6 +172,26 @@ img {
     width:100%;
     object-fit: cover;
 }
+.bio{
+    background-color: rgb(185, 234, 255);
+    padding:  40px 40px 20px 40px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    height:300px;
+    transition: .3s ease-in-out;
+}
+.bio img {
+    padding-bottom: 20px;
+    margin-top: -20px;
+}
+.bio p{
+    color:#000;
+}
+
+.bio:hover{
+    background-color: rgb(65, 198, 255);
+    transition: .3s ease-in-out;
+}
 
 a.small-link {
     font-family: 'Poppins', sans-serif;
@@ -4477,8 +4497,10 @@ textarea {
 ========================================================================= */
 
 .item-h1 {
-    height: 100% !important;
-    height: auto !important;
+    max-height: 400px;
+    width:100%;
+    height:100%;
+    object-fit: cover;
 }
 .isotope-item {
     z-index: 2;
@@ -4661,6 +4683,7 @@ textarea {
 }
 .post-media img {
     width: 100%;
+    height: 100%;
 }
 
 
