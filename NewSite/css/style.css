@@ -8435,11 +8435,20 @@ ul{list-style-type: none;}
   margin: 0 auto;
   position: relative;
 }
+
 .hero-banner-eleven .banner-intro .brand-logo {
   position: absolute;
   right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
+  animation-name: spin;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes spin{
+  from{ transform: rotate(360deg);
+ }
+  to{ transform: rotate(-360deg);
+ }
 }
 .hero-banner-eleven .banner-intro .heading {max-width: 1008px;}
 .hero-banner-eleven .banner-intro .name {
@@ -8500,6 +8509,8 @@ ul{list-style-type: none;}
   text-transform: capitalize;
   color: rgba(255, 255, 255, 0.7);
   font-size: 15px;
+  line-height: 21px;
+  padding-top: 4px;
   opacity: 0;
   transform: translateY(5px);
   transition-delay: 0.1s;
@@ -8620,12 +8631,6 @@ ul{list-style-type: none;}
   right: 0;
   height: 56%;
   background: linear-gradient(180deg, rgba(24, 24, 24, 0) 0%, #121212 100%);
-}
-.vcamp-text-block-sixteen .img-wrapper .brand-logo {
-  position: absolute;
-  left: 0;
-  bottom: 12%;
-  z-index: 1;
 }
 .vcamp-text-block-sixteen .img-wrapper .shape-one {
   left: 0;
@@ -10236,13 +10241,6 @@ ul{list-style-type: none;}
   font-family: 'Recoleta';
   font-size: 72px;
   margin-bottom: -13px;
-}
-.hero-banner-fifteen .brand-logo {
-  position: absolute;
-  z-index: 1;
-  left: -12%;
-  bottom: 30%;
-  width: 21.21%;
 }
 /*^^^^^^^^^^^^^^^^^^^^^ Vcamp Feature Section Seventeen ^^^^^^^^^^^^^^^^^^^^^^^^*/
 .vcamp-feature-section-seventeen {
