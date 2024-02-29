@@ -877,6 +877,7 @@ body .theme-btn-nineteen:hover {color: #fff;}
 .page-pagination-one ul li a:hover span,
 .page-pagination-one ul li.active a span {
   background: #232323;
+  transition: .3s;
   color: #fff;
 }
 a:hover{color: var(--red-one);}

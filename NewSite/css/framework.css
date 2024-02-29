@@ -1,6 +1,7 @@
 *{margin:0;padding:0;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
-a {text-decoration: none; display: inline-block; color: inherit;}
-a:hover,a:focus,a:visited {text-decoration: none; outline: none;}
+a {transition: .5s; text-decoration: none; display: inline-block; color: inherit;}
+a:hover,a:focus,a:visited {text-decoration: none; outline: none; 
+  transition: .5s;}
 img {max-width: 100%; display: block;}
 button {border:none;outline: none;box-shadow: none;display: block; padding: 0;cursor: pointer;background: transparent;}
 button:focus {outline: none;}
