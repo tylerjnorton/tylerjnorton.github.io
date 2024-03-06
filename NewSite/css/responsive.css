@@ -15,10 +15,12 @@
 
 @media (min-width: 1400px) {
 .blog-section-four .blog-meta-wrapper.column3 {column-count: 3;}
+
 }
  /*(min-width: 1400px)*/
 /*Grid xl Start*/
 @media (max-width: 1399px) { 
+  
   .card-style-one p {padding-right: 0;}
   .theme-main-menu.theme-menu-two .inner-content {padding-left: 15px; padding-right: 15px;}
   .form-style-one.with-border {margin-right: 0;}
@@ -138,6 +140,7 @@
 
 /*Grid lg Start*/
 @media (max-width: 1199px) {
+  
   body {font-size: 16px;}
   .text-lg {font-size: 18px; line-height: 1.85em;}
   body .theme-btn-one {font-size: 16px; padding: 0 32px; line-height: 52px;}
@@ -590,6 +593,7 @@
 
 /*Between Grid lg*/
 @media (min-width: 992px) and (max-width: 1199px) {
+  
   .navbar [class*="mega-dropdown"] .menu-column {padding: 10px 0 40px 0;}
   .navbar [class*="mega-dropdown"] .mega-menu-title {font-size: 12px;}
   .navbar .dropdown-menu .dropdown-item {font-size: 15px;}
@@ -671,6 +675,7 @@
 
 /*Grid md Start*/
 @media (max-width: 991px) {
+  
   h1,.hero-banner-nine .hero-heading {font-size: 60px;}
   .hero-banner-two .hero-heading {font-size: 50px;}
   .hero-banner-three .hero-heading {font-size: 55px;}
