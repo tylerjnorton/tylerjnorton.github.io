@@ -107,13 +107,13 @@ function Home() {
             <WorkCard
               title="RocketReach"
               role="Senior Design Lead"
-              image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80"
+              image="/images/rr.png"
               link="/case-study/rocketreach"
             />
             <WorkCard
               title="Unqork"
               role="Design Services Lead"
-              image="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80"
+              image="/images/uq.png"
               link="/case-study/unqork"
             />
           </div>
