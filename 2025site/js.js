@@ -4,17 +4,30 @@ document.addEventListener('DOMContentLoaded', function () {
     var letters = ['T','M','S'];
     var colorIndex = 0, letterIndex = 0;
     var nav = document.querySelector('.left-nav');
+    var heading = document.querySelector('article h1');
     if (!nav) return;
+    
+    var badgeLink = document.createElement('a');
+    badgeLink.href = 'index.html';
+    badgeLink.className = 'left-nav__badge-link';
+    
     var badge = document.createElement('div');
     badge.className = 'left-nav__badge';
     badge.setAttribute('aria-hidden', 'true');
     badge.style.background = colors[colorIndex];
     badge.textContent = letters[letterIndex];
-    nav.insertBefore(badge, nav.firstChild);
+    
+    badgeLink.appendChild(badge);
+    nav.insertBefore(badgeLink, nav.firstChild);
+    
+    // Set initial heading color
+    if (heading) heading.style.color = colors[colorIndex];
+    
     setInterval(function () {
         colorIndex = (colorIndex + 1) % colors.length;
         letterIndex = (letterIndex + 1) % letters.length;
         badge.style.background = colors[colorIndex];
+        if (heading) heading.style.color = colors[colorIndex];
         badge.textContent = letters[letterIndex];
     }, 200);
 });

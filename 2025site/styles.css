@@ -164,6 +164,18 @@ body {
     box-sizing: border-box;
 }
 
+.feed-1 {
+    position: absolute;
+    top: 12px;
+    left: 108px;
+    /* Account for left nav width */
+    right: 24px;
+    bottom: 0;
+    overflow-y: auto;
+    column-count: 1;
+    gap: 24px;
+    box-sizing: border-box;
+}
 @media screen and (max-width: 900px) {
 
     .feed {
@@ -362,4 +374,45 @@ a{
     width: 44px;
     height: 44px;
     color: inherit;
+}
+article {
+    padding: 24px;
+    margin-bottom: 24px;
+    padding-top: 72px;
+}
+article p { 
+    max-width: 40vw;
+    font-size: 2rem;
+    background-color: rgba(219, 219, 219, 0.6);
+    z-index: 2;
+    position: relative;
+}
+article video,
+article img { 
+    max-width: 45vw;
+    position: fixed;
+    top: 5vw;
+    right: 24px;
+    z-index: 1;
+}
+article h1 { 
+    font-size: 8rem;
+    position: relative;
+    margin-bottom: 1rem;
+    font-style: italic;
+    z-index: 2;
+}
+@media screen and (max-width: 900px) {
+
+    article h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+    z-index: 2;
+    }
+
+article p { 
+    max-width: 800px;
+    font-size: 1.4rem;
+}
 }
