@@ -420,9 +420,24 @@ article h1 {
     font-style: italic;
     z-index: 2;
     }
-
+article video,
+article img { 
+    max-width: 90vw;
+    position: fixed;
+    top: 5vw;
+    z-index: 1;
+}
 article p { 
     max-width: 800px;
     font-size: 1.4rem;
+}
+article iframe { 
+    max-width: 90vw !important;
+}
+.photo-grid {
+    max-width: 90vw !important;
+}
+.photos-preview {
+    display: none !important;
 }
 }
