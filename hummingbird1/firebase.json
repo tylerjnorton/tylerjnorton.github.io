@@ -1,12 +1,9 @@
 {
   "hosting": {
-    "public": "public",
-    "redirects": [
-      {
-        "source": "**",
-        "destination": "https://tylerjnorton.github.io/hummingbird1/index.html",
-        "type": 301
-      }
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*"
     ]
   }
 }
