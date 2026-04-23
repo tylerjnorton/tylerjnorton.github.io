@@ -152,28 +152,18 @@ body {
 }
 
 .feed {
-    position: absolute;
-    top: 12px;
-    left: 108px;
+    margin: 12px 24px 12px 108px;
     /* Account for left nav width */
-    right: 24px;
-    bottom: 0;
-    overflow-y: auto;
     column-count: 3;
-    gap: 24px;
+    column-gap: 24px;
     box-sizing: border-box;
 }
 
 .feed-1 {
-    position: absolute;
-    top: 12px;
-    left: 108px;
+    margin: 12px 24px 12px 108px;
     /* Account for left nav width */
-    right: 24px;
-    bottom: 0;
-    overflow-y: auto;
     column-count: 1;
-    gap: 24px;
+    column-gap: 24px;
     box-sizing: border-box;
 }
 @media screen and (max-width: 900px) {
