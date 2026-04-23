@@ -1,0 +1,8 @@
+# Exclude Claude runtime/session data from git
+cache/
+sessions/
+session-env/
+shell-snapshots/
+telemetry/
+history.jsonl
+*.log
