@@ -17,19 +17,21 @@ document.addEventListener('DOMContentLoaded', function () {
     badge.setAttribute('aria-hidden', 'true');
     badge.style.background = colors[colorIndex];
     badge.textContent = letters[letterIndex];
-    
+    nav.style.setProperty('--badge-color', colors[colorIndex]);
+
     badgeLink.appendChild(badge);
     nav.insertBefore(badgeLink, nav.firstChild);
-    
+
     // Set initial link colors
     paragraphLinks.forEach(function(link) {
         link.style.color = colors[colorIndex];
     });
-    
+
     setInterval(function () {
         colorIndex = (colorIndex + 1) % colors.length;
         letterIndex = (letterIndex + 1) % letters.length;
         badge.style.background = colors[colorIndex];
+        nav.style.setProperty('--badge-color', colors[colorIndex]);
         paragraphLinks.forEach(function(link) {
             link.style.color = colors[colorIndex];
         });

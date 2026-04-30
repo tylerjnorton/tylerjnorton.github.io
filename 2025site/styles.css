@@ -351,7 +351,10 @@ a{
 }
 
 .left-nav__icons .left-nav__link:hover,
-.left-nav__icons .left-nav__link:focus,
+.left-nav__icons .left-nav__link:focus {
+    background-color: var(--badge-color, rgba(0, 0, 0, 0.06));
+}
+
 .left-nav__badge:hover,
 .left-nav__badge:focus {
     background-color: rgba(0, 0, 0, 0.06);
@@ -364,6 +367,32 @@ a{
     width: 44px;
     height: 44px;
     color: inherit;
+    position: relative;
+}
+
+.left-nav__icons .left-nav__link::after {
+    content: attr(aria-label);
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+    color: rgb(219, 219, 219);
+    background-color: #000;
+    padding: 3px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+
+.left-nav__icons .left-nav__link:hover::after,
+.left-nav__icons .left-nav__link:focus::after {
+    opacity: 1;
 }
 article {
     padding: 24px;

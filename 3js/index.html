@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Room</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { overflow:hidden; }
+    canvas { display:block; }
+    #hint { position:fixed; bottom:14px; left:50%; transform:translateX(-50%);
+      color:rgba(255,255,255,.45); font:12px system-ui; pointer-events:none; }
+  </style>
+</head>
+<body>
+<p id="hint">Drag to orbit · Scroll to zoom</p>
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ─── RENDERER ────────────────────────────────────────────────────────────────
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x12141e);
+
+const camera = new THREE.PerspectiveCamera(56, innerWidth / innerHeight, 0.1, 100);
+camera.position.set(0, 1.8, 3.0);
+camera.lookAt(0, 1.7, 0);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 1.7, 0);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.enablePan = false;
+controls.minDistance = 0.5;
+controls.maxDistance = 4.8;
+controls.minPolarAngle = 0.1;
+controls.maxPolarAngle = 1.92;
+
+// ─── LIGHTS ──────────────────────────────────────────────────────────────────
+scene.add(new THREE.AmbientLight(0xffeedd, 0.72));
+const pendant = new THREE.PointLight(0xfff5d8, 3.2, 22);
+pendant.position.set(0, 4.88, 0); pendant.castShadow = true;
+pendant.shadow.mapSize.set(1024, 1024); scene.add(pendant);
+const monGlow = new THREE.PointLight(0x3366ff, 1.0, 4.5);
+monGlow.position.set(1.2, 2.2, -3.5); scene.add(monGlow);
+const lampGlow = new THREE.PointLight(0xffcc88, 1.8, 5.5);
+lampGlow.position.set(1.8, 1.5, -4.0); scene.add(lampGlow);
+const tvGlow = new THREE.PointLight(0x2244aa, 0.9, 5);
+tvGlow.position.set(-1.0, 1.75, -3.8); scene.add(tvGlow);
+const floorLampL = new THREE.PointLight(0xffeecc, 1.4, 6);
+floorLampL.position.set(-4.2, 2.0, -0.8); scene.add(floorLampL);
+const ringLightL = new THREE.PointLight(0xfff5e0, 1.2, 4);
+ringLightL.position.set(3.75, 2.05, 2.6); scene.add(ringLightL);
+const dirLight = new THREE.DirectionalLight(0xaabbff, 0.18); dirLight.position.set(-3,5,-2); scene.add(dirLight);
+
+// ─── TOON SETUP ──────────────────────────────────────────────────────────────
+const fmt = renderer.capabilities.isWebGL2 ? THREE.RedFormat : THREE.LuminanceFormat;
+function mkG(n) {
+  const d = new Uint8Array(n);
+  for (let i=0;i<n;i++) d[i]=Math.floor(i/(n-1)*255);
+  const t = new THREE.DataTexture(d,n,1,fmt);
+  t.minFilter = t.magFilter = THREE.NearestFilter; t.needsUpdate=true; return t;
+}
+const g3=mkG(3), g4=mkG(4);
+const OL = new THREE.MeshBasicMaterial({color:0x000000,side:THREE.BackSide});
+
+const T  = (c,g=g3)  => new THREE.MeshToonMaterial({color:c,gradientMap:g});
+const TF = (c,a=1)   => new THREE.MeshBasicMaterial({color:c,transparent:a<1,opacity:a});
+const TT = (c,g=g4,a=0.5) => new THREE.MeshToonMaterial({color:c,gradientMap:g,transparent:true,opacity:a});
+
+// geometry helpers
+const bx  = (w,h,d)    => new THREE.BoxGeometry(w,h,d);
+const cy  = (r,h,s=20) => new THREE.CylinderGeometry(r,r,h,s);
+const cy2 = (rt,rb,h,s=20) => new THREE.CylinderGeometry(rt,rb,h,s);
+const sp  = (r,w=20,h=16) => new THREE.SphereGeometry(r,w,h);
+const tr  = (r,t,rs=10,ts=36,a=Math.PI*2) => new THREE.TorusGeometry(r,t,rs,ts,a);
+
+// mesh builder: creates mesh with inline outline child, adds to parent
+function m(geo, mat, parent, px=0,py=0,pz=0, rx=0,ry=0,rz=0, sx=1,sy=1,sz=1, ol=true) {
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(px,py,pz); mesh.rotation.set(rx,ry,rz); mesh.scale.set(sx,sy,sz);
+  mesh.castShadow=true; mesh.receiveShadow=true;
+  if (ol) { const o=new THREE.Mesh(geo,OL); o.scale.setScalar(1.065); mesh.add(o); }
+  parent.add(mesh); return mesh;
+}
+// no-outline variant
+const mn = (geo,mat,par,...args) => m(geo,mat,par,...args.slice(0,9),false);
+
+// ─── ROOM ────────────────────────────────────────────────────────────────────
+const FLOOR = new THREE.MeshLambertMaterial({color:0xb88850});
+const WALL  = new THREE.MeshLambertMaterial({color:0xf0ebe2, side:THREE.DoubleSide});
+const CEIL  = new THREE.MeshLambertMaterial({color:0xf8f7f3});
+const TRIM  = new THREE.MeshLambertMaterial({color:0xe4ddd2});
+
+// floor + planks
+const floorMesh = new THREE.Mesh(bx(10,0.14,10),FLOOR);
+floorMesh.position.set(0,0.07,0); floorMesh.receiveShadow=true; scene.add(floorMesh);
+for(let i=-4;i<=4;i++){
+  const plk=new THREE.Mesh(bx(0.012,0.008,10),new THREE.MeshLambertMaterial({color:0xa07040}));
+  plk.position.set(i,0.145,0); scene.add(plk);
+}
+
+// walls + ceiling
+const walls = [
+  [bx(10,5.2,0.12), [0,2.62,-5]],
+  [bx(10,5.2,0.12), [0,2.62, 5]],
+  [bx(0.12,5.2,10), [-5,2.62,0]],
+  [bx(0.12,5.2,10), [5,2.62,0]],
+];
+walls.forEach(([g,pos])=>{
+  const w=new THREE.Mesh(g,WALL); w.position.set(...pos); w.receiveShadow=true; scene.add(w);
+});
+const ceilMesh=new THREE.Mesh(bx(10,0.1,10),CEIL); ceilMesh.position.set(0,5.05,0); scene.add(ceilMesh);
+
+// baseboard
+[[-5,0,0,true],[5,0,0,true],[0,0,-5,false],[0,0,5,false]].forEach(([x,,z,vert])=>{
+  const b=new THREE.Mesh(bx(vert?0.06:10, 0.18, vert?10:0.06),TRIM);
+  b.position.set(x===0?0:x*0.97, 0.23, z===0?0:z*0.97); scene.add(b);
+});
+
+// ceiling pendant
+const pG=new THREE.Group(); scene.add(pG);
+m(cy(0.012,0.85),      T(0x333333),    pG, 0,4.58,0);
+m(cy2(0.28,0.16,0.32,24), T(0xd4ca88,g4), pG, 0,4.18,0, Math.PI,0,0);
+m(tr(0.28,0.022,8,24), T(0xaa9840),    pG, 0,4.02,0, Math.PI/2,0,0);
+{ const _p=new THREE.Mesh(sp(0.17,12,10),TF(0xfff8cc)); _p.position.set(0,4.28,0); scene.add(_p); }
+
+// rug
+[[6.2,4.6,0x1a3a6a],[5.6,4.0,0x24549a],[4.4,3.0,0x1a3a6a]].forEach(([w,d,c],i)=>{
+  const r=new THREE.Mesh(bx(w,0.04,d),new THREE.MeshLambertMaterial({color:c}));
+  r.position.set(0,0.155+i*0.007,0); r.receiveShadow=true; scene.add(r);
+});
+
+// ════════════════════════════════════════════════════════════════════════
+// 1. CORKBOARD WITH POST-ITS  — far left
+// ════════════════════════════════════════════════════════════════════════
+const CX=-3.4, CY=2.5;
+m(bx(1.08,0.96,0.062),T(0x4a2e18),scene, CX,CY,-4.938);
+m(bx(1.00,0.88,0.034),TF(0xc49562),scene, CX,CY,-4.922);
+for(let i=0;i<6;i++) mn(bx(1.00,0.004,0.004),TF(0xb07840,0.35),scene, CX,CY-0.36+i*0.145,-4.906);
+const NOTES=[
+  [CX-0.30,CY+0.28,0xffee44, 0.08],[CX-0.03,CY+0.26,0xff88cc,-0.06],[CX+0.28,CY+0.29,0x88bbff, 0.10],
+  [CX-0.32,CY+0.01,0x88dd88,-0.05],[CX+0.05,CY+0.02,0xffee44, 0.13],[CX+0.30,CY+0.00,0xffaa44,-0.09],
+  [CX-0.22,CY-0.28,0xff88cc, 0.06],[CX+0.20,CY-0.27,0xffee44,-0.11],[CX-0.01,CY-0.25,0x88bbff, 0.08],
+  [CX+0.33,CY-0.27,0x88dd88, 0.03]
+];
+NOTES.forEach(([nx,ny,nc,nr])=>{
+  mn(bx(0.175,0.175,0.008),TF(nc),scene, nx,ny,-4.906, 0,0,nr);
+  [-0.048,0,0.048].forEach(dy=>mn(bx(0.115,0.007,0.003),TF(0x444444,0.65),scene, nx,ny+dy,-4.900, 0,0,nr));
+  mn(sp(0.013,8,6),TF(0xcc2222),scene, nx+0.072,ny+0.072,-4.898);
+});
+
+// ════════════════════════════════════════════════════════════════════════
+// 2. TV + MEDIA CONSOLE  — left-center
+// ════════════════════════════════════════════════════════════════════════
+const TX=-1.0;
+m(bx(1.80,0.46,0.44),T(0x1e150c,g4),scene, TX,0.37,-4.78);
+[[-0.82,-0.18],[0.82,-0.18],[-0.82,0.18],[0.82,0.18]].forEach(([dx,dz])=>
+  m(cy(0.018,0.096,12),T(0x888888),scene, TX+dx,0.185,-4.78+dz));
+m(bx(0.008,0.36,0.008),T(0x2e2014),scene, TX,0.37,-4.562);
+[-0.44,0.44].forEach(dx=>m(bx(0.10,0.016,0.010),T(0xaaaaaa,g4),scene, TX+dx,0.37,-4.554));
+m(cy(0.048,0.092,24),T(0x333333),scene, TX-0.55,0.638,-4.79);
+m(cy2(0.052,0.044,0.020,24),T(0x222222),scene, TX-0.55,0.687,-4.79);
+m(cy(0.044,0.004,20),TF(0xffffff,0.12),scene, TX-0.55,0.638,-4.748, Math.PI/2,0,0);
+m(bx(0.095,0.016,0.032),T(0x222222,g4),scene, TX+0.52,0.602,-4.782, 0,0.2,0);
+m(bx(0.018,0.006,0.006),T(0xcc2222),scene, TX+0.52,0.611,-4.764, 0,0.2,0);
+const TVY=1.75;
+m(bx(1.38,0.82,0.058),T(0x111111),scene, TX,TVY,-4.974);
+m(bx(1.30,0.74,0.024),T(0x0d0d0d),scene, TX,TVY,-4.960);
+{ const _tv=new THREE.Mesh(bx(1.24,0.69,0.016),TF(0x08101e)); _tv.position.set(TX,TVY,-4.950); scene.add(_tv); }
+{ const _glow=new THREE.Mesh(bx(0.85,0.52,0.008),TF(0x182a4a)); _glow.position.set(TX,TVY+0.04,-4.944); scene.add(_glow); }
+{ const _bar=new THREE.Mesh(bx(0.70,0.040,0.006),TF(0x3366cc)); _bar.position.set(TX,TVY-0.27,-4.943); scene.add(_bar); }
+[-0.20,-0.07,0.06,0.19].forEach((dx,i)=>{ const _d=new THREE.Mesh(sp(0.013,8,6),TF(i===0?0xffffff:0x444444)); _d.position.set(TX+dx,TVY-0.29,-4.942); scene.add(_d); });
+m(bx(0.18,0.22,0.042),T(0x666666),scene, TX,TVY,-4.988);
+
+// ════════════════════════════════════════════════════════════════════════
+// 3. DESK + MONITOR  — center-right
+// ════════════════════════════════════════════════════════════════════════
+const DX=1.2, DY=0.78;
+m(bx(1.60,0.048,0.65),T(0x8a5a30,g4),scene, DX,DY,-4.525);
+m(bx(1.60,0.030,0.050),T(0x7a4a28,g4),scene, DX,DY-0.014,-4.225);
+[[-0.72,-0.27],[0.72,-0.27],[-0.72,0.27],[0.72,0.27]].forEach(([dx,dz])=>{
+  m(cy(0.020,0.76,10),T(0xaaaaaa,g4),scene, DX+dx,DY-0.418,-4.525+dz);
+  m(cy(0.032,0.016,12),T(0x888888),scene, DX+dx,DY-0.804,-4.525+dz);
+});
+m(bx(1.30,0.016,0.016),T(0x999999),scene, DX,DY-0.68,-4.525);
+m(bx(1.0,0.012,0.48),T(0x1a1822,g3),scene, DX-0.08,DY+0.006,-4.44);
+m(bx(0.20,0.016,0.180),T(0x888888,g4),scene, DX,DY+0.008,-4.78);
+m(bx(0.022,0.30,0.022),T(0x777777),scene, DX,DY+0.162,-4.79);
+m(bx(0.66,0.40,0.062),T(0x181818),scene, DX,DY+1.075,-4.825);
+m(bx(0.62,0.36,0.028),T(0x111111),scene, DX,DY+1.075,-4.810);
+{ const _scr=new THREE.Mesh(bx(0.58,0.33,0.014),TF(0x0c1420)); _scr.position.set(DX,DY+1.075,-4.802); scene.add(_scr); }
+{ const _sb=new THREE.Mesh(bx(0.16,0.33,0.006),TF(0x111a22)); _sb.position.set(DX-0.21,DY+1.075,-4.797); scene.add(_sb); }
+[[0xcc4444,0.18],[0x44aaff,0.14],[0x88cc88,0.20],[0xffcc44,0.12],[0x44aaff,0.16],[0x888888,0.10],[0xcc4444,0.14],[0x88cc88,0.18]].forEach(([c,w],i)=>{
+  const _l=new THREE.Mesh(bx(w,0.013,0.004),TF(c,0.9));
+  _l.position.set(DX-0.09+w/2-0.28,DY+1.13-(i*0.036),-4.797); scene.add(_l);
+});
+m(bx(0.42,0.015,0.138),T(0xd8d8d4,g4),scene, DX-0.05,DY+0.007,-4.548);
+[[0.36,0.016],[0.34,0.016],[0.32,0.016],[0.28,0.016]].forEach(([kw],i)=>
+  mn(bx(kw,0.006,0.016),T(0xb8b8b6,g4),scene, DX-0.05,DY+0.018,-4.580+i*0.024));
+m(bx(0.060,0.022,0.100),T(0xe0e0dc,g4),scene, DX+0.30,DY+0.006,-4.540, 0,0.1,0);
+m(bx(0.028,0.010,0.038),T(0x888888,g4),scene, DX+0.30,DY+0.014,-4.506, 0,0.1,0);
+m(cy2(0.038,0.032,0.085,16),T(0xdd3322),scene, DX-0.58,DY+0.048,-4.72);
+m(tr(0.020,0.008,8,16,Math.PI),T(0xcc2200),scene, DX-0.544,DY+0.048,-4.72, 0,0,Math.PI/2);
+{ const _cf=new THREE.Mesh(cy(0.032,0.004,16),TF(0xd4956a,0.8)); _cf.position.set(DX-0.58,DY+0.090,-4.72); scene.add(_cf); }
+m(cy(0.048,0.014,20),T(0x2a2a2a),scene, DX+0.58,DY+0.007,-4.76);
+m(bx(0.016,0.42,0.016),T(0x2a2a2a),scene, DX+0.58,DY+0.22,-4.70, 0.30,0,0);
+m(sp(0.022,10,8),T(0x333333),scene, DX+0.58,DY+0.44,-4.58);
+m(bx(0.016,0.38,0.016),T(0x2a2a2a),scene, DX+0.58,DY+0.60,-4.42,-0.48,0,0);
+m(cy2(0.10,0.04,0.15,20),T(0xe8e0a0,g4),scene, DX+0.58,DY+0.74,-4.27, Math.PI,0,0);
+{ const _dlb=new THREE.Mesh(sp(0.035,10,8),TF(0xfff8cc)); _dlb.position.set(DX+0.58,DY+0.68,-4.27); scene.add(_dlb); }
+m(bx(0.20,0.016,0.26),T(0x2244aa,g4),scene, DX-0.54,DY+0.012,-4.52, 0,0.05,0);
+m(bx(0.016,0.020,0.24),T(0xcc2222),scene, DX-0.447,DY+0.012,-4.52, 0,0.05,0);
+
+// ════════════════════════════════════════════════════════════════════════
+// 4. CAMERA STATION  — far right
+// ════════════════════════════════════════════════════════════════════════
+const KX=3.2;
+[-0.28,0.28].forEach(bx2=>m(bx(0.042,0.24,0.20),T(0x555555),scene, KX+bx2,2.10,-4.888, -0.58,0,0));
+m(bx(0.72,0.036,0.26),T(0x7a4a28,g4),scene, KX,2.24,-4.78);
+m(bx(0.22,0.155,0.15),T(0x181818),scene, KX-0.15,2.34,-4.82);
+m(bx(0.22,0.076,0.060),T(0x1a1a1a),scene, KX-0.15,2.45,-4.82);
+m(cy(0.055,0.12,20),T(0x1e1e1e),scene, KX-0.15,2.34,-4.700, Math.PI/2,0,0);
+m(cy(0.040,0.005,20),TF(0x88aacc,0.6),scene, KX-0.15,2.34,-4.641, Math.PI/2,0,0);
+m(cy(0.048,0.018,20),T(0x222222),scene, KX+0.10,2.34,-4.80, Math.PI/2,0,0);
+m(bx(0.090,0.014,0.052),T(0xeeeeee,g4),scene, KX+0.22,2.34,-4.79, 0,0.1,0);
+m(bx(0.055,0.055,0.018),T(0x5588cc,g4),scene, KX+0.30,2.33,-4.80, 0,-0.1,0);
+[-0.28,0.28].forEach(bx2=>m(bx(0.042,0.22,0.20),T(0x555555),scene, KX+bx2,1.27,-4.888, -0.58,0,0));
+m(bx(0.72,0.036,0.26),T(0x7a4a28,g4),scene, KX,1.40,-4.78);
+m(bx(0.38,0.28,0.22),T(0x3a3028),scene, KX,1.556,-4.81);
+m(bx(0.36,0.055,0.20),T(0x2e2820),scene, KX,1.700,-4.810);
+m(tr(0.055,0.010,8,14,Math.PI*1.2),T(0x888888),scene, KX,1.700,-4.800, Math.PI/2,0,0);
+m(bx(0.34,0.008,0.006),T(0xaaaaaa),scene, KX,1.625,-4.800);
+[-0.12,0.12].forEach(dx=>m(cy(0.018,0.010,14),T(0xccaa33,g4),scene, KX+dx,1.698,-4.800));
+m(cy(0.038,0.020,16),T(0x444444),scene, KX+0.55,0.164,2.8);
+m(cy(0.015,1.55,12),T(0x555555),scene, KX+0.55,0.985,2.8);
+m(cy(0.010,0.28,10),T(0x555555),scene, KX+0.55,1.84,2.8, 0.28,0,0);
+m(tr(0.245,0.028,12,40),TF(0xfff8e0),scene, KX+0.55,2.05,2.64, Math.PI/2,0,0);
+m(tr(0.200,0.012,8,36),TF(0xfff0cc,0.6),scene, KX+0.55,2.05,2.64, Math.PI/2,0,0);
+{ const _rl=new THREE.Mesh(sp(0.06,10,8),TF(0xfff8e0,0.8)); _rl.position.set(KX+0.55,2.05,2.64); scene.add(_rl); }
+m(bx(0.012,0.14,0.010),T(0x333333),scene, KX+0.55,2.05,2.632);
+m(bx(0.14,0.012,0.010),T(0x333333),scene, KX+0.55,2.05,2.632);
+
+// Floor lamp — left corner
+m(cy(0.12,0.028,20),T(0x333333),scene, -4.2,0.155,-1.0);
+m(cy(0.018,1.60,12),T(0x444444),scene, -4.2,0.965,-1.0);
+m(cy(0.018,0.38,12),T(0x444444),scene, -4.2,1.82,-0.80,-0.48,0,0);
+m(cy2(0.30,0.14,0.42,24),T(0xf5e8b0,g4),scene, -4.2,2.04,-0.64, Math.PI,0,0);
+m(tr(0.30,0.022,8,28),T(0xc8b860),scene, -4.2,1.84,-0.64, Math.PI/2,0,0);
+{ const _fl=new THREE.Mesh(sp(0.08,12,10),TF(0xfff8cc)); _fl.position.set(-4.2,1.95,-0.64); scene.add(_fl); }
+
+// ─── ANIMATE ───────────────────────────────────────────────────────────────────────────────
+renderer.setAnimationLoop(()=>{
+  controls.update();
+  renderer.render(scene, camera);
+});
+
+window.addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+</script>
+</body>
+</html>
