@@ -168,7 +168,7 @@ const RECIPES = [
     emoji: "🍗",
     desc: "Thinly pounded breaded chicken cutlets, pan-fried golden. Serve with rice pilaf for Britt or in marinara for Tyler.",
     tags: ["dinner", "savory"],
-    person: "Chuck",
+    person: "Carlene",
     prep: "15 min", cook: "15 min", serves: "4",
     guesses: ["prep", "cook", "serves"],
     ingredients: [

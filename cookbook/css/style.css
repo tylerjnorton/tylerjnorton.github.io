@@ -1,24 +1,29 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── Vintage Cookbook palette ────────────── */
 :root {
-  --bg: #faf8f4;
-  --surface: #ffffff;
-  --border: #e8e2d9;
-  --text: #2c2c2c;
-  --muted: #7a7168;
-  --accent: #c0622a;
-  --accent-light: #f5ede6;
-  --font-serif: Georgia, 'Times New Roman', serif;
-  --font-sans: system-ui, -apple-system, sans-serif;
+  --bg: #f1e7d6;
+  --surface: #fbf6ec;
+  --border: #ddcbb0;
+  --text: #3a2e22;
+  --muted: #6f5c45;       /* darkened for WCAG AA contrast on cream */
+  --accent: #a8412a;
+  --accent-light: #efe1cf;
+  --accent-dark: #8a3320; /* hover/pressed shade of the one interactive colour */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: Georgia, 'Times New Roman', serif;
 }
 
 body {
-  background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
   min-height: 100vh;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(255,250,240,0.6), transparent 55%),
+    repeating-linear-gradient(0deg, rgba(120,90,55,0.022) 0 2px, transparent 2px 4px);
 }
 
 /* Header */
@@ -37,6 +42,7 @@ header {
 header .logo {
   font-family: var(--font-serif);
   font-size: 1.4rem;
+  font-weight: 700;
   color: var(--accent);
   letter-spacing: -0.02em;
 }
@@ -50,7 +56,8 @@ header .logo {
 .hero h1 {
   font-family: var(--font-serif);
   font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: normal;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   margin-bottom: 0.4rem;
 }
 
@@ -128,12 +135,15 @@ header .logo {
 }
 
 .tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;            /* desktop touch-target minimum */
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 99px;
-  padding: 0.28rem 0.8rem;
+  padding: 0.3rem 0.85rem;
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--text);
   cursor: pointer;
   transition: all 0.15s;
   user-select: none;
@@ -143,25 +153,27 @@ header .logo {
 .tag.active { background: var(--accent-light); border-color: var(--accent); color: var(--accent); font-weight: 600; }
 
 .tag .count {
-  opacity: 0.55;
-  margin-left: 0.3rem;
+  opacity: 0.6;
+  margin-left: 0.35rem;
   font-size: 0.72em;
   font-variant-numeric: tabular-nums;
 }
 
-/* Person chips — visually distinct from tags */
+/* Person chips — same interactive colour as tags, distinguished by a solid
+   fill when active (filled vs. outlined) rather than a second hue. */
 .tag.person {
   border-radius: 6px;
   font-weight: 500;
 }
 
-.tag.person:hover { border-color: #3f7a6b; color: #3f7a6b; }
 .tag.person.active {
-  background: #e7f1ed;
-  border-color: #3f7a6b;
-  color: #2f5d51;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fbf6ec;
   font-weight: 600;
 }
+
+.tag.person.active .count { opacity: 0.8; }
 
 /* Grid */
 .container {
@@ -170,10 +182,28 @@ header .logo {
   padding: 0 1.5rem 5rem;
 }
 
+.results-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
 .results-count {
   font-size: 0.8rem;
   color: var(--muted);
-  margin-bottom: 1rem;
+}
+
+.legend {
+  font-size: 0.73rem;
+  color: var(--muted);
+}
+
+.legend-est {
+  color: #b03a2e;
+  font-weight: 700;
 }
 
 .grid {
@@ -216,14 +246,15 @@ header .logo {
 
 .card h2 {
   font-family: var(--font-serif);
-  font-size: 1.05rem;
-  font-weight: normal;
+  font-size: 1.1rem;
+  font-weight: 600;
   line-height: 1.3;
   margin-bottom: 0.3rem;
 }
 
 .card-desc {
   font-size: 0.82rem;
+  line-height: 1.5;
   color: var(--muted);
   flex: 1;
 }
@@ -271,22 +302,24 @@ header .logo {
 .modal {
   background: var(--surface);
   border-radius: 12px;
-  max-width: 660px;
+  max-width: 960px;
   width: 100%;
   margin: auto;
   position: relative;
-  overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;          /* modal is its own scroll container */
 }
 
 .modal-close {
-  position: absolute;
+  position: sticky;
   top: 0.85rem;
-  right: 0.85rem;
-  background: rgba(255,255,255,0.9);
+  float: right;
+  margin: 0.85rem 0.85rem -2.5rem 0;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   font-size: 1.1rem;
   cursor: pointer;
   display: flex;
@@ -298,7 +331,7 @@ header .logo {
   line-height: 1;
 }
 
-.modal-close:hover { color: var(--text); }
+.modal-close:hover { color: var(--text); border-color: var(--accent); }
 
 .modal-body {
   padding: 1.75rem 2rem 2.25rem;
@@ -307,7 +340,7 @@ header .logo {
 .modal-body h2 {
   font-family: var(--font-serif);
   font-size: 1.9rem;
-  font-weight: normal;
+  font-weight: 600;
   line-height: 1.2;
   margin-bottom: 0.4rem;
 }
@@ -323,10 +356,12 @@ header .logo {
 
 .modal-meta span { display: flex; align-items: center; gap: 0.3rem; }
 
-/* Estimated (guessed) values, not from the original recipe */
+/* Estimated values: red + a "~" prefix (added in JS) so colour is not the
+   sole indicator. */
 .card-meta .guess,
 .modal-meta .guess {
-  color: #c0392b;
+  color: #b03a2e;
+  font-weight: 600;
   cursor: help;
 }
 
@@ -350,41 +385,127 @@ header .logo {
   text-transform: uppercase;
   letter-spacing: 0.09em;
   color: var(--accent);
-  margin: 1.4rem 0 0.55rem;
+  margin: 0 0 0.6rem;
   font-weight: 600;
 }
 
-.modal-body ul {
-  list-style: none;
-  padding: 0;
+/* Cook Mode launch — primary action of the modal */
+.cook-launch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--accent);
+  color: #fbf6ec;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.15rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-bottom: 1.6rem;
+}
+.cook-launch:hover { background: var(--accent-dark); }
+
+/* Two-column ingredients | instructions */
+.cook-grid {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.85fr) 1.5fr;
+  gap: 0.5rem 2.25rem;
+  align-items: start;
 }
 
-.modal-body ul li {
-  font-size: 0.88rem;
-  padding: 0.28rem 0;
-  border-bottom: 1px solid var(--border);
+.ingredients-col {
+  position: sticky;
+  top: 3.4rem;
+  align-self: start;
+}
+
+/* Checklists */
+.checklist { list-style: none; padding: 0; margin: 0; }
+
+.check-item {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
 }
+.check-item:last-child { border-bottom: none; }
 
-.modal-body ul li::before {
-  content: "·";
-  color: var(--accent);
-  font-size: 1.2rem;
-  line-height: 1;
+.check-box {
   flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  border: 1.5px solid var(--accent);
+  border-radius: 4px;
+  position: relative;
+  top: 2px;
+  transition: background 0.12s;
+}
+.check-item.checked .check-box { background: var(--accent); }
+.check-item.checked .check-box::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  color: #fbf6ec;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+}
+.check-item.checked .check-text {
+  text-decoration: line-through;
+  color: var(--muted);
+  opacity: 0.75;
 }
 
-.modal-body ol {
-  padding-left: 1.3rem;
+/* Steps: numbered, whole row toggles done */
+.steplist { counter-reset: step; }
+.steplist .check-item { counter-increment: step; align-items: flex-start; }
+.steplist .check-item::before {
+  content: counter(step);
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.steplist .check-item.checked::before { background: var(--accent); color: #fbf6ec; }
 
-.modal-body ol li {
-  font-size: 0.88rem;
-  margin-bottom: 0.55rem;
+/* Ingredient sub-headers (e.g. "Sauce:" / "Meatballs:") */
+.ing-divider {
+  list-style: none;
+  font-weight: 700;
   color: var(--text);
-  padding-left: 0.2rem;
+  padding: 0.65rem 0 0.3rem;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 620px) {
+  .cook-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+  .ingredients-col {
+    position: sticky;
+    top: 0;
+    max-height: 40vh;
+    overflow-y: auto;
+    background: var(--surface);
+    margin: 0 -1.25rem;
+    padding: 0.25rem 1.25rem 0.5rem;
+    box-shadow: 0 7px 8px -7px rgba(0,0,0,0.25);
+    z-index: 3;
+  }
 }
 
 .modal-notes {
@@ -405,8 +526,175 @@ footer {
   border-top: 1px solid var(--border);
 }
 
+footer a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+footer a:hover { text-decoration: underline; }
+
 @media (max-width: 560px) {
   header { padding: 0 1rem; }
   .modal-body { padding: 1.25rem; }
   .modal-body h2 { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ════ Cook Mode: focused, hands-busy step view ════ */
+.cookmode {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(255,250,240,0.6), transparent 55%);
+  flex-direction: column;
+  padding: 1.25rem;
+}
+.cookmode.open { display: flex; }
+
+.cm-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.cm-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--text);
+}
+.cm-exit {
+  flex-shrink: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  min-height: 40px;
+  padding: 0.5rem 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+}
+.cm-exit:hover { border-color: var(--accent); color: var(--accent); }
+
+.cm-progress-track {
+  height: 4px;
+  background: var(--accent-light);
+  border-radius: 2px;
+  margin-top: 0.85rem;
+  overflow: hidden;
+}
+.cm-progress { height: 100%; background: var(--accent); width: 0; transition: width 0.2s; }
+
+.cm-stepwrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  padding: 1.5rem 0.5rem;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+}
+.cm-counter {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+.cm-step {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4.2vw, 2.4rem);
+  line-height: 1.4;
+  color: var(--text);
+}
+.cm-hint { margin-top: 1.5rem; font-size: 0.78rem; color: var(--muted); }
+
+/* Prep step (ingredient gathering) */
+.cm-prep-label {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3.8vw, 2rem);
+  margin-bottom: 1.4rem;
+}
+.cm-prep-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  display: inline-block;
+  columns: 2;
+  column-gap: 2.75rem;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.cm-prep-list li { padding: 0.2rem 0; break-inside: avoid; }
+.cm-prep-list li::before { content: "•"; color: var(--accent); margin-right: 0.55rem; }
+.cm-prep-list .cm-ing-divider { font-weight: 700; column-span: all; padding-top: 0.4rem; }
+.cm-prep-list .cm-ing-divider::before { content: none; }
+
+@media (max-width: 560px) {
+  .cm-prep-list { columns: 1; }
+}
+
+.cm-nav {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto 0.6rem;
+}
+.cm-nav button {
+  flex: 1;
+  min-height: 56px;
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.cm-prev { background: var(--surface); color: var(--accent); }
+.cm-next { background: var(--accent); color: #fbf6ec; }
+.cm-next:hover { background: var(--accent-dark); }
+.cm-nav button:disabled { opacity: 0.4; cursor: default; }
+
+.cm-ing {
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+  padding-top: 0.5rem;
+}
+.cm-ing summary {
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-weight: 700;
+  padding: 0.35rem 0;
+}
+.cm-ing ul { list-style: none; padding: 0.4rem 0 0.6rem; columns: 2; column-gap: 1.5rem; }
+.cm-ing li { font-size: 0.88rem; padding: 0.18rem 0; break-inside: avoid; }
+.cm-ing-divider { font-weight: 700; }
+
+@media (max-width: 560px) {
+  .cm-ing ul { columns: 1; }
 }
