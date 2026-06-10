@@ -3159,5 +3159,267 @@ const RECIPES = [
       "Microwave the chocolate frosting (lid and foil removed) about 15 seconds to soften; stir until easily spreadable. Spread evenly over the top layer of graham crackers.",
       "Cover and chill overnight. This dessert gets better over time as the graham crackers soften."
     ]
+  },
+  {
+    title: "Aunt Donnie's Sugar Cookies",
+    emoji: "🍪",
+    desc: "Classic rolled and cut-out sugar cookies, ready to decorate.",
+    tags: ["dessert", "sweet"],
+    person: "Carlene",
+    prep: "15 min", cook: "10 min", serves: "about 3 dozen",
+    guesses: ["prep", "serves"],
+    ingredients: [
+      "1 c marg/butter combo",
+      "1 1/2 c sugar",
+      "1 egg",
+      "1 1/2 t vanilla",
+      "3/4 t baking powder",
+      "3/4 t salt",
+      "3 c flour"
+    ],
+    steps: [
+      "Cream together wet ingredients. Add food coloring if desired. Whisk together and add dry ingredients.",
+      "Roll out on a floured surface to 1/4 inch thick.",
+      "Bake at 350° for 10 minutes on a greased cookie sheet.",
+      "Decorate if desired."
+    ]
+  },
+  {
+    title: "Apple Squares",
+    emoji: "🍎",
+    desc: "A cinnamon apple snack cake baked in a 9x13, dusted with cinnamon sugar.",
+    tags: ["dessert", "sweet"],
+    person: "Carlene",
+    prep: "15 min", cook: "45 min", serves: "12",
+    guesses: ["prep", "serves"],
+    ingredients: [
+      "1 3/4 c sugar",
+      "3 eggs",
+      "1 c vegetable oil",
+      "1 t vanilla",
+      "1/2 t salt",
+      "1 t cinnamon",
+      "1 t baking powder",
+      "2 c flour",
+      "2 cups thinly sliced apples (cortland or macs best)"
+    ],
+    steps: [
+      "Mix ingredients in order until creamed together.",
+      "Add 2 cups thinly sliced apples (cortland or macs best).",
+      "Bake in a greased 9x13 pan for 40-45 minutes at 350°.",
+      "Sprinkle with cinnamon and sugar after removed from oven."
+    ]
+  },
+  {
+    title: "Chocolate Frosting",
+    emoji: "🍫",
+    desc: "A simple cooked-butter cocoa frosting (pairs with the Hershey's Chocolate Cake).",
+    tags: ["dessert", "sweet"],
+    person: "Carlene",
+    prep: "10 min", cook: "0 min", serves: "frosts 1 cake",
+    guesses: ["prep"],
+    ingredients: [
+      "1/2 c butter (not margarine)",
+      "2/3 c cocoa",
+      "3 c confectioner's sugar",
+      "1/3 c milk",
+      "1 t vanilla"
+    ],
+    steps: [
+      "Melt butter, stir in cocoa.",
+      "Add milk and sugar alternately and mix together.",
+      "Add vanilla and mix on medium."
+    ]
+  },
+  {
+    title: "Hershey's Chocolate Cake",
+    emoji: "🍫",
+    desc: "The classic moist Hershey's chocolate cake (pair with the Chocolate Frosting).",
+    tags: ["dessert", "sweet"],
+    person: "Carlene",
+    prep: "15 min", cook: "35 min", serves: "12",
+    guesses: ["prep", "serves"],
+    ingredients: [
+      "2 c sugar",
+      "1 3/4 c flour",
+      "3/4 c baking cocoa",
+      "1 1/2 t baking powder",
+      "1 1/2 t baking soda",
+      "1 t salt",
+      "2 eggs",
+      "1 cup milk",
+      "1/2 c veg oil",
+      "2 t vanilla",
+      "1 c boiling water"
+    ],
+    steps: [
+      "Combine dry ingredients then add remaining. Beat for 2 minutes at medium speed. Batter will be thin.",
+      "Bake at 350° in greased and floured pans (round) or 9x13 for 30-35 minutes.",
+      "Cool 10 minutes before removing from pan."
+    ]
+  },
+  {
+    title: "Best Sweet Cornbread",
+    emoji: "🌽",
+    desc: "A sweet, tender cornbread baked in a 9x13 pan.",
+    tags: ["side", "sweet"],
+    person: "Carlene",
+    prep: "10 min", cook: "40 min", serves: "12",
+    guesses: ["prep", "serves"],
+    ingredients: [
+      "1 c cornmeal",
+      "3 c flour",
+      "1 1/3 c sugar",
+      "2 T baking powder",
+      "1 t salt",
+      "2/3 c veg oil",
+      "1/3 c melted butter",
+      "2 T honey",
+      "4 eggs, beaten",
+      "2 1/2 c milk"
+    ],
+    steps: [
+      "Whisk dry ingredients together. Add wet ingredients and stir just to moisten. Combine — do not overmix!",
+      "Pour into a greased 9x13 pan.",
+      "Bake at 350° 40 minutes or until top is cracking and slightly brown."
+    ]
+  },
+  {
+    title: "Chocolate Crinkles",
+    emoji: "🍪",
+    desc: "Fudgy chocolate cookies rolled in confectioner's sugar that crackle as they bake.",
+    tags: ["dessert", "sweet"],
+    person: "Carlene",
+    prep: "20 min", cook: "10 min, plus 2 hr chill", serves: "about 3 dozen",
+    guesses: ["prep", "serves"],
+    ingredients: [
+      "1/2 c margarine",
+      "4 squares unsweetened chocolate",
+      "2 c sugar",
+      "4 eggs",
+      "2 t vanilla",
+      "3 3/4 c flour",
+      "2 t baking powder",
+      "1/2 t salt",
+      "Confectioner's sugar (for rolling)"
+    ],
+    steps: [
+      "Melt margarine and chocolate, then add sugar, eggs and vanilla.",
+      "Whisk together, then add dry ingredients. Chill 2 hours.",
+      "Scoop 1 inch balls and roll in confectioner's sugar.",
+      "Bake at 375° for 10 min on a greased cookie sheet.",
+      "Cool at least 5 min before removing to cooling rack."
+    ]
+  },
+  {
+    title: "Best Banana Bread",
+    emoji: "🍌",
+    desc: "A moist banana loaf made fluffy with sour cream (or mayo), baked over parchment.",
+    tags: ["breakfast", "sweet"],
+    person: "Carlene",
+    prep: "15 min", cook: "55 min", serves: "1 loaf",
+    guesses: ["prep", "serves"],
+    ingredients: [
+      "1/2 c margarine (room temp)",
+      "1 c sugar",
+      "2 eggs (room temp)",
+      "1 1/2 c flour",
+      "1 t soda",
+      "1 t salt",
+      "2 mashed ripe bananas (about 1 cup)",
+      "1/2 c sour cream or mayo",
+      "1 t vanilla"
+    ],
+    steps: [
+      "Mix margarine, sugar and eggs till fluffy.",
+      "Whisk flour, soda and salt together, then add to wet ingredients.",
+      "Add: 2 mashed ripe bananas (about 1 cup), sour cream or mayo, and vanilla.",
+      "Pour into a greased loaf pan with parchment paper on the bottom.",
+      "Bake at 350° for 50-55 min."
+    ]
+  },
+  {
+    title: "Apple Pie",
+    emoji: "🥧",
+    desc: "A classic double-crust apple pie with Cortland or Mac apples and warm spices.",
+    tags: ["dessert", "sweet"],
+    person: "Carlene",
+    prep: "25 min", cook: "45 min", serves: "8",
+    guesses: ["prep", "serves"],
+    ingredients: [
+      "2 thawed pie crusts (room temp)",
+      "6-8 cortland or mac apples, pared",
+      "1/3 c sugar",
+      "1/3 c flour",
+      "1/2 t nutmeg",
+      "1/2 t ginger",
+      "1/2 t cinnamon",
+      "1/2 t allspice",
+      "1 t lemon juice",
+      "4 t butter"
+    ],
+    steps: [
+      "Pare 6-8 cortland or mac apples.",
+      "Toss in a large bowl with the sugar, flour, nutmeg, ginger, cinnamon, allspice and lemon juice. Criss cross and toss together with 2 sharp knives.",
+      "Pour into bottom crust. Place 4 t butter around top of apples.",
+      "Cover with top crust, cutting 4-6 vents.",
+      "Bake at 375° for 40-45 min."
+    ]
+  },
+  {
+    title: "Auntie Jan's Soda Bread",
+    emoji: "🍞",
+    desc: "A round buttermilk soda bread with an X cut on top, brushed with butter while it bakes.",
+    tags: ["side", "breakfast"],
+    person: "Carlene",
+    prep: "15 min", cook: "50 min", serves: "1 loaf",
+    guesses: ["prep", "serves"],
+    ingredients: [
+      "— Combine: —",
+      "4 c flour",
+      "4 T sugar",
+      "1 t baking soda",
+      "1 T baking powder",
+      "1/2 t salt",
+      "1/2 c margarine or butter",
+      "— Stir in: —",
+      "1 c buttermilk",
+      "1 egg",
+      "— Brushing mixture: —",
+      "1/4 c butter (melted)",
+      "1/4 c buttermilk"
+    ],
+    steps: [
+      "Combine flour, sugar, baking soda, baking powder, salt and margarine or butter.",
+      "Stir in buttermilk and egg.",
+      "Knead in bowl or slightly floured surface.",
+      "Form into round boule and place on a greased cookie sheet. Use a sharp knife to cut an X on top.",
+      "Combine 1/4 c butter (melted) with 1/4 c buttermilk and brush loaf with mixture.",
+      "Bake at 375° for 45-50 minutes. Use mixture to brush 2-3 times while baking."
+    ]
+  },
+  {
+    title: "Easy Artisan Bread",
+    emoji: "🥖",
+    desc: "A no-knead dutch oven artisan loaf with a crackly crust — just four ingredients.",
+    tags: ["side"],
+    person: "Carlene",
+    prep: "15 min, plus 3 hr rise", cook: "45 min", serves: "1 loaf",
+    guesses: ["prep", "serves"],
+    ingredients: [
+      "3 c flour",
+      "1 pkg (2 t) rapid rise yeast",
+      "2 t kosher salt",
+      "1 1/2 c very warm tap water"
+    ],
+    steps: [
+      "Mix flour, yeast and salt, then add water (wet and sloppy).",
+      "Cover and let rise for 3 hours until doubled in size/volume. (Can be refrigerated for up to 3 days.)",
+      "Put dutch oven with lid in oven and preheat to 450°.",
+      "Turn dough onto floured surface. Fold sides inward with dough scraper into rough ball to deflate bubbles.",
+      "Flip onto parchment, smooth side up. Remove dutch oven, use paper to place dough in pot and cover.",
+      "Bake 30 min covered, then 15 min uncovered.",
+      "Cool at least 10 min on rack before slicing."
+    ]
   }
 ];
