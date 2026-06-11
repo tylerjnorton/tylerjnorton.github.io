@@ -6,8 +6,11 @@ const resultsCount = document.getElementById("resultsCount");
 const backdrop = document.getElementById("backdrop");
 const modalBody = document.getElementById("modalBody");
 
-/* ── Local changes: edits, deletions and photos are saved in this browser
-   (localStorage) and re-applied on top of the built-in recipes at load. ── */
+/* ── Shared changes layer ──
+   Edits, deletions and photos are stored as per-recipe "overrides" on top of
+   the built-in recipes (which are never modified). When Firebase is configured
+   in js/firebase-config.js they live in Firestore and sync to everyone, live.
+   Until then they fall back to this browser's localStorage. */
 const store = {
   load(key, fallback) {
     try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
@@ -15,15 +18,82 @@ const store = {
   },
   save(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
 };
-const edits = store.load("cookbook_edits", {});
-const deleted = store.load("cookbook_deleted", []);
-const photos = store.load("cookbook_photos", {});
 
 // Stable id = the recipe's original (pre-edit) title.
-RECIPES.forEach(r => { r._id = r.title; });
-RECIPES.forEach(r => { if (edits[r._id]) Object.assign(r, edits[r._id]); });
-for (let i = RECIPES.length - 1; i >= 0; i--) {
-  if (deleted.includes(RECIPES[i]._id)) RECIPES.splice(i, 1);
+const ORIGINALS = RECIPES.map(r => ({ ...r, _id: r.title }));
+const photos = {};   // id -> photo data URL, derived from overrides
+let overrides = {};  // id -> { edit?, deleted?, photo? }
+
+let db = null;
+if (window.CB_FIREBASE_CONFIG && window.firebase) {
+  try {
+    firebase.initializeApp(window.CB_FIREBASE_CONFIG);
+    db = firebase.firestore();
+  } catch (_) { db = null; }
+}
+
+const deletedIds = () => Object.keys(overrides).filter(id => overrides[id].deleted);
+
+// Rebuild the visible recipe list from the originals + current overrides.
+function applyOverrides() {
+  Object.keys(photos).forEach(k => delete photos[k]);
+  const list = [];
+  for (const o of ORIGINALS) {
+    const ov = overrides[o._id];
+    if (ov && ov.deleted) continue;
+    list.push(ov && ov.edit ? { ...o, ...ov.edit } : o);
+    if (ov && ov.photo) photos[o._id] = ov.photo;
+  }
+  RECIPES.length = 0;
+  RECIPES.push(...list);
+}
+
+// Save one recipe's override patch — to Firestore for everyone when
+// configured, otherwise to this browser's localStorage.
+function persistOverride(id, patch) {
+  overrides[id] = { ...overrides[id], ...patch };
+  if (db) {
+    db.collection("overrides").doc(encodeURIComponent(id)).set(patch, { merge: true })
+      .catch(err => alert("Couldn't reach the shared cookbook — this change may not have saved for everyone.\n\n" + err.message));
+  } else {
+    try { store.save("cookbook_overrides", overrides); }
+    catch (_) { alert("This browser's storage is full — the change couldn't be saved. Try removing a photo first."); }
+  }
+  applyOverrides();
+}
+
+applyOverrides();
+if (db) {
+  // Live sync: the first snapshot loads shared state; later ones apply
+  // everyone else's changes as they happen.
+  db.collection("overrides").onSnapshot(snap => {
+    overrides = {};
+    snap.forEach(d => { overrides[decodeURIComponent(d.id)] = d.data(); });
+    applyOverrides();
+    render();
+  }, () => { /* offline or misconfigured — built-in recipes still work */ });
+} else {
+  overrides = store.load("cookbook_overrides", {});
+  applyOverrides();
+}
+
+/* ── Family passcode: asked once per browser before changing shared data ── */
+const PASS_HASH = "23a04f066159c0b5d3ede1602729a4532b62f1cef50d4f312fa1e36ba2c0e66a";
+
+async function sha256(s) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function ensureUnlocked() {
+  if (!db) return true; // per-browser changes don't affect anyone else
+  if (localStorage.getItem("cookbook_unlocked") === PASS_HASH) return true;
+  const word = prompt("Enter the family passcode to make changes for everyone:");
+  if (word === null) return false;
+  const h = await sha256(word.trim().toLowerCase());
+  if (h !== PASS_HASH) { alert("That's not the passcode — ask Tyler!"); return false; }
+  localStorage.setItem("cookbook_unlocked", h);
+  return true;
 }
 
 let activeTag = "all";
@@ -80,8 +150,9 @@ function renderGrid() {
   const q = query.toLowerCase();
   const list = RECIPES.filter(r => matches(r, { tag: activeTag, person: activePerson, q }));
   resultsCount.textContent = `${list.length} recipe${list.length === 1 ? "" : "s"}`;
-  if (deleted.length > 0) {
-    resultsCount.innerHTML += ` · <button class="restore-link" type="button">restore ${deleted.length} deleted</button>`;
+  const nDeleted = deletedIds().length;
+  if (nDeleted > 0) {
+    resultsCount.innerHTML += ` · <button class="restore-link" type="button">restore ${nDeleted} deleted</button>`;
   }
 
   if (list.length === 0) {
@@ -171,7 +242,9 @@ function renderEditForm(idx) {
   modalBody.innerHTML = `
     <div class="modal-body">
       <h2 id="modalTitle">Edit “${escapeHtml(r.title)}”</h2>
-      <p class="edit-hint">Changes are saved in this browser only — the original recipe stays safe.</p>
+      <p class="edit-hint">${db
+        ? "Changes save to the shared family cookbook — everyone will see them."
+        : "Shared sync isn't set up yet, so changes save in this browser only."}</p>
       <form class="edit-form" data-form="${idx}">
         <label>Title<input name="title" value="${escAttr(r.title)}" required></label>
         <label>Description<textarea name="desc" rows="2">${escapeHtml(r.desc)}</textarea></label>
@@ -208,21 +281,29 @@ function saveEdit(idx, form) {
   };
   // A hand-typed time/serving is no longer an estimate, so drop its ~ marker.
   updated.guesses = (r.guesses || []).filter(f => updated[f] === r[f]);
-  Object.assign(r, updated);
-  edits[r._id] = updated;
-  store.save("cookbook_edits", edits);
+  persistOverride(r._id, { edit: updated });
   render();
-  openModal(idx);
+  reopenById(r._id);
+}
+
+// After overrides reapply, a recipe's index can shift — find it again by id.
+function reopenById(id) {
+  const idx = RECIPES.findIndex(r => r._id === id);
+  if (idx >= 0) openModal(idx); else closeModal();
 }
 
 function deleteRecipe(idx) {
   const r = RECIPES[idx];
-  const sure = confirm(`Delete “${r.title}”?\n\nIt will be hidden on this device. You can bring it back with the “restore deleted” link above the recipe grid.`);
+  const where = db ? "for everyone" : "on this device";
+  const sure = confirm(`Delete “${r.title}” ${where}?\n\nYou can bring it back with the “restore deleted” link above the recipe grid.`);
   if (!sure) return;
-  deleted.push(r._id);
-  store.save("cookbook_deleted", deleted);
-  RECIPES.splice(idx, 1);
+  persistOverride(r._id, { deleted: true });
   closeModal();
+  render();
+}
+
+function restoreAllDeleted() {
+  deletedIds().forEach(id => persistOverride(id, { deleted: false }));
   render();
 }
 
@@ -236,31 +317,25 @@ let photoIdx = null;
 photoInput.addEventListener("change", () => {
   const file = photoInput.files[0];
   if (!file || photoIdx === null) return;
-  const idx = photoIdx;
-  resizePhoto(file, 1200, dataUrl => {
+  const id = RECIPES[photoIdx] && RECIPES[photoIdx]._id;
+  if (!id) return;
+  resizePhoto(file, dataUrl => {
     photoInput.value = "";
-    try {
-      photos[RECIPES[idx]._id] = dataUrl;
-      store.save("cookbook_photos", photos);
-    } catch (_) {
-      alert("Couldn't save the photo — this browser's storage for the cookbook is full. Try removing a photo from another recipe first.");
-      return;
-    }
+    persistOverride(id, { photo: dataUrl });
     render();
-    openModal(idx);
+    reopenById(id);
   });
 });
 
-function resizePhoto(file, maxEdge, cb) {
+// Downscale on a canvas so photos fit Firestore's 1MB document limit
+// (and localStorage in fallback mode). Retries smaller if still too big.
+function resizePhoto(file, cb) {
   const img = new Image();
   img.onload = () => {
-    const scale = Math.min(1, maxEdge / Math.max(img.width, img.height));
-    const canvas = document.createElement("canvas");
-    canvas.width = Math.round(img.width * scale);
-    canvas.height = Math.round(img.height * scale);
-    canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
     URL.revokeObjectURL(img.src);
-    cb(canvas.toDataURL("image/jpeg", 0.82));
+    let dataUrl = drawScaled(img, 900, 0.78);
+    if (dataUrl.length > 700000) dataUrl = drawScaled(img, 600, 0.6);
+    cb(dataUrl);
   };
   img.onerror = () => {
     URL.revokeObjectURL(img.src);
@@ -269,11 +344,20 @@ function resizePhoto(file, maxEdge, cb) {
   img.src = URL.createObjectURL(file);
 }
 
+function drawScaled(img, maxEdge, quality) {
+  const scale = Math.min(1, maxEdge / Math.max(img.width, img.height));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.round(img.width * scale);
+  canvas.height = Math.round(img.height * scale);
+  canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+  return canvas.toDataURL("image/jpeg", quality);
+}
+
 function removePhoto(idx) {
-  delete photos[RECIPES[idx]._id];
-  store.save("cookbook_photos", photos);
+  const id = RECIPES[idx]._id;
+  persistOverride(id, { photo: null });
   render();
-  openModal(idx);
+  reopenById(id);
 }
 
 function closeModal() {
@@ -311,15 +395,20 @@ modalBody.addEventListener("click", e => {
   const launch = e.target.closest(".cook-launch[data-cook]");
   if (launch) { openCookMode(Number(launch.dataset.cook)); return; }
   const edit = e.target.closest("[data-edit]");
-  if (edit) { renderEditForm(Number(edit.dataset.edit)); return; }
+  if (edit) { ensureUnlocked().then(ok => ok && renderEditForm(Number(edit.dataset.edit))); return; }
   const cancel = e.target.closest("[data-cancel]");
   if (cancel) { openModal(Number(cancel.dataset.cancel)); return; }
   const photoBtn = e.target.closest("[data-photo]");
-  if (photoBtn) { photoIdx = Number(photoBtn.dataset.photo); photoInput.click(); return; }
+  if (photoBtn) {
+    ensureUnlocked().then(ok => {
+      if (ok) { photoIdx = Number(photoBtn.dataset.photo); photoInput.click(); }
+    });
+    return;
+  }
   const rmPhoto = e.target.closest("[data-removephoto]");
-  if (rmPhoto) { removePhoto(Number(rmPhoto.dataset.removephoto)); return; }
+  if (rmPhoto) { ensureUnlocked().then(ok => ok && removePhoto(Number(rmPhoto.dataset.removephoto))); return; }
   const del = e.target.closest("[data-delete]");
-  if (del) { deleteRecipe(Number(del.dataset.delete)); return; }
+  if (del) { ensureUnlocked().then(ok => ok && deleteRecipe(Number(del.dataset.delete))); return; }
   const item = e.target.closest(".check-item");
   if (item) item.classList.toggle("checked");
 });
@@ -334,8 +423,7 @@ modalBody.addEventListener("submit", e => {
 // "restore N deleted" link in the results bar brings hidden recipes back.
 resultsCount.addEventListener("click", e => {
   if (!e.target.closest(".restore-link")) return;
-  store.save("cookbook_deleted", []);
-  location.reload();
+  ensureUnlocked().then(ok => ok && restoreAllDeleted());
 });
 
 backdrop.addEventListener("click", e => {
