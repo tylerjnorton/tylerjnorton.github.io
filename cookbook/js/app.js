@@ -6,11 +6,12 @@ const resultsCount = document.getElementById("resultsCount");
 const backdrop = document.getElementById("backdrop");
 const modalBody = document.getElementById("modalBody");
 
-/* ── Shared changes layer ──
-   Edits, deletions and photos are stored as per-recipe "overrides" on top of
-   the built-in recipes (which are never modified). When Firebase is configured
-   in js/firebase-config.js they live in Firestore and sync to everyone, live.
-   Until then they fall back to this browser's localStorage. */
+/* ── Recipe store ──
+   The single source of truth is the Firestore "recipes" collection: every
+   recipe lives there in full and is editable by the family, syncing live to
+   everyone. js/recipes.js is only the seed — it's loaded into Firestore once,
+   automatically, the first time the app sees an empty collection — and the
+   offline fallback. Without Firebase, changes save per-browser instead. */
 const store = {
   load(key, fallback) {
     try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
@@ -19,10 +20,12 @@ const store = {
   save(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
 };
 
-// Stable id = the recipe's original (pre-edit) title.
-const ORIGINALS = RECIPES.map(r => ({ ...r, _id: r.title }));
-const photos = {};   // id -> photo data URL, derived from overrides
-let overrides = {};  // id -> { edit?, deleted?, photo? }
+// Seed copies of the built-in recipes. _id (the original title) is the
+// permanent key; `order` preserves the cookbook's ordering.
+const BUILTINS = RECIPES.map((r, i) => ({ ...r, _id: r.title, order: i }));
+const photos = {};   // id -> photo data URL, derived from recipe data
+let overrides = {};  // local-fallback mode only: id -> changed fields
+let docs = null;     // Firestore mode: latest snapshot of all recipe docs
 
 let db = null;
 if (window.CB_FIREBASE_CONFIG && window.firebase) {
@@ -32,49 +35,73 @@ if (window.CB_FIREBASE_CONFIG && window.firebase) {
   } catch (_) { db = null; }
 }
 
-const deletedIds = () => Object.keys(overrides).filter(id => overrides[id].deleted);
+const deletedIds = () => db
+  ? (docs || []).filter(d => d.deleted).map(d => d._id)
+  : Object.keys(overrides).filter(id => overrides[id].deleted);
 
-// Rebuild the visible recipe list from the originals + current overrides.
-function applyOverrides() {
+// Rebuild the visible recipe list from the current source of truth.
+function rebuild() {
   Object.keys(photos).forEach(k => delete photos[k]);
-  const list = [];
-  for (const o of ORIGINALS) {
-    const ov = overrides[o._id];
-    if (ov && ov.deleted) continue;
-    list.push(ov && ov.edit ? { ...o, ...ov.edit } : o);
-    if (ov && ov.photo) photos[o._id] = ov.photo;
-  }
+  const list = (db && docs)
+    ? docs.filter(d => !d.deleted).sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999))
+    : BUILTINS.map(b => ({ ...b, ...overrides[b._id] })).filter(r => !r.deleted);
+  for (const r of list) if (r.photo) photos[r._id] = r.photo;
   RECIPES.length = 0;
   RECIPES.push(...list);
 }
 
-// Save one recipe's override patch — to Firestore for everyone when
+// Firestore rejects undefined values; _id is local-only (it's the doc id).
+function toDoc(r) {
+  const d = { ...r };
+  delete d._id;
+  Object.keys(d).forEach(k => { if (d[k] === undefined) delete d[k]; });
+  return d;
+}
+
+// One-time migration: copy every built-in recipe into Firestore.
+let seedTried = false;
+function seedRecipes() {
+  if (seedTried) return;
+  seedTried = true;
+  const batch = db.batch();
+  BUILTINS.forEach(b => batch.set(db.collection("recipes").doc(encodeURIComponent(b._id)), toDoc(b)));
+  batch.commit().catch(err =>
+    alert("Couldn't load the starter recipes into the shared cookbook:\n\n" + err.message));
+}
+
+// Save changed fields on one recipe — to Firestore for everyone when
 // configured, otherwise to this browser's localStorage.
-function persistOverride(id, patch) {
-  overrides[id] = { ...overrides[id], ...patch };
+function persistChange(id, patch) {
   if (db) {
-    db.collection("overrides").doc(encodeURIComponent(id)).set(patch, { merge: true })
+    db.collection("recipes").doc(encodeURIComponent(id)).set(patch, { merge: true })
       .catch(err => alert("Couldn't reach the shared cookbook — this change may not have saved for everyone.\n\n" + err.message));
+    const d = (docs || []).find(x => x._id === id);
+    if (d) Object.assign(d, patch); // optimistic; the snapshot confirms it
   } else {
+    overrides[id] = { ...overrides[id], ...patch };
     try { store.save("cookbook_overrides", overrides); }
     catch (_) { alert("This browser's storage is full — the change couldn't be saved. Try removing a photo first."); }
   }
-  applyOverrides();
+  rebuild();
 }
 
-applyOverrides();
+rebuild();
 if (db) {
-  // Live sync: the first snapshot loads shared state; later ones apply
-  // everyone else's changes as they happen.
-  db.collection("overrides").onSnapshot(snap => {
-    overrides = {};
-    snap.forEach(d => { overrides[decodeURIComponent(d.id)] = d.data(); });
-    applyOverrides();
+  // Live sync: the first snapshot loads the shared cookbook (seeding it if
+  // empty); later ones apply everyone's changes as they happen.
+  db.collection("recipes").onSnapshot(snap => {
+    if (snap.empty) {
+      if (!snap.metadata.fromCache) seedRecipes();
+      return;
+    }
+    docs = [];
+    snap.forEach(d => docs.push({ ...d.data(), _id: decodeURIComponent(d.id) }));
+    rebuild();
     render();
   }, () => { /* offline or misconfigured — built-in recipes still work */ });
 } else {
   overrides = store.load("cookbook_overrides", {});
-  applyOverrides();
+  rebuild();
 }
 
 /* ── Family passcode: asked once per browser before changing shared data ── */
@@ -281,7 +308,7 @@ function saveEdit(idx, form) {
   };
   // A hand-typed time/serving is no longer an estimate, so drop its ~ marker.
   updated.guesses = (r.guesses || []).filter(f => updated[f] === r[f]);
-  persistOverride(r._id, { edit: updated });
+  persistChange(r._id, updated);
   render();
   reopenById(r._id);
 }
@@ -297,13 +324,13 @@ function deleteRecipe(idx) {
   const where = db ? "for everyone" : "on this device";
   const sure = confirm(`Delete “${r.title}” ${where}?\n\nYou can bring it back with the “restore deleted” link above the recipe grid.`);
   if (!sure) return;
-  persistOverride(r._id, { deleted: true });
+  persistChange(r._id, { deleted: true });
   closeModal();
   render();
 }
 
 function restoreAllDeleted() {
-  deletedIds().forEach(id => persistOverride(id, { deleted: false }));
+  deletedIds().forEach(id => persistChange(id, { deleted: false }));
   render();
 }
 
@@ -321,7 +348,7 @@ photoInput.addEventListener("change", () => {
   if (!id) return;
   resizePhoto(file, dataUrl => {
     photoInput.value = "";
-    persistOverride(id, { photo: dataUrl });
+    persistChange(id, { photo: dataUrl });
     render();
     reopenById(id);
   });
@@ -355,7 +382,7 @@ function drawScaled(img, maxEdge, quality) {
 
 function removePhoto(idx) {
   const id = RECIPES[idx]._id;
-  persistOverride(id, { photo: null });
+  persistChange(id, { photo: null });
   render();
   reopenById(id);
 }
