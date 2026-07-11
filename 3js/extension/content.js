@@ -1,427 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Scores</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bl-height: 80px;
-  }
-
-  * { box-sizing: border-box; }
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background: #0a0a0a;
-    overflow: hidden;
-  }
-
-  body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-
-  /* ---------- Browser ---------- */
-
-  .browser-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0 12px;
-    background: #111;
-    border-bottom: 2px solid #e2231a;
-    z-index: 9998;
-    font-family: "Oswald", Arial, sans-serif;
-  }
-
-  .browser-url {
-    flex: 1 1 auto;
-    height: 34px;
-    padding: 0 14px;
-    border-radius: 17px;
-    border: none;
-    outline: none;
-    background: #222;
-    color: #fff;
-    font-family: "Oswald", Arial, sans-serif;
-    font-size: 15px;
-  }
-
-  .browser-url::placeholder {
-    color: #777;
-  }
-
-  .browser-go {
-    flex: 0 0 auto;
-    height: 34px;
-    padding: 0 20px;
-    border-radius: 17px;
-    border: none;
-    background: #e2231a;
-    color: #fff;
-    font-family: "Oswald", Arial, sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-
-  .browser-go:hover {
-    background: #c81d14;
-  }
-
-  .browser-note {
-    flex: 0 0 auto;
-    color: #666;
-    font-size: 12px;
-    font-style: italic;
-    max-width: 220px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .browser-frame {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: #000;
-  }
-
-  /* ---------- Bottom Line ---------- */
-
-  .bottomline {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: var(--bl-height);
-    display: flex;
-    align-items: stretch;
-    background: #000;
-    border-top: 2px solid #e2231a;
-    z-index: 9999;
-    font-family: "Oswald", "Arial Narrow", Arial, sans-serif;
-    transform-origin: left bottom;
-  }
-
-  .bl-badge {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: stretch;
-    z-index: 2;
-  }
-
-  .bl-espn-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 150px;
-    padding: 0 20px 0 18px;
-    background: #e2231a;
-    transform: skewX(-12deg);
-    margin-left: -10px;
-  }
-
-  .bl-espn-box span {
-    display: inline-block;
-    transform: skewX(12deg);
-    font-family: "Oswald", "Arial Narrow", Arial, sans-serif;
-    font-weight: 700;
-    font-style: italic;
-    color: #fff;
-    font-size: 22px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .bl-stage {
-    flex: 1 1 auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 32px;
-    background: #000;
-    overflow: hidden;
-  }
-
-  .bl-card {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-  }
-
-  .bl-scoreline,
-  .bl-detail-slot {
-    display: inline-flex;
-    align-items: baseline;
-    white-space: nowrap;
-  }
-
-  .slide-out {
-    animation: bl-slide-out 0.4s cubic-bezier(0.5, 0, 1, 0.5) forwards;
-  }
-
-  .slide-in {
-    animation: bl-slide-in 0.4s cubic-bezier(0, 0.5, 0.5, 1) forwards;
-  }
-
-  @keyframes bl-slide-out {
-    from { transform: translateY(0);      opacity: 1; }
-    to   { transform: translateY(-30px);  opacity: 0; }
-  }
-
-  @keyframes bl-slide-in {
-    from { transform: translateY(30px); opacity: 0; }
-    to   { transform: translateY(0);    opacity: 1; }
-  }
-
-  .bl-team {
-    color: #fff;
-    font-weight: 500;
-    font-size: 34px;
-    letter-spacing: 0.2px;
-    text-transform: uppercase;
-  }
-
-  .bl-team.winner {
-    color: #fff;
-    font-weight: 600;
-  }
-
-  .bl-score {
-    color: #c9a961;
-    font-weight: 600;
-    font-size: 34px;
-    font-variant-numeric: tabular-nums;
-    margin: 0 14px 0 6px;
-  }
-
-  .bl-score.winner {
-    color: #c9a961;
-  }
-
-  .bl-at {
-    color: #4a4a4a;
-    font-weight: 400;
-    font-size: 22px;
-    margin: 0 14px;
-  }
-
-  .bl-status {
-    margin-left: 18px;
-    color: #c9a961;
-    font-size: 34px;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-  }
-
-  .bl-status.live {
-    color: #ff4136;
-  }
-
-  .bl-status--rank {
-    margin-left: 0;
-    margin-right: 16px;
-  }
-
-  .bl-detail {
-    display: inline-block;
-    margin-left: 18px;
-    padding-left: 18px;
-    border-left: 1px solid #333;
-    color: #aaa;
-    font-size: 34px;
-    font-weight: 400;
-    letter-spacing: 0.2px;
-  }
-
-  .bl-empty {
-    color: #666;
-    font-size: 16px;
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: 0.2px;
-  }
-
-  .bl-headline {
-    color: #f5f5f5;
-    font-weight: 500;
-    font-size: 24px;
-    letter-spacing: 0.1px;
-    white-space: normal;
-    line-height: 1.2;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    flex: 0 1 auto;
-    min-width: 0;
-    max-width: 62vw;
-    margin-right: 18px;
-  }
-
-  .bl-card.bl-card--headline {
-    align-items: center;
-  }
-
-  .bl-bumper {
-    position: absolute;
-    inset: 0;
-    width: 0;
-    overflow: hidden;
-    background: #e2231a;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: skewX(-12deg);
-    transform-origin: left center;
-    transition: width 0.45s ease-in-out;
-  }
-
-  .bl-bumper.active {
-    width: 100%;
-  }
-
-  .bl-bumper-list {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 44px;
-    transform: skewX(12deg);
-    white-space: nowrap;
-  }
-
-  .bl-bumper-list span {
-    display: inline-block;
-    color: #fff;
-    font-weight: 700;
-    font-style: italic;
-    font-size: 32px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .bl-toggle {
-    position: fixed;
-    right: 0;
-    bottom: 70px;
-    width: 10px;
-    height: 10px;
-    background: #e2231a;
-    cursor: pointer;
-    z-index: 10000;
-  }
-
-  .bl-toggle--off {
-    background: #444;
-  }
-</style>
-</head>
-<body>
-
-<div class="browser-bar">
-  <input type="text" id="browserUrl" class="browser-url" placeholder="Search or enter address" autocomplete="off">
-  <button type="button" id="browserGo" class="browser-go">Go</button>
-  <span class="browser-note">Some sites block embedding</span>
-</div>
-<iframe id="browserFrame" class="browser-frame" title="Browser"></iframe>
-
-<script>
 (function () {
-  var input = document.getElementById('browserUrl');
-  var goBtn = document.getElementById('browserGo');
-  var frame = document.getElementById('browserFrame');
+  'use strict';
 
-  function normalizeUrl(raw) {
-    var value = raw.trim();
-    if (!value) return null;
-    if (/^https?:\/\//i.test(value)) return value;
-    var looksLikeDomain = /^[^\s]+\.[a-z]{2,}([/?#].*)?$/i.test(value);
-    if (looksLikeDomain) return 'https://' + value;
-    return 'https://www.google.com/search?q=' + encodeURIComponent(value);
-  }
+  if (window.top !== window.self) return; // only overlay the top-level page, not nested iframes
+  if (document.getElementById('espn-bottomline-host')) return; // avoid double-injection
 
-  function go() {
-    var url = normalizeUrl(input.value);
-    if (!url) return;
-    input.value = url;
-    frame.src = url;
-  }
-
-  goBtn.addEventListener('click', go);
-  input.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') go();
-  });
-})();
-</script>
-
-<div class="bottomline" id="bottomline">
-  <div class="bl-badge">
-    <div class="bl-espn-box"><span id="blBadgeText">ESPN</span></div>
-  </div>
-  <div class="bl-stage">
-    <div class="bl-card" id="blCard">
-      <span class="bl-scoreline" id="blScoreLine">
-        <span class="bl-empty">Loading scores &amp; headlines&hellip;</span>
-      </span>
-      <span class="bl-detail-slot" id="blDetailSlot"></span>
-    </div>
-  </div>
-  <div class="bl-bumper" id="blBumper">
-    <div class="bl-bumper-list" id="blBumperList"></div>
-  </div>
-</div>
-<div class="bl-toggle" id="blToggle" title="Show/hide ticker"></div>
-
-<script>
-(function () {
-  // Tiny show/hide switch pinned to the bottom-right corner. Hides the ticker bar but stays
-  // visible itself so it can bring the bar back. State survives reloads via localStorage.
-  var toggle = document.getElementById('blToggle');
-  var bar = document.getElementById('bottomline');
-
-  function setHidden(hidden) {
-    bar.style.display = hidden ? 'none' : 'flex';
-    toggle.classList.toggle('bl-toggle--off', hidden);
-    try { localStorage.setItem('blHidden', hidden ? '1' : '0'); } catch (e) {}
-  }
-
-  toggle.addEventListener('click', function () {
-    setHidden(bar.style.display !== 'none');
-  });
-
-  try {
-    if (localStorage.getItem('blHidden') === '1') setHidden(true);
-  } catch (e) {}
-})();
-</script>
-
-<script>
-(function () {
   var LEAGUES = [
     { label: 'MLB',   path: 'baseball/mlb',                         sport: 'baseball' },
     { label: 'CBB',   path: 'baseball/college-baseball',             sport: 'baseball' },
@@ -438,34 +20,13 @@
     { label: 'FTSY',  path: null,                                    sport: 'fantasy' }
   ];
 
-  var FANTASY_LEAGUE_ID = 'atrubo6smgi02v9p';
-  var FANTASY_URL = 'https://www.fantrax.com/fxea/general/getStandings?leagueId=' + FANTASY_LEAGUE_ID;
-
-  // Shuffled once per page load so the rotation groups leagues in a different order each time.
-  for (var si = LEAGUES.length - 1; si > 0; si--) {
-    var sj = Math.floor(Math.random() * (si + 1));
-    var tmp = LEAGUES[si];
-    LEAGUES[si] = LEAGUES[sj];
-    LEAGUES[sj] = tmp;
-  }
-
   var DETAIL_MS = 4000;
   var SCORES_REFRESH_MS = 90 * 1000;
-  var NEWS_REFRESH_MS = 10 * 60 * 1000;
+  var NEWS_REFRESH_MS = 20 * 60 * 1000; // NewsAPI free tier is capped at 100 req/day
   var FLIP_ANIM_MS = 400;
 
   var BUMPER_EXPAND_MS = 450;
   var BUMPER_HOLD_MS = 1800; // how long the full list of leagues sits on screen before collapsing
-
-  // Headlines come from ESPN's per-league news endpoints. Only these four categories are shown.
-  // Soccer aggregates a few major competitions so it isn't just one league.
-  var NEWS_SOURCES = [
-    { label: 'SOCCER', paths: ['soccer/eng.1', 'soccer/fifa.world', 'soccer/usa.1'] },
-    { label: 'NBA',    paths: ['basketball/nba'] },
-    { label: 'NFL',    paths: ['football/nfl'] },
-    { label: 'MLB',    paths: ['baseball/mlb'] }
-  ];
-  var NEWS_PER_SOURCE = 6;
 
   var gameList = [];
   var headlineList = [];
@@ -473,58 +34,247 @@
   var currentIndex = 0;
   var currentBadgeLeague = null;
 
-  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  // ---------- Cross-navigation persistence ----------
+  // Content scripts are re-injected fresh on every page load, which would otherwise mean the
+  // ticker restarts (re-fetches, re-plays the intro bumper) every time you click a link. Instead
+  // we mirror the rotation position and cached data into chrome.storage.session, which survives
+  // across page loads for the life of the browsing session, and resume from it on injection.
+  var STORAGE_KEY = 'bottomlineState';
+  var persisted = {};
 
-  function ymd(date) {
-    return '' + date.getFullYear() + pad(date.getMonth() + 1) + pad(date.getDate());
+  function persistState(patch) {
+    for (var k in patch) { if (patch.hasOwnProperty(k)) persisted[k] = patch[k]; }
+    try {
+      var obj = {};
+      obj[STORAGE_KEY] = persisted;
+      chrome.storage.session.set(obj);
+    } catch (e) {}
   }
 
-  // Yesterday's results stay in the rotation until 5pm local time the next day, then drop off.
-  function scoresDateParam() {
-    var now = new Date();
-    var today = ymd(now);
-    if (now.getHours() >= 17) return today;
-
-    var yesterday = new Date(now);
-    yesterday.setDate(now.getDate() - 1);
-    return ymd(yesterday) + '-' + today;
+  function persistPosition() {
+    persistState({
+      currentIndex: currentIndex,
+      currentDetailIndex: currentDetailIndex,
+      lastGameLeague: lastGameLeague,
+      currentBadgeLeague: currentBadgeLeague,
+      introPlayed: introPlayed
+    });
   }
 
-  function escapeHtml(str) {
-    var div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
+  // ---------- Shadow DOM setup so host-page CSS can't bleed in (or our CSS bleed out) ----------
+
+  var fontLink = document.createElement('link');
+  fontLink.rel = 'stylesheet';
+  fontLink.href = 'https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap';
+  document.head.appendChild(fontLink);
+
+  var host = document.createElement('div');
+  host.id = 'espn-bottomline-host';
+  document.documentElement.appendChild(host);
+
+  var shadow = host.attachShadow({ mode: 'open' });
+
+  var styleEl = document.createElement('style');
+  styleEl.textContent = [
+    ':host {',
+    '  all: initial;',
+    '  position: fixed !important;',
+    '  left: 0;',
+    '  right: 0;',
+    '  bottom: 0;',
+    '  z-index: 2147483647;',
+    '  display: block;',
+    '  transform-origin: left bottom;',
+    '}',
+    '* { box-sizing: border-box; }',
+    ':host, .bottomline { font-family: "Oswald", "Arial Narrow", Arial, sans-serif; }',
+
+    '.bottomline {',
+    '  display: flex;',
+    '  align-items: stretch;',
+    '  height: 80px;',
+    '  background: #000;',
+    '  border-top: 2px solid #e2231a;',
+    '  box-shadow: 0 -4px 16px rgba(0,0,0,0.5);',
+    '}',
+
+    '.bl-badge { flex: 0 0 auto; display: flex; align-items: stretch; z-index: 2; }',
+
+    '.bl-espn-box {',
+    '  display: flex; align-items: center; justify-content: center;',
+    '  min-width: 150px; padding: 0 20px 0 18px;',
+    '  background: #e2231a; transform: skewX(-12deg); margin-left: -10px;',
+    '}',
+    '.bl-espn-box span {',
+    '  display: inline-block; transform: skewX(12deg);',
+    '  font-weight: 700; font-style: italic; color: #fff; font-size: 22px;',
+    '  letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap;',
+    '}',
+
+    '.bl-stage {',
+    '  flex: 1 1 auto; height: 100%; display: flex; align-items: center;',
+    '  justify-content: flex-start; padding-left: 32px; background: #000; overflow: hidden;',
+    '}',
+
+    '.bl-card { display: flex; align-items: baseline; flex-wrap: nowrap; white-space: nowrap; }',
+    '.bl-scoreline, .bl-detail-slot { display: inline-flex; align-items: baseline; white-space: nowrap; }',
+
+    '.slide-out { animation: bl-slide-out 0.4s cubic-bezier(0.5,0,1,0.5) forwards; }',
+    '.slide-in { animation: bl-slide-in 0.4s cubic-bezier(0,0.5,0.5,1) forwards; }',
+    '@keyframes bl-slide-out { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-30px); opacity: 0; } }',
+    '@keyframes bl-slide-in { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }',
+
+    '.bl-team { color: #fff; font-weight: 500; font-size: 34px; letter-spacing: 0.2px; text-transform: uppercase; }',
+    '.bl-team.winner { color: #fff; font-weight: 600; }',
+    '.bl-score { color: #c9a961; font-weight: 600; font-size: 34px; font-variant-numeric: tabular-nums; margin: 0 14px 0 6px; }',
+    '.bl-score.winner { color: #c9a961; }',
+    '.bl-at { color: #4a4a4a; font-weight: 400; font-size: 22px; margin: 0 14px; }',
+    '.bl-status { margin-left: 18px; color: #c9a961; font-size: 34px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; }',
+    '.bl-status.live { color: #ff4136; }',
+    '.bl-status--rank { margin-left: 0; margin-right: 16px; }',
+    '.bl-detail { display: inline-block; margin-left: 18px; padding-left: 18px; border-left: 1px solid #333; color: #aaa; font-size: 34px; font-weight: 400; letter-spacing: 0.2px; }',
+    '.bl-empty { color: #666; font-size: 16px; font-weight: 400; font-style: italic; letter-spacing: 0.2px; }',
+
+    '.bl-headline {',
+    '  color: #f5f5f5; font-weight: 500; font-size: 24px; letter-spacing: 0.1px;',
+    '  white-space: normal; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2;',
+    '  -webkit-box-orient: vertical; overflow: hidden; flex: 0 1 auto; min-width: 0;',
+    '  max-width: 62vw; margin-right: 18px;',
+    '}',
+    '.bl-card.bl-card--headline { align-items: center; }',
+
+    '.bl-bumper {',
+    '  position: absolute; inset: 0; width: 0; overflow: hidden; background: #e2231a;',
+    '  z-index: 10; display: flex; align-items: center; justify-content: center;',
+    '  transform: skewX(-12deg); transform-origin: left center; transition: width 0.45s ease-in-out;',
+    '}',
+    '.bl-bumper.active { width: 100%; }',
+    '.bl-bumper-list { display: flex; align-items: center; justify-content: center; gap: 44px; transform: skewX(12deg); white-space: nowrap; }',
+    '.bl-bumper-list span { display: inline-block; color: #fff; font-weight: 700; font-style: italic; font-size: 32px; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }',
+
+    '.bl-toggle { position: absolute; right: 0; top: 0; width: 10px; height: 10px; background: #e2231a; cursor: pointer; z-index: 20; }',
+    '.bl-toggle--off { background: #444; }'
+  ].join('\n');
+  shadow.appendChild(styleEl);
+
+  var wrapper = document.createElement('div');
+  wrapper.innerHTML =
+    '<div class="bottomline" id="blBar">' +
+      '<div class="bl-badge">' +
+        '<div class="bl-espn-box"><span id="blBadgeText">ESPN</span></div>' +
+      '</div>' +
+      '<div class="bl-stage">' +
+        '<div class="bl-card" id="blCard">' +
+          '<span class="bl-scoreline" id="blScoreLine"><span class="bl-empty">Loading scores &amp; headlines&hellip;</span></span>' +
+          '<span class="bl-detail-slot" id="blDetailSlot"></span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="bl-bumper" id="blBumper">' +
+        '<div class="bl-bumper-list" id="blBumperList"></div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="bl-toggle" id="blToggle" title="Show/hide ticker"></div>';
+  shadow.appendChild(wrapper);
+
+  function $(id) { return shadow.getElementById(id); }
+
+  // Tiny show/hide switch pinned to the bottom-right corner. Hides the ticker bar but stays
+  // visible itself so it can bring the bar back. State survives navigations with the rest of
+  // the persisted rotation state.
+  function setBarHidden(hidden) {
+    $('blBar').style.display = hidden ? 'none' : 'flex';
+    $('blToggle').classList.toggle('bl-toggle--off', hidden);
+  }
+
+  $('blToggle').addEventListener('click', function () {
+    var hidden = $('blBar').style.display !== 'none';
+    setBarHidden(hidden);
+    persistState({ hidden: hidden });
+  });
+
+  // Browser zoom scales every CSS px uniformly, which would otherwise make the bar grow or
+  // shrink as the user zooms whatever page it's overlaid on. Lock it to its true default size,
+  // anchored to the bottom-left corner where the bar is pinned.
+  (function () {
+    var scale = 1;
+    var zoomKnown = false; // true once chrome.tabs.getZoom has given us a real answer
+
+    function applyScale() {
+      host.style.transform = 'scale(' + scale + ')';
+      if (window.innerWidth) {
+        host.style.right = 'auto';
+        host.style.width = (window.innerWidth / scale) + 'px';
+      }
+    }
+
+    function setZoomFactor(zoomFactor) {
+      if (!zoomFactor || zoomFactor <= 0) return;
+      zoomKnown = true;
+      scale = 1 / zoomFactor;
+      applyScale();
+    }
+
+    // chrome.tabs.getZoom reports this tab's actual current zoom percentage directly from
+    // Chrome -- accurate even if the page was already zoomed before this script ever ran,
+    // unlike inferring it from devicePixelRatio (which only reveals *changes* relative to
+    // whatever zoom happened to be active at injection time).
+    sendMessage({ type: 'GET_ZOOM' }).then(function (res) {
+      if (res && res.ok) setZoomFactor(res.zoomFactor);
+    });
+
+    try {
+      chrome.runtime.onMessage.addListener(function (msg) {
+        if (msg && msg.type === 'ZOOM_CHANGED') setZoomFactor(msg.zoomFactor);
+      });
+    } catch (e) {}
+
+    // Fallback in case messaging never resolves: less precise (relative to load time only),
+    // but better than nothing. Backs off permanently once real zoom data arrives.
+    var baseDPR = window.devicePixelRatio || 1;
+    window.addEventListener('resize', function () {
+      if (zoomKnown) return;
+      scale = baseDPR / (window.devicePixelRatio || 1);
+      applyScale();
+    });
+  })();
+
+  // ---------- Data fetching (via the background service worker, immune to page CSPs) ----------
+
+  function sendMessage(msg) {
+    return new Promise(function (resolve) {
+      try {
+        chrome.runtime.sendMessage(msg, function (res) {
+          if (chrome.runtime.lastError) { resolve(null); return; }
+          resolve(res || null);
+        });
+      } catch (e) {
+        resolve(null);
+      }
+    });
   }
 
   function fetchLeague(league) {
     if (league.sport === 'fantasy') return fetchFantasyLeague(league);
-
-    var url = 'https://site.api.espn.com/apis/site/v2/sports/' + league.path +
-      '/scoreboard?dates=' + scoresDateParam();
-    return fetch(url)
-      .then(function (res) { return res.ok ? res.json() : { events: [] }; })
-      .then(function (data) {
-        return (data.events || []).map(function (ev) {
-          return { kind: 'game', league: league, event: ev };
-        });
-      })
-      .catch(function () { return []; });
+    return sendMessage({ type: 'FETCH_LEAGUE', path: league.path }).then(function (res) {
+      if (!res || !res.ok) return [];
+      return (res.events || []).map(function (ev) {
+        return { kind: 'game', league: league, event: ev };
+      });
+    });
   }
 
   // Fantrax "team roto" league where every fantasy team IS a real MLB team's aggregate stats.
   // Each standings row becomes its own entry so the rotation scrolls through the full table.
   function fetchFantasyLeague(league) {
-    return fetch(FANTASY_URL)
-      .then(function (res) { return res.ok ? res.json() : []; })
-      .then(function (data) {
-        return (data || [])
-          .slice()
-          .sort(function (a, b) { return a.rank - b.rank; })
-          .map(function (team) {
-            return { kind: 'game', league: league, fantasy: team };
-          });
-      })
-      .catch(function () { return []; });
+    return sendMessage({ type: 'FETCH_FANTASY' }).then(function (res) {
+      if (!res || !res.ok) return [];
+      return (res.teams || [])
+        .slice()
+        .sort(function (a, b) { return a.rank - b.rank; })
+        .map(function (team) {
+          return { kind: 'game', league: league, fantasy: team };
+        });
+    });
   }
 
   function ordinalSuffix(n) {
@@ -538,40 +288,17 @@
     }
   }
 
-  function fetchNewsPath(path) {
-    return fetch('https://site.api.espn.com/apis/site/v2/sports/' + path + '/news')
-      .then(function (res) { return res.ok ? res.json() : { articles: [] }; })
-      .then(function (data) { return data.articles || []; })
-      .catch(function () { return []; });
-  }
-
-  // For one category (which may span several leagues), interleave the leagues' articles for
-  // variety, dedup by headline, and cap the total so no one category floods the rotation.
-  function collectSourceHeadlines(src) {
-    return Promise.all(src.paths.map(fetchNewsPath)).then(function (lists) {
-      var maxLen = 0;
-      lists.forEach(function (l) { maxLen = Math.max(maxLen, l.length); });
-
-      var out = [];
-      var seen = {};
-      for (var i = 0; i < maxLen && out.length < NEWS_PER_SOURCE; i++) {
-        for (var j = 0; j < lists.length && out.length < NEWS_PER_SOURCE; j++) {
-          var art = lists[j][i];
-          if (!art) continue;
-          var text = (art.headline || '').trim();
-          if (!text || seen[text]) continue;
-          seen[text] = true;
-          out.push({ kind: 'headline', source: src.label, text: text });
-        }
-      }
-      return out;
-    });
-  }
-
+  // Headlines are aggregated ESPN news (soccer/nba/nfl/mlb only), assembled in the background
+  // service worker; each item is already { source: <category label>, text: <headline> }.
   function fetchHeadlines() {
-    return Promise.all(NEWS_SOURCES.map(collectSourceHeadlines))
-      .then(function (perSource) { return [].concat.apply([], perSource); })
-      .catch(function () { return []; });
+    return sendMessage({ type: 'FETCH_HEADLINES' }).then(function (res) {
+      if (!res || !res.ok) return [];
+      return (res.headlines || [])
+        .map(function (h) {
+          return { kind: 'headline', source: h.source || 'NEWS', text: h.text };
+        })
+        .filter(function (h) { return h.text; });
+    });
   }
 
   function findSide(competitors, side) {
@@ -584,6 +311,12 @@
   function localTime(isoDate) {
     var d = new Date(isoDate);
     return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
   }
 
   function shortName(athlete) {
@@ -606,9 +339,6 @@
   }
 
   // ---------- Lazy per-game summary fetch (win/loss/save pitchers, per-team NFL leaders) ----------
-  // The compact scoreboard payload doesn't carry these; only the box score summary endpoint does.
-  // Fetched on demand for whichever game is currently on screen (plus one game ahead), and cached
-  // by event id so the periodic score refresh doesn't re-fetch games we already have.
 
   var summaryCache = {};
 
@@ -638,22 +368,13 @@
     if (cached && (cached.loading || cached.state === state)) return;
 
     summaryCache[key] = { loading: true, state: state, data: null };
-    var url = 'https://site.api.espn.com/apis/site/v2/sports/' + entry.league.path +
-      '/summary?event=' + entry.event.id;
-
-    fetch(url)
-      .then(function (res) { return res.ok ? res.json() : null; })
-      .then(function (data) {
-        summaryCache[key] = { loading: false, state: state, data: data };
-        onSummaryLoaded(entry);
-      })
-      .catch(function () {
-        summaryCache[key] = { loading: false, state: state, data: null };
-      });
+    sendMessage({ type: 'FETCH_SUMMARY', path: entry.league.path, eventId: entry.event.id }).then(function (res) {
+      var data = (res && res.ok) ? res.data : null;
+      summaryCache[key] = { loading: false, state: state, data: data };
+      onSummaryLoaded(entry);
+    });
   }
 
-  // If the game that just finished loading is still the one on screen, refresh its details
-  // in place so the richer facts (decisions, per-team leaders) appear without waiting.
   function onSummaryLoaded(entry) {
     var cur = entries[currentIndex];
     if (!cur || cur.kind !== 'game') return;
@@ -703,8 +424,6 @@
   }
 
   // ---------- Per-sport detail lists ----------
-  // Each returns an array of short fact strings the ticker cycles through, in order,
-  // while the score/matchup line above stays put.
 
   function baseballDetails(entry, comp) {
     var state = entry.event.status.type.state;
@@ -794,7 +513,6 @@
       if (results.length) return results;
     }
 
-    // Fallback while the per-team summary is still loading: one game-wide leader per category.
     var fallback = [];
     ['passingYards', 'rushingYards', 'receivingYards'].forEach(function (name) {
       var cat = (comp.leaders || []).filter(function (l) { return l.name === name; })[0];
@@ -906,7 +624,7 @@
   }
 
   function renderDetailSlot(text) {
-    var slot = document.getElementById('blDetailSlot');
+    var slot = $('blDetailSlot');
     slot.innerHTML = text ? '<span class="bl-detail">' + escapeHtml(text) + '</span>' : '';
   }
 
@@ -914,19 +632,18 @@
     var label = !entry ? 'ESPN' : (entry.kind === 'headline' ? 'NEWS' : entry.league.label);
     if (label === currentBadgeLeague) return;
     currentBadgeLeague = label;
-    document.getElementById('blBadgeText').textContent = label;
+    $('blBadgeText').textContent = label;
   }
 
-  // ---------- Playback: full-card transitions between games/headlines, and a lighter-weight
-  // transition on just the detail slot while flipping through facts within the same game. ----------
+  // ---------- Playback ----------
 
   var currentDetails = [];
   var currentDetailIndex = 0;
-  var lastGameLeague = null; // league of the last GAME shown, ignoring any headlines in between
+  var lastGameLeague = null;
 
-  function goToEntry(index) {
-    var card = document.getElementById('blCard');
-    var scoreLine = document.getElementById('blScoreLine');
+  function goToEntry(index, startDetailIndex) {
+    var card = $('blCard');
+    var scoreLine = $('blScoreLine');
     currentIndex = index;
     var entry = entries[currentIndex];
 
@@ -937,6 +654,7 @@
       currentDetailIndex = 0;
       card.classList.remove('bl-card--headline');
       updateBadge(null);
+      persistPosition();
       return;
     }
 
@@ -947,18 +665,20 @@
     updateBadge(entry);
 
     currentDetails = computeDetails(entry);
-    currentDetailIndex = 0;
-    renderDetailSlot(currentDetails[0]);
+    currentDetailIndex = Math.min(startDetailIndex || 0, Math.max(0, currentDetails.length - 1));
+    renderDetailSlot(currentDetails[currentDetailIndex]);
 
     ensureSummary(entry);
     var next = entries[(currentIndex + 1) % entries.length];
     if (next) ensureSummary(next);
+
+    persistPosition();
   }
 
   function animateToEntry(index) {
-    var card = document.getElementById('blCard');
+    var card = $('blCard');
     card.classList.remove('slide-in');
-    void card.offsetWidth; // restart animation
+    void card.offsetWidth;
     card.classList.add('slide-out');
 
     setTimeout(function () {
@@ -970,7 +690,7 @@
   }
 
   function animateDetailStep() {
-    var slot = document.getElementById('blDetailSlot');
+    var slot = $('blDetailSlot');
     slot.classList.remove('slide-in');
     void slot.offsetWidth;
     slot.classList.add('slide-out');
@@ -981,10 +701,10 @@
       slot.classList.remove('slide-out');
       void slot.offsetWidth;
       slot.classList.add('slide-in');
+      persistPosition();
     }, FLIP_ANIM_MS);
   }
 
-  // Distinct league labels that actually have a game today, in the (shuffled) LEAGUES order.
   function leaguesWithGames() {
     var seen = {};
     var result = [];
@@ -998,8 +718,6 @@
     return result;
   }
 
-  // Same list, rotated so the league we're about to reveal is first (leftmost), continuing
-  // through the rest of the rotation order and wrapping back around.
   function orderedLeagueNames(nextLabel) {
     var names = leaguesWithGames();
     var idx = names.indexOf(nextLabel);
@@ -1007,11 +725,6 @@
     return names.slice(idx).concat(names.slice(0, idx));
   }
 
-  // League-change bumper: the red badge expands to cover the whole bar, laying out every
-  // league that has games today in one horizontal row (next league leftmost, then the rest
-  // of the rotation order to its right), then shrinks back down — leftward, anchored at the
-  // left edge — to reveal the next league's score underneath. Also used as the very first
-  // thing shown on page load (isIntro), before any score appears.
   function playLeagueBumper(nextIndex, isIntro) {
     var next = entries[nextIndex];
     var nextLabel = next && next.kind === 'game' ? next.league.label : null;
@@ -1022,8 +735,8 @@
       return;
     }
 
-    var bumper = document.getElementById('blBumper');
-    var list = document.getElementById('blBumperList');
+    var bumper = $('blBumper');
+    var list = $('blBumperList');
     list.innerHTML = names.map(function (n) { return '<span>' + escapeHtml(n) + '</span>'; }).join('');
 
     bumper.classList.add('active');
@@ -1062,7 +775,6 @@
     return new Date(a.event.date) - new Date(b.event.date);
   }
 
-  // Weaves one headline in among every few games so news doesn't dominate the rotation.
   // Headlines only ever get inserted at a boundary between two different leagues -- never in
   // the middle of one league's own run (e.g. never partway through the FTSY standings).
   function buildPlaylist(games, headlines) {
@@ -1103,8 +815,6 @@
     entries = buildPlaylist(gameList, headlineList);
     if (currentIndex >= entries.length) currentIndex = 0;
 
-    // Hold on the loading state (rather than possibly flashing a headline first) until scores
-    // have arrived, so the league-cycle bumper is genuinely the first thing the viewer sees.
     if (!gameList.length) return;
 
     if (!introPlayed) {
@@ -1120,6 +830,7 @@
     Promise.all(LEAGUES.map(fetchLeague)).then(function (results) {
       gameList = [].concat.apply([], results);
       gameList.sort(sortEntries);
+      persistState({ gameList: gameList, gameListFetchedAt: Date.now() });
       rebuildPlaylist();
     });
   }
@@ -1127,39 +838,78 @@
   function loadHeadlines() {
     fetchHeadlines().then(function (results) {
       headlineList = results;
+      persistState({ headlineList: headlineList, headlineListFetchedAt: Date.now() });
       rebuildPlaylist();
     });
   }
 
-  loadScores();
-  loadHeadlines();
-  setInterval(loadScores, SCORES_REFRESH_MS);
-  setInterval(loadHeadlines, NEWS_REFRESH_MS);
-  setInterval(tick, DETAIL_MS);
-})();
-</script>
+  // Resume from where the last page left off (skipping the intro bumper and any refetch that
+  // isn't actually due yet) instead of restarting cold on every navigation.
+  function boot(saved) {
+    var now = Date.now();
 
-<script>
-(function () {
-  // Browser zoom scales every CSS px uniformly, which would otherwise make the bar grow or
-  // shrink as the user zooms. Lock it to whatever physical size it had when the page loaded by
-  // applying the inverse scale, anchored to the bottom-left corner where the bar is pinned.
-  var el = document.getElementById('bottomline');
-  var baseDPR = window.devicePixelRatio || 1;
-
-  function applyZoomLock() {
-    var scale = baseDPR / (window.devicePixelRatio || 1);
-    el.style.transform = 'scale(' + scale + ')';
-    if (window.innerWidth) {
-      el.style.right = 'auto';
-      el.style.width = (window.innerWidth / scale) + 'px';
+    if (saved && Array.isArray(saved.leagues) && saved.leagues.length === LEAGUES.length) {
+      LEAGUES = saved.leagues;
+    } else {
+      for (var si = LEAGUES.length - 1; si > 0; si--) {
+        var sj = Math.floor(Math.random() * (si + 1));
+        var tmp = LEAGUES[si];
+        LEAGUES[si] = LEAGUES[sj];
+        LEAGUES[sj] = tmp;
+      }
     }
+    persisted.leagues = LEAGUES;
+
+    var gamesFresh = !!(saved && Array.isArray(saved.gameList) && saved.gameListFetchedAt &&
+      (now - saved.gameListFetchedAt < SCORES_REFRESH_MS));
+    var headlinesFresh = !!(saved && Array.isArray(saved.headlineList) && saved.headlineListFetchedAt &&
+      (now - saved.headlineListFetchedAt < NEWS_REFRESH_MS));
+
+    if (saved && saved.introPlayed) {
+      introPlayed = true;
+      lastGameLeague = saved.lastGameLeague || null;
+    }
+
+    if (saved && saved.hidden) {
+      persisted.hidden = true;
+      setBarHidden(true);
+    }
+
+    if (gamesFresh) {
+      gameList = saved.gameList;
+      persisted.gameList = gameList;
+      persisted.gameListFetchedAt = saved.gameListFetchedAt;
+      if (headlinesFresh) {
+        headlineList = saved.headlineList;
+        persisted.headlineList = headlineList;
+        persisted.headlineListFetchedAt = saved.headlineListFetchedAt;
+      }
+    }
+
+    // Only skip straight to a resumed frame (no bumper, no "Loading...") if the intro already
+    // played in this session AND we have game data fresh enough to trust without refetching.
+    var resumed = gamesFresh && introPlayed;
+    if (resumed) {
+      entries = buildPlaylist(gameList, headlineList);
+      var resumeIndex = (saved && typeof saved.currentIndex === 'number') ? saved.currentIndex : 0;
+      if (resumeIndex >= entries.length) resumeIndex = 0;
+      goToEntry(resumeIndex, saved ? saved.currentDetailIndex : 0);
+    }
+
+    if (!resumed) loadScores();
+    if (!headlinesFresh) loadHeadlines();
+
+    setInterval(loadScores, SCORES_REFRESH_MS);
+    setInterval(loadHeadlines, NEWS_REFRESH_MS);
+    setInterval(tick, DETAIL_MS);
   }
 
-  applyZoomLock();
-  window.addEventListener('resize', applyZoomLock);
+  try {
+    chrome.storage.session.get([STORAGE_KEY], function (result) {
+      var saved = (!chrome.runtime.lastError && result) ? result[STORAGE_KEY] : null;
+      boot(saved || null);
+    });
+  } catch (e) {
+    boot(null);
+  }
 })();
-</script>
-
-</body>
-</html>

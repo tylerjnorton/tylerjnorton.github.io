@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "youthsports",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd '/private/tmp/claude-501/-Users-tylernorton-Documents-GitHub-tylerjnorton-github-io-youthsports/f5d1a9a1-1fb1-4659-a65a-eb2a5e829971/scratchpad/site' && python3 -m http.server \"$PORT\""],
+      "port": 4180,
+      "autoPort": true
+    }
+  ]
+}
