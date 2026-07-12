@@ -321,6 +321,7 @@ body {
 #section-12 { --overlay-h: 342; }
 #section-13 { --overlay-h: 18; }
 #section-14 { --overlay-h: 198; }
+#section-15 { --overlay-h: 240; }
 #section-2 .preview video,
 #section-3 .preview video,
 #section-4 .preview video,
@@ -333,7 +334,8 @@ body {
 #section-11 .preview video,
 #section-12 .preview video,
 #section-13 .preview video,
-#section-14 .preview video {
+#section-14 .preview video,
+#section-15 .preview video {
     width: 100%;
     height: auto;
     display: block;
