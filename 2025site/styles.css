@@ -194,9 +194,25 @@ body {
 .feed {
     margin: 12px 24px 12px 108px;
     /* Account for left nav width */
-    column-count: 3;
-    column-gap: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
     box-sizing: border-box;
+}
+
+/* Explicit masonry columns so items can be placed per-column on desktop */
+.feed__col {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Pin About Me to the top of the rightmost column on desktop.
+   It sits last in the DOM (so it flows to the bottom on mobile),
+   and order:-1 lifts it to the top of this column on desktop. */
+.feed__col--right #section-1 {
+    order: -1;
 }
 
 .feed-1 {
@@ -209,8 +225,13 @@ body {
 @media screen and (max-width: 900px) {
 
     .feed {
-        column-count: 1;
-        column-gap: 24px;
+        display: block;
+    }
+
+    /* Collapse the columns so every tile flows in one stream in DOM order;
+       About Me is last in the DOM, so it lands at the bottom. */
+    .feed__col {
+        display: contents;
     }
 }
 
@@ -322,6 +343,8 @@ body {
 #section-13 { --overlay-h: 18; }
 #section-14 { --overlay-h: 198; }
 #section-15 { --overlay-h: 240; }
+#section-16 { --overlay-h: 330; }
+#section-17 { --overlay-h: 90; }
 #section-2 .preview video,
 #section-3 .preview video,
 #section-4 .preview video,

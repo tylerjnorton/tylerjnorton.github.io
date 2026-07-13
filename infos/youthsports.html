@@ -98,7 +98,7 @@
   .dotstage i.hoa{background:transparent;border-color:var(--amber)}
   .dotstage i.hop{background:transparent;border-color:var(--pink)}
   /* labels that sit over the dot-bars, one per measure */
-  .stagelabels{position:relative;pointer-events:none;opacity:0;transition:opacity .3s ease}
+  .stagelabels{position:relative;width:min(100%,42dvh);pointer-events:none;opacity:0;transition:opacity .3s ease}
   .stagelabels span{
     position:absolute;left:0;right:0;text-align:center;
     font-size:clamp(9.5px,1.2vw,11px);font-weight:600;letter-spacing:.01em;
@@ -173,6 +173,7 @@
     .stage-wrap{align-items:center;justify-content:flex-end;padding:0 6vw 0 0}
     .stage-inner{width:min(38vw,460px)}
     .dotstage{width:min(100%,60dvh)}
+    .stagelabels{width:min(100%,60dvh)}
     .stage-cap{max-width:100%}
     .step{align-items:flex-start;text-align:left;justify-content:center;padding:0 0 0 6vw}
     .step > *{max-width:min(42vw,560px)}
@@ -316,15 +317,15 @@
     <div class="step" id="s5" data-step="5">
       <p class="kicker fx">Put simply</p>
       <div class="poster amber fx d1">&frac12;</div>
-      <p class="sub fx d2"><strong>An active child is about half as likely to face anxiety or depression</strong> as an inactive one. The team splits to scale: one struggling active kid for every two inactive ones.</p>
-      <p class="src">2019 study reported by The New York Times (2020), via Project Play</p>
+      <p class="sub fx d2"><strong>An active child is about half as likely to face depression</strong> as an inactive one. Out of 100 kids who move every day and 100 who never do, about <strong>11 of the active</strong> feel depressed or hopeless nearly daily, next to <strong>25 of the inactive</strong>. Same-size groups, so it's a rate, not a headcount.</p>
+      <p class="src">State of Play Tacoma&ndash;Pierce County report, Aspen Institute, via Project Play</p>
     </div>
 
     <div class="step" id="s6" data-step="6">
       <p class="kicker fx">The habit outlives the season</p>
       <div class="poster amber fx d1">8&times;</div>
-      <p class="sub fx d2"><strong>Teen athletes are 8&times; as likely to still be active at 24</strong>. That's eight for every one, drawn to scale here. Among adults 30+ who play sports today, 77% played as kids. Just 3% didn't.</p>
-      <p class="src">Perkins (2004); Robert Wood Johnson Foundation / Harvard / NPR (2015), via Project Play</p>
+      <p class="sub fx d2"><strong>Teen athletes are 8&times; as likely to still be active at 24</strong> as the kids who never played. That's eight for every one, drawn to scale here.</p>
+      <p class="src">Perkins (2004), via Project Play / Aspen Institute</p>
     </div>
 
     <div class="step" id="s7" data-step="7">
@@ -388,14 +389,14 @@
 <section class="method" id="s-method" aria-label="Methodology and sources">
   <div class="wrap">
     <h2>About the <span class="amber">numbers</span></h2>
-    <p>Every statistic in this deck comes from published research or national polls, compiled and source-checked before publication. One team of 200 dots carries the whole story: colored dots are athletes, gray dots are non-athletes, and the same dots regroup for every stat. They walk off the field for the 50% dropout, split to scale for the ratio beats (3×, ½, 8×, 92%, 80%), and line up into the bar charts, where each bar is a track of dots filled to its rate. Read the findings honestly. <strong>Almost all are correlational:</strong> kids who play tend to have these outcomes, but the studies don't prove sports alone cause them. Figures marked WSF / Project Play come from organizations that advocate for youth sports, while the University of Kansas, JAACAP, and Eagle Hill figures are independent. Some numbers date from 2004 to 2015. Two widely repeated stats, the "95% of Fortune 500 executives played sports" and "96% of dropouts were non-athletes" lines, are left out because they can't be traced to a primary study.</p>
+    <p>Every statistic in this deck comes from published research or national polls, compiled and source-checked before publication. One team of 200 dots carries the whole story: colored dots are athletes, gray dots are non-athletes, and the same dots regroup for every stat. They walk off the field for the 50% dropout, split to scale for the ratio beats (3×, 8×, 92%, 80%), and line up into the bar charts, where each bar is a track of dots filled to its rate. Read the findings honestly. <strong>Almost all are correlational:</strong> kids who play tend to have these outcomes, but the studies don't prove sports alone cause them. Direction matters too: separately, <strong>77% of adults 30+ who still play sports were sports kids themselves</strong> (Robert Wood Johnson Foundation / Harvard / NPR, 2015), but that only describes who today's adult players used to be, not how many of today's kids will stay in the game. Figures marked WSF / Project Play come from organizations that advocate for youth sports, while the University of Kansas, JAACAP, and Eagle Hill figures are independent. Some numbers date from 2004 to 2015. Two widely repeated stats, the "95% of Fortune 500 executives played sports" and "96% of dropouts were non-athletes" lines, are left out because they can't be traced to a primary study.</p>
     <ul>
       <li data-tag="E1"><a href="https://www.edutopia.org/discussion/social-and-academic-benefits-team-sports">Edutopia, University of Kansas study of grades 9–12</a></li>
       <li data-tag="E2"><a href="https://www.athleteassessments.com/importance-of-youth-sports-statistics/">Women's Sports Foundation, via Athlete Assessments</a></li>
       <li data-tag="E3"><a href="https://projectplay.org/youth-sports/facts/benefits">Women's Sports Foundation (2018 &amp; 2004), via Project Play / Aspen Institute</a></li>
       <li data-tag="E5"><a href="https://projectplay.org/youth-sports/facts/benefits">JAACAP (2015) &amp; NYT-reported 2019 study, via Project Play</a></li>
       <li data-tag="E7"><a href="https://coachad.com/news/study-team-sports-participation-improves-workplace-attitudes-performance/">Eagle Hill Consulting poll (2019), via Coach &amp; Athletic Director</a></li>
-      <li data-tag="E8"><a href="https://projectplay.org/youth-sports/facts/benefits">Perkins (2004) &amp; RWJF/Harvard/NPR (2015), via Project Play</a></li>
+      <li data-tag="E8"><a href="https://projectplay.org/youth-sports/facts/benefits">Perkins (2004), via Project Play</a></li>
       <li data-tag="E9"><a href="https://digitalcommons.liberty.edu/cgi/viewcontent.cgi?article=4306&context=doctoral">White (2021), Liberty University (participation figure and cited studies)</a></li>
     </ul>
     <p class="credit">Built July 2026 · tylerjnorton.github.io/youthsports</p>
@@ -537,9 +538,48 @@
   function renderLabels(labs){
     if (!labs || !labs.length){ labelLayer.style.opacity = 0; labelLayer.innerHTML = ""; return; }
     var html = "";
-    labs.forEach(function(l){ html += '<span style="top:'+Math.round(l.y)+'px">'+l.text+'</span>'; });
+    labs.forEach(function(l){
+      var st = 'top:'+Math.round(l.y)+'px';
+      if (l.left!=null){ st += ';left:'+Math.round(l.left)+'px;right:auto;width:'+Math.round(l.w)+'px'; }
+      html += '<span style="'+st+'">'+l.text+'</span>';
+    });
     labelLayer.innerHTML = html;
     labelLayer.style.opacity = 1;
+  }
+
+  /* ============ two equal teams, side by side ============
+     100 kids who move daily (left) next to 100 who never do (right), each a 10x10
+     block like the opening grid split in half. In each team the bright dots are the
+     ones who struggle with depression. Because the teams are the same size, the right
+     block simply lights up about twice as much — that's the "half as likely" RATE,
+     drawn honestly, not a claim about what share of depressed kids are inactive. */
+  function cohortsTargets(affLeft, affRight){
+    var cols = 10, rows = 10, gapCells = 2.4;
+    var totalCols = cols*2 + gapCells;
+    var cell = W/totalCols;
+    var s = (cell*0.72)/D;
+    var blockW = cols*cell, gridW = blockW*2 + gapCells*cell;
+    var ox = (W - gridW)/2;
+    var labelH = Math.max(11, Math.min(15, Math.round(W*0.032)));
+    var gridH = rows*cell;
+    var oy = (W - gridH)/2 + labelH*0.5;
+    var m = {};
+    function place(cast, aff, bx){
+      for (var k=0;k<100;k++){
+        var idx = cast[k]; if (idx==null) continue;
+        var col=k%cols, row=Math.floor(k/cols), on = k<aff;
+        m[idx] = {cx: bx + col*cell + cell/2, cy: oy + row*cell + cell/2, s:s,
+                  cls: on ? "a" : "n", op: on ? 1 : 0.16, delay:(col*7)+(row*7)};
+      }
+    }
+    var leftX = ox, rightX = ox + blockW + gapCells*cell;
+    place(ATH, affLeft, leftX);
+    place(NON, affRight, rightX);
+    pendingLabels = [
+      {text:"ACTIVE",   y: oy - labelH*0.4, left: leftX,  w: blockW},
+      {text:"INACTIVE", y: oy - labelH*0.4, left: rightX, w: blockW}
+    ];
+    return m;
   }
 
   /* who is currently on the field (visible). Drives the tunnel convention:
@@ -624,9 +664,9 @@
     {cap:'reported each · <span class="k a">active 6–7 days/wk</span> vs <span class="k g">0–1 days</span> · shorter is better',
      dots:function(){ return barTargets(INNER); }},
 
-    /* 5 · splits 1:2 to scale */
-    {cap:'who struggles, drawn to scale: <span class="k a">1 active</span> for every <span class="k g">2 inactive</span>',
-     dots:function(){ return ratioTargets(ATH, 33, 66, "a", "n"); }},
+    /* 5 · put simply: two equal teams of 100; the inactive one lights up about twice as often (a rate, not a split) */
+    {cap:'bright = struggles with depression · <span class="k a">active</span> vs <span class="k g">inactive</span> · 100 kids each',
+     dots:function(){ return cohortsTargets(11, 25); }},
 
     /* 6 · splits 8:1 */
     {cap:'still active at 24, drawn to scale: <span class="k a">8 who played</span> for every <span class="k g">1 who didn’t</span>',

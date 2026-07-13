@@ -41,96 +41,134 @@
 
     <main class="feed" role="list" aria-label="Content feed">
 
+        <!--
+            MANUAL COLUMNS: these three .feed__col wrappers are the masonry columns
+            on desktop (left, middle, right). Unlike the old CSS multi-column layout,
+            the browser does NOT auto-balance their heights anymore, so YOU place each
+            tile by hand. To add a project, drop its <section> into whichever column is
+            shortest; if a column starts looking lopsided, move a <section> to a shorter one.
+            On mobile all three columns collapse into one stream in DOM order (top of col 1
+            down, then col 2, then col 3). About Me is intentionally the LAST tile in the DOM
+            so it lands at the bottom on mobile, while order:-1 (in styles.css) lifts it to
+            the top of the rightmost column on desktop. Keep it last in the right column.
+        -->
 
-        <section id="section-2" class="feed-item" role="listitem">
-            <div class="title"><a href="./mcw.html">MCW Starz Videos</div>
-            <div class="preview" aria-hidden="true">
-            <video src="assets/mcw.mp4" autoplay muted loop playsinline></video></a>
-            </div>
-        </section>
+        <div class="feed__col" role="presentation">
 
-        <section id="section-14" class="feed-item" role="listitem">
-            <div class="title"><a href="./solve-the-mystery.html">r/whatsthecodeword</div>
-            <div class="preview" aria-hidden="true">
-            <img src="https://i.ytimg.com/vi/Y3Y-QOLpAQA/maxresdefault.jpg"></img></a>
-            </div>
-        </section>
+            <section id="section-16" class="feed-item" role="listitem">
+                <div class="title"><a href="./rocketreach.html">RocketReach</div>
+                <div class="preview" aria-hidden="true">
+                <img src="assets/rr/banner.jpg"></img></a>
+                </div>
+            </section>
 
-                <section id="section-10" class="feed-item" role="listitem">
-            <div class="title"><a href="./traveling-bostonian.html">Traveling Bostonian</div>
-            <div class="preview" aria-hidden="true">
-            <video src="assets/tb.mov" autoplay muted loop playsinline></video></a>
-            </div>
-        </section>
+            <section id="section-15" class="feed-item" role="listitem">
+                <div class="title"><a href="./infographics.html">Infographics</div>
+                <div class="preview" aria-hidden="true">
+                <video src="assets/infos.mov" autoplay muted loop playsinline></video></a>
+                </div>
+            </section>
 
-        <section id="section-8" class="feed-item" role="listitem">
-            <div class="title"><a href="./marketing-content.html">Marketing Content</div>
-            <div class="preview" aria-hidden="true">
-            <video src="assets/video.mov" autoplay muted loop playsinline></video></a>
-            </div>
-        </section>
+            <section id="section-2" class="feed-item" role="listitem">
+                <div class="title"><a href="./mcw.html">MCW Starz Videos</div>
+                <div class="preview" aria-hidden="true">
+                <video src="assets/mcw.mp4" autoplay muted loop playsinline></video></a>
+                </div>
+            </section>
 
-        <section id="section-3" class="feed-item" role="listitem">
-            <div class="title"><a href="./brands.html">Brands</div>
-            <div class="preview" aria-hidden="true">
-            <img src="assets/brand.gif"></img></a>
-            </div>
-        </section>
+            <section id="section-14" class="feed-item" role="listitem">
+                <div class="title"><a href="./solve-the-mystery.html">r/whatsthecodeword</div>
+                <div class="preview" aria-hidden="true">
+                <img src="https://i.ytimg.com/vi/Y3Y-QOLpAQA/maxresdefault.jpg"></img></a>
+                </div>
+            </section>
 
-        <section id="section-5" class="feed-item" role="listitem">
-            <div class="title"><a href="./magazine.html">Magazine</div>
-            <div class="preview" aria-hidden="true">
-            <img src="assets/book.png"></img></a>
-            </div>
-        </section>
+            <section id="section-10" class="feed-item" role="listitem">
+                <div class="title"><a href="./traveling-bostonian.html">Traveling Bostonian</div>
+                <div class="preview" aria-hidden="true">
+                <video src="assets/tb.mov" autoplay muted loop playsinline></video></a>
+                </div>
+            </section>
 
-        <section id="section-15" class="feed-item" role="listitem">
-            <div class="title"><a href="./infographics.html">Infographics</div>
-            <div class="preview" aria-hidden="true">
-            <video src="assets/infos.mov" autoplay muted loop playsinline></video></a>
-            </div>
-        </section>
-        <section id="section-6" class="feed-item" role="listitem">
-            <div class="title"><a href="./taskmetro.html">Taskmetro</div>
-            <div class="preview" aria-hidden="true">
-            <video src="assets/tm.mp4" autoplay muted loop playsinline></video></a>
-            </div>
-        </section>
+        </div>
 
-        <section id="section-13" class="feed-item" role="listitem">
-            <div class="title"><a href="./hoop-highlights.html">Hoop Highlights</div>
-            <div class="preview" aria-hidden="true">
-            <video src="assets/hl.mov" autoplay muted loop playsinline></video></a>
-            </div>
-        </section>
+        <div class="feed__col" role="presentation">
 
-        <section id="section-7" class="feed-item" role="listitem">
-            <div class="title"><a href="./photography.html">Photography</div>
-            <div class="preview" aria-hidden="true">
-            <img src="assets/photos.gif"></img></a>
-            </div>
-        </section>
+            <section id="section-8" class="feed-item" role="listitem">
+                <div class="title"><a href="./marketing-content.html">Marketing Content</div>
+                <div class="preview" aria-hidden="true">
+                <video src="assets/video.mov" autoplay muted loop playsinline></video></a>
+                </div>
+            </section>
 
-        <section id="section-9" class="feed-item" role="listitem">
-            <div class="title"><a href="./vibe.html">Vibes and AI Projects</div>
-            <div class="preview" aria-hidden="true">
-            <video src="assets/gf.mov" autoplay muted loop playsinline></video></a>
-            </div>
-        </section>
+            <section id="section-3" class="feed-item" role="listitem">
+                <div class="title"><a href="./brands.html">Brands</div>
+                <div class="preview" aria-hidden="true">
+                <img src="assets/brand.gif"></img></a>
+                </div>
+            </section>
 
-        <section id="section-4" class="feed-item" role="listitem" aria-label="Videography">
-            <div class="title"><a href="./hummingbird.html">Hummingbird</div>
-            <div class="preview" aria-hidden="true">
-            <img src="assets/hum.jpg"></img></a>
-            </div>
-        </section>
+            <section id="section-5" class="feed-item" role="listitem">
+                <div class="title"><a href="./magazine.html">Magazine</div>
+                <div class="preview" aria-hidden="true">
+                <img src="assets/book.png"></img></a>
+                </div>
+            </section>
 
-        <section id="section-1" class="feed-item" role="listitem">
-            <div class="title"><a href="./about.html">About Me</div>
-            <div class="preview" aria-hidden="true">
-            <img src="assets/about.gif"></img></a>
-            </div>
-        </section>
+            <section id="section-6" class="feed-item" role="listitem">
+                <div class="title"><a href="./taskmetro.html">Taskmetro</div>
+                <div class="preview" aria-hidden="true">
+                <video src="assets/tm.mp4" autoplay muted loop playsinline></video></a>
+                </div>
+            </section>
+
+            <section id="section-13" class="feed-item" role="listitem">
+                <div class="title"><a href="./hoop-highlights.html">Hoop Highlights</div>
+                <div class="preview" aria-hidden="true">
+                <video src="assets/hl.mov" autoplay muted loop playsinline></video></a>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="feed__col feed__col--right" role="presentation">
+
+            <section id="section-7" class="feed-item" role="listitem">
+                <div class="title"><a href="./photography.html">Photography</div>
+                <div class="preview" aria-hidden="true">
+                <img src="assets/photos.gif"></img></a>
+                </div>
+            </section>
+
+            <section id="section-9" class="feed-item" role="listitem">
+                <div class="title"><a href="./vibe.html">Vibes and AI Projects</div>
+                <div class="preview" aria-hidden="true">
+                <video src="assets/gf.mov" autoplay muted loop playsinline></video></a>
+                </div>
+            </section>
+
+            <section id="section-4" class="feed-item" role="listitem" aria-label="Videography">
+                <div class="title"><a href="./hummingbird.html">Hummingbird</div>
+                <div class="preview" aria-hidden="true">
+                <img src="assets/hum.jpg"></img></a>
+                </div>
+            </section>
+
+            <section id="section-17" class="feed-item" role="listitem">
+                <div class="title"><a href="./unqork.html">Unqork</div>
+                <div class="preview" aria-hidden="true">
+                <img src="assets/uq/banner.jpg"></img></a>
+                </div>
+            </section>
+
+            <section id="section-1" class="feed-item" role="listitem">
+                <div class="title"><a href="./about.html">About Me</div>
+                <div class="preview" aria-hidden="true">
+                <img src="assets/about.gif"></img></a>
+                </div>
+            </section>
+
+        </div>
 
     </main>
 </body>
