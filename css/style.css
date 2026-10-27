@@ -973,6 +973,9 @@ a:hover{color: var(--red-one);}
   .nav-justify {flex-wrap: wrap; row-gap: 4px;}
   .theme-main-menu .navitem {padding: 6px 8px; font-size: 14px; white-space: nowrap;}
 }
+@media (max-width: 360px) {
+  .theme-main-menu .navitem {padding: 5px 5px; font-size: 13px;}
+}
 .logo{
   
   color:#fff;
@@ -8520,7 +8523,7 @@ ul{list-style-type: none;}
 }
 .portfolio-gallery-one .img-meta .hover-content span {
   display: block;
-  text-transform: capitalize;
+  text-transform: none;
   color: rgba(255, 255, 255, 0.7);
   font-size: 15px;
   line-height: 21px;
