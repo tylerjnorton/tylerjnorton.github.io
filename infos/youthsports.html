@@ -19,6 +19,7 @@
     --pink:#FF5D8F;       /* girls */
     --blue:#54A8FF;       /* boys */
     --gray:#4A5468;       /* doesn't play / quit */
+    --red:#FF3B30;        /* risk marker (drug involvement) */
     --display:"Anton", Impact, sans-serif;
     --sans:"Inter", -apple-system, sans-serif;
   }
@@ -97,6 +98,36 @@
   .dotstage i.pink{background:var(--pink)}        /* a girl (second half) */
   .dotstage i.hoa{background:transparent;border-color:var(--amber)}
   .dotstage i.hop{background:transparent;border-color:var(--pink)}
+  /* outcome markers that sit on a dot: grad cap = graduates, red x = drug involvement.
+     They pop in after the dots settle. */
+  .dotstage i.cap::before,.dotstage i.cap::after,
+  .dotstage i.x::before,.dotstage i.x::after{
+    content:"";position:absolute;pointer-events:none;
+    animation:mark-in .35s ease 1s both;
+  }
+  .dotstage i.cap::before{                        /* mortarboard */
+    left:2%;top:-36%;width:96%;height:96%;
+    background:var(--chalk);
+    transform:scaleY(.42) rotate(45deg);
+  }
+  .dotstage i.cap::after{                         /* tassel */
+    left:84%;top:-2%;width:8%;height:40%;
+    background:var(--amber);border-radius:2px;
+  }
+  .dotstage i.x::before,.dotstage i.x::after{
+    left:-14%;top:41%;width:128%;height:18%;
+    background:var(--red);border-radius:2px;
+    box-shadow:0 0 0 1.5px var(--night);          /* keeps it readable on pink */
+    transform:rotate(45deg);
+  }
+  .dotstage i.x::after{transform:rotate(-45deg)}
+  .dotstage i.ring::before{                       /* ring = teen pregnancy */
+    content:"";position:absolute;pointer-events:none;
+    inset:-30%;border-radius:50%;
+    border:2px solid var(--chalk);
+    animation:mark-in .35s ease 1s both;
+  }
+  @keyframes mark-in{from{opacity:0;scale:.4}to{opacity:1;scale:1}}
   /* labels that sit over the dot-bars, one per measure */
   .stagelabels{position:relative;width:min(100%,42dvh);pointer-events:none;opacity:0;transition:opacity .3s ease}
   .stagelabels span{
@@ -112,6 +143,7 @@
   .stage-cap .k{font-weight:700;color:var(--chalk)}
   .stage-cap .k.p{color:var(--pink)} .stage-cap .k.a{color:var(--amber)}
   .stage-cap .k.g{color:#8B95A6}
+  .stage-cap .k.r{color:var(--red)} .stage-cap .k.c{color:var(--chalk)}
 
   /* stage bars (the swap-in illustration when dots don't fit the stat) */
   .stagebars{
@@ -240,6 +272,7 @@
 
   @media (prefers-reduced-motion: reduce){
     .fx,.dotstage i,.bar i,.dotstage,.stagebars{transition:none !important}
+    .dotstage i::before,.dotstage i::after{animation:none !important}
     html{scroll-behavior:auto}
   }
 </style>
@@ -347,21 +380,21 @@
     <div class="step" id="s9" data-step="9">
       <p class="kicker fx" style="color:var(--pink)">Her diploma</p>
       <div class="poster pink fx d1">3&times;</div>
-      <p class="sub fx d2"><strong>A girl who plays high school sports is three times as likely to graduate</strong> as one who doesn't. The squad splits 3-to-1, drawn to scale.</p>
+      <p class="sub fx d2"><strong>A girl who plays high school sports is three times as likely to graduate</strong> as one who doesn't. The caps show that gap between two same-size squads: three among girls who play for every one among girls who don't. The source gives the ratio, not actual graduation rates, so the counts are illustrative.</p>
       <p class="src">Women's Sports Foundation, via Athlete Assessments</p>
     </div>
 
     <div class="step" id="s10" data-step="10">
       <p class="kicker fx" style="color:var(--pink)">Her risks · drugs</p>
       <div class="poster pink fx d1">92<small>%</small></div>
-      <p class="sub fx d2"><strong>A female student athlete is 92% less likely to get involved with drugs.</strong> Drawn to scale: for every 100 non-athlete girls who do, about 8 athletes do.</p>
+      <p class="sub fx d2"><strong>A female student athlete is 92% less likely to get involved with drugs.</strong> Between two same-size squads, that's about 2 red marks among girls who play for every 25 among girls who don't. The source gives the ratio, not actual rates, so the counts are illustrative.</p>
       <p class="src">Women's Sports Foundation, via Athlete Assessments</p>
     </div>
 
     <div class="step" id="s11" data-step="11">
       <p class="kicker fx" style="color:var(--pink)">Her risks · pregnancy</p>
       <div class="poster pink fx d1">80<small>%</small></div>
-      <p class="sub fx d2"><strong>A female student athlete is 80% less likely to experience a teen pregnancy.</strong> Drawn to scale: for every 100 non-athlete girls who do, about 20 athletes do.</p>
+      <p class="sub fx d2"><strong>A female student athlete is 80% less likely to experience a teen pregnancy.</strong> Between two same-size squads, that's about 5 rings among girls who play for every 25 among girls who don't. The source gives the ratio, not actual rates, so the counts are illustrative.</p>
       <p class="src">Women's Sports Foundation, via Athlete Assessments</p>
     </div>
 
@@ -376,7 +409,7 @@
 
     <div class="step" id="s13" data-step="13">
       <p class="kicker fx">Final whistle</p>
-      <h2 class="fx d1">The whistle blows.<br><span class="amber">The winning doesn't.</span></h2>
+      <h2 class="fx d1">The game ends.<br><span class="amber">The winning doesn't.</span></h2>
       <div class="poster amber num fx d2" style="font-size:clamp(56px,10vw,120px)">$57B</div>
       <p class="sub fx d3">What one public-health model says the U.S. would save in medical costs and productivity by hitting its youth-sports participation goal, plus <strong class="num">1.4 million</strong> more years lived in good health. Everyone back on the field. <strong>Keep all 200 playing.</strong></p>
       <p class="src">2023 simulation model, CUNY Graduate School of Public Health, via Project Play</p>
@@ -389,7 +422,7 @@
 <section class="method" id="s-method" aria-label="Methodology and sources">
   <div class="wrap">
     <h2>About the <span class="amber">numbers</span></h2>
-    <p>Every statistic in this deck comes from published research or national polls, compiled and source-checked before publication. One team of 200 dots carries the whole story: colored dots are athletes, gray dots are non-athletes, and the same dots regroup for every stat. They walk off the field for the 50% dropout, split to scale for the ratio beats (3×, 8×, 92%, 80%), and line up into the bar charts, where each bar is a track of dots filled to its rate. Read the findings honestly. <strong>Almost all are correlational:</strong> kids who play tend to have these outcomes, but the studies don't prove sports alone cause them. Direction matters too: separately, <strong>77% of adults 30+ who still play sports were sports kids themselves</strong> (Robert Wood Johnson Foundation / Harvard / NPR, 2015), but that only describes who today's adult players used to be, not how many of today's kids will stay in the game. Figures marked WSF / Project Play come from organizations that advocate for youth sports, while the University of Kansas, JAACAP, and Eagle Hill figures are independent. Some numbers date from 2004 to 2015. Two widely repeated stats, the "95% of Fortune 500 executives played sports" and "96% of dropouts were non-athletes" lines, are left out because they can't be traced to a primary study.</p>
+    <p>Every statistic in this deck comes from published research or national polls, compiled and source-checked before publication. One team of 200 dots carries the whole story: colored dots are athletes, gray dots are non-athletes, and the same dots regroup for every stat. They walk off the field for the 50% dropout, split to scale for the 8× ratio beat, stand as two same-size squads for her 3× graduation odds, 92% lower drug odds and 80% lower teen-pregnancy odds, with grad caps, red marks and rings placed at the reported ratio (3 to 1, 2 to 25, 5 to 25) on illustrative counts because the source gives no base rates, and line up into the bar charts, where each bar is a track of dots filled to its rate. Read the findings honestly. <strong>Almost all are correlational:</strong> kids who play tend to have these outcomes, but the studies don't prove sports alone cause them. Direction matters too: separately, <strong>77% of adults 30+ who still play sports were sports kids themselves</strong> (Robert Wood Johnson Foundation / Harvard / NPR, 2015), but that only describes who today's adult players used to be, not how many of today's kids will stay in the game. Figures marked WSF / Project Play come from organizations that advocate for youth sports, while the University of Kansas, JAACAP, and Eagle Hill figures are independent. Some numbers date from 2004 to 2015. Two widely repeated stats, the "95% of Fortune 500 executives played sports" and "96% of dropouts were non-athletes" lines, are left out because they can't be traced to a primary study.</p>
     <ul>
       <li data-tag="E1"><a href="https://www.edutopia.org/discussion/social-and-academic-benefits-team-sports">Edutopia, University of Kansas study of grades 9–12</a></li>
       <li data-tag="E2"><a href="https://www.athleteassessments.com/importance-of-youth-sports-statistics/">Women's Sports Foundation, via Athlete Assessments</a></li>
@@ -419,13 +452,15 @@
      Colour carries the story: colored = athlete, gray = non-athlete. */
   var survives = [];
   (function(){
-    var s=0, seed=7;
-    for (var i=0;i<N;i++){
-      seed = (seed*137 + 71) % 200;
-      var keep = (seed < 100 && s < 100) || (N-i) <= (100-s);
-      if (keep) s++;
-      survives.push(keep);
+    /* Fisher-Yates shuffle, then the first 100 shuffled slots keep playing:
+       exactly 100 survivors, scattered with no repeating pattern */
+    var order = [];
+    for (var i=0;i<N;i++){ order.push(i); survives.push(false); }
+    for (var j=N-1;j>0;j--){
+      var r = Math.floor(Math.random()*(j+1));
+      var tmp = order[j]; order[j] = order[r]; order[r] = tmp;
     }
+    for (var k=0;k<100;k++) survives[order[k]] = true;
   })();
   var ALL = [], ATH = [], NON = [];
   for (var i2=0;i2<N;i2++){ ALL.push(i2); (survives[i2]?ATH:NON).push(i2); }
@@ -553,7 +588,8 @@
      ones who struggle with depression. Because the teams are the same size, the right
      block simply lights up about twice as much — that's the "half as likely" RATE,
      drawn honestly, not a claim about what share of depressed kids are inactive. */
-  function cohortsTargets(affLeft, affRight){
+  function cohortsTargets(affLeft, affRight, opts){
+    opts = opts || {};
     var cols = 10, rows = 10, gapCells = 2.4;
     var totalCols = cols*2 + gapCells;
     var cell = W/totalCols;
@@ -568,16 +604,19 @@
       for (var k=0;k<100;k++){
         var idx = cast[k]; if (idx==null) continue;
         var col=k%cols, row=Math.floor(k/cols), on = k<aff;
+        var mark = opts.mark ? opts.mark(cast, k) : "";
         m[idx] = {cx: bx + col*cell + cell/2, cy: oy + row*cell + cell/2, s:s,
-                  cls: on ? "a" : "n", op: on ? 1 : 0.16, delay:(col*7)+(row*7)};
+                  cls: (on ? (opts.onCls ? opts.onCls(cast) : "a") : "n") + (mark ? " "+mark : ""),
+                  op: mark ? 1 : on ? (opts.onOp ? opts.onOp(cast) : 1) : 0.16, delay:(col*7)+(row*7)};
       }
     }
     var leftX = ox, rightX = ox + blockW + gapCells*cell;
     place(ATH, affLeft, leftX);
     place(NON, affRight, rightX);
+    var labels = opts.labels || ["ACTIVE", "INACTIVE"];
     pendingLabels = [
-      {text:"ACTIVE",   y: oy - labelH*0.4, left: leftX,  w: blockW},
-      {text:"INACTIVE", y: oy - labelH*0.4, left: rightX, w: blockW}
+      {text:labels[0], y: oy - labelH*0.4, left: leftX,  w: blockW},
+      {text:labels[1], y: oy - labelH*0.4, left: rightX, w: blockW}
     ];
     return m;
   }
@@ -622,7 +661,27 @@
     }
     for (var j=0;j<N;j++) onField[j] = !!m[j];
   }
-  function ragged(i){ return ((i*53)%7)*120; }
+  /* each dot gets its own random walk-off delay (fixed per page load, so
+     scrolling back and forth replays the same exit) */
+  var exitJitter = [];
+  for (var ej=0;ej<N;ej++) exitJitter.push(Math.round(Math.random()*840));
+  function ragged(i){ return exitJitter[i]; }
+
+  /* outcome markers (grad caps, red x's) land on random dots in each squad,
+     fixed per page load. rank[k] < n marks n random slots of 100. */
+  function shuffledRanks(){
+    var r = [];
+    for (var q=0;q<100;q++) r.push(q);
+    for (var q2=99;q2>0;q2--){ var z = Math.floor(Math.random()*(q2+1)), t = r[q2]; r[q2] = r[z]; r[z] = t; }
+    return r;
+  }
+  var rankPlay = shuffledRanks(), rankNot = shuffledRanks();
+  /* marks nPlay of the playing squad and nNot of the other, at a true ratio */
+  function squadMarks(cls, nPlay, nNot){
+    return function(cast, k){
+      return (cast===ATH ? rankPlay[k] < nPlay : rankNot[k] < nNot) ? cls : "";
+    };
+  }
   function wave(i,k){ return ((k%10)*12)+(Math.floor(k/10)*10); }
   function lateWave(i,k){ return 350 + wave(i,k); }
 
@@ -680,17 +739,35 @@
     {cap:'second half · <span class="k p">every athlete is now a girl</span>',
      dots:function(){ return gridTargets(ATH, 10, pinkAll, lateWave); }},
 
-    /* 9 · her squad splits 3:1 */
-    {cap:'her graduation odds, drawn to scale: <span class="k p">3 who play</span> for every <span class="k g">1 who doesn’t</span>',
-     dots:function(){ return ratioTargets(ATH, 75, 25, "pink", "n"); }},
+    /* 9 · two equal squads of girls. The source gives the 3x ratio but no base
+       rate, so the caps show the ratio (75 vs 25) and are labelled illustrative. */
+    {cap:'🎓 = graduates · <span class="k p">3 caps among girls who play</span> for every <span class="k g">1 among girls who don’t</span> · illustrative ratio, not real rates',
+     dots:function(){ return cohortsTargets(100, 100, {
+       labels:["PLAYS", "DOESN’T"],
+       onCls:function(cast){ return cast===ATH ? "pink" : "n"; },
+       onOp:function(cast){ return cast===ATH ? 1 : 0.45; },
+       mark:squadMarks("cap", 75, 25)
+     }); }},
 
-    /* 10 · drugs, 8 : 92 */
-    {cap:'drug involvement, drawn to scale: <span class="k p">8 who play</span> for every <span class="k g">100 who don’t</span>',
-     dots:function(){ return ratioTargets(ATH, 8, 92, "pink", "n"); }},
+    /* 10 · drugs. "92% less likely" is a relative risk with no base rate given,
+       so the x's show the ratio (2 vs 25 = 92% fewer) and are labelled illustrative. */
+    {cap:'<span class="k r">✕</span> = drug involvement · <span class="k p">2 among girls who play</span> for every <span class="k g">25 among girls who don’t</span> · illustrative ratio, not real rates',
+     dots:function(){ return cohortsTargets(100, 100, {
+       labels:["PLAYS", "DOESN’T"],
+       onCls:function(cast){ return cast===ATH ? "pink" : "n"; },
+       onOp:function(cast){ return cast===ATH ? 1 : 0.45; },
+       mark:squadMarks("x", 2, 25)
+     }); }},
 
-    /* 11 · pregnancy, 20 : 80 */
-    {cap:'teen pregnancy, drawn to scale: <span class="k p">20 who play</span> for every <span class="k g">80 who don’t</span>',
-     dots:function(){ return ratioTargets(ATH, 20, 80, "pink", "n"); }},
+    /* 11 · pregnancy. "80% less likely" is a relative risk with no base rate given,
+       so the rings show the ratio (5 vs 25 = 80% fewer) and are labelled illustrative. */
+    {cap:'<span class="k c">◯</span> = teen pregnancy · <span class="k p">5 among girls who play</span> for every <span class="k g">25 among girls who don’t</span> · illustrative ratio, not real rates',
+     dots:function(){ return cohortsTargets(100, 100, {
+       labels:["PLAYS", "DOESN’T"],
+       onCls:function(cast){ return cast===ATH ? "pink" : "n"; },
+       onOp:function(cast){ return cast===ATH ? 1 : 0.45; },
+       mark:squadMarks("ring", 5, 25)
+     }); }},
 
     /* 12 · 94 of 100 executives */
     {cap:'<span class="k p">94 of 100 female executives</span> played sports as girls · hollow = didn’t',

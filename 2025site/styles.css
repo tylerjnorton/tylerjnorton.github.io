@@ -34,12 +34,21 @@ body.loading {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 4rem;
+    font-size: min(4rem, 8vw);
     font-weight: 700;
     letter-spacing: 0.18em;
+    padding-left: 0.18em; /* balance trailing letter-spacing so text stays centered */
     color: #000;
     z-index: 2;
     white-space: nowrap;
+}
+
+@media screen and (max-width: 600px) {
+    #loader__text {
+        font-size: 8.5vw;
+        letter-spacing: 0.06em;
+        padding-left: 0.06em;
+    }
 }
 
 html {
